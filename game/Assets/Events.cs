@@ -20,4 +20,8 @@ public static class Events {
     public static System.Action OnGameComplete = delegate { };
     public static System.Action<bool> OnGamePaused = delegate { };
 
+
+    public static System.Action OnChangeingLane = delegate { };
+    public static System.Action OnChangeLaneComplete = delegate { };
+
 }
