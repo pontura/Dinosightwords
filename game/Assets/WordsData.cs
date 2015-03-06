@@ -7,7 +7,7 @@ public class WordsData : MonoBehaviour {
 
     
     [Serializable]
-    public class Level
+    public class Word
     {
         [SerializeField]
         public string sightWord;
@@ -22,10 +22,11 @@ public class WordsData : MonoBehaviour {
     [Serializable]
     public class Zone
     {
-        public string name;
-
-        public Level[] levels;
+        [SerializeField]
+        public string title;
+        public Word[] words;
     }
 
-    public Zone[] Zones;
+    public Zone[] Zone1;
+    public Zone[] Zone2;
 }

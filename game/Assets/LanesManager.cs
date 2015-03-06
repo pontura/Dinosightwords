@@ -13,7 +13,7 @@ public class LanesManager : MonoBehaviour {
     {
         int laneSeparation = Data.Instance.gameData.laneSeparation;
         int laneYPosition = -Data.Instance.gameData.laneYPosition;
-        for (int a = 0; a < qty; a++)
+        for (int a = 0; a < qty+1; a++)
         {
             Lane newLane = Instantiate(lane, Vector3.zero, Quaternion.identity) as Lane;
             lanes.Add(newLane);
@@ -21,6 +21,7 @@ public class LanesManager : MonoBehaviour {
             newLane.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, laneYPosition - (laneSeparation * a), 0);
             newLane.GetComponent<RectTransform>().sizeDelta = new Vector3(100,100,100);
             newLane.GetComponent<RectTransform>().localScale = Vector3.one;
+            newLane.Init(a);
         }
     }
     public void AddObject(LaneObject laneObject, LaneObjectData data)
@@ -33,7 +34,7 @@ public class LanesManager : MonoBehaviour {
     }
     public Lane GetRandomLane()
     {
-        return lanes[Random.Range(0,lanes.Count)];
+        return lanes[Random.Range(0,lanes.Count-1)];
     }
     public void MoveLanes(float _x)
     {

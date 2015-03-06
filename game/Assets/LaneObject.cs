@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class LaneObject : MonoBehaviour {
 
     public LaneObjectData data;
+    public int repeatIn;
 
     public void SetData(LaneObjectData data)
     {

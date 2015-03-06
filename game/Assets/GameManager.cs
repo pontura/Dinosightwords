@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour {
     public float distance;
     public states state;
 
+    public Scrolleable[] Scrolleables;
+
     public LaneObject LaneObject_Word;
 
     public enum states
@@ -57,6 +59,11 @@ public class GameManager : MonoBehaviour {
             float _speed = (speed * 100) * Time.deltaTime;
             distance += _speed;
             lanesManager.MoveLanes(_speed);
+
+            foreach (Scrolleable scrolleable in Scrolleables)
+            {
+                scrolleable.Move(_speed);
+            }
         }
     }
 }

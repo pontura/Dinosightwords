@@ -5,6 +5,7 @@ public class Game : MonoBehaviour {
         
     private states lastState;
     public states state;
+
     
     public enum states
     {
