@@ -14,6 +14,7 @@ public class Data : MonoBehaviour
     public float soundsVolume = 1;
 
     public SceneLoader sceneLoader;
+    public GameData gameData;
 
     public static Data Instance
     {
@@ -31,15 +32,15 @@ public class Data : MonoBehaviour
         mInstance = this;
         DontDestroyOnLoad(this);
 
-        GetComponent<MusicManager>().Init();
+        gameData = GetComponent<GameData>();
 
-        Events.OnMusicVolumeChanged += OnMusicVolumeChanged;
-        Events.OnSoundsVolumeChanged += OnSoundsVolumeChanged;
-        Events.OnSaveVolumes += OnSaveVolumes;
+//        Events.OnMusicVolumeChanged += OnMusicVolumeChanged;
+//        Events.OnSoundsVolumeChanged += OnSoundsVolumeChanged;
+//        Events.OnSaveVolumes += OnSaveVolumes;
 
-#if UNITY_ANDROID || UNITY_IPHONE
-        Handheld.PlayFullScreenMovie(movPath, Color.black, FullScreenMovieControlMode.Hidden, FullScreenMovieScalingMode.AspectFit);
-#endif
+//#if UNITY_ANDROID || UNITY_IPHONE
+//        Handheld.PlayFullScreenMovie(movPath, Color.black, FullScreenMovieControlMode.Hidden, FullScreenMovieScalingMode.AspectFit);
+//#endif
 
     }
     void Start()

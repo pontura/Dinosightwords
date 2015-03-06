@@ -4,14 +4,17 @@ using System.Collections;
 public class CharacterManager : MonoBehaviour {
 
     public Character character;
-    public Lane[] lanes;
-    public int laneID;
+    private LanesManager lanesManager;
+    
 
     public void Init()
     {
         Events.OnSwipe += OnSwipe;
         Events.OnChangeingLane += OnChangeingLane;
         Events.OnChangeLaneComplete += OnChangeLaneComplete;
+        lanesManager = Game.Instance.GetComponent<LanesManager>();
+        OnChangeingLane();
+        character.Init();
     }
     public void OnDestroy()
     {
@@ -22,28 +25,28 @@ public class CharacterManager : MonoBehaviour {
     void OnSwipe(SwipeDetector.directions direction)
     {
         if (character.state == Character.states.CHANGE) return;
-        if (laneID == 1 && direction == SwipeDetector.directions.UP) return;
-        if (laneID == 4 && direction == SwipeDetector.directions.DOWN) return;
+        if (lanesManager.laneActiveID == 1 && direction == SwipeDetector.directions.UP) return;
+        if (lanesManager.laneActiveID == Data.Instance.GetComponent<GameData>().totalLanes && direction == SwipeDetector.directions.DOWN) return;
 
         switch (direction)
         {
             case SwipeDetector.directions.UP:
-                character.MoveUP(); laneID--; break;
+                character.MoveUP(); lanesManager.laneActiveID--; break;
             case SwipeDetector.directions.DOWN:
-                character.MoveDown(); laneID++; break;
+                character.MoveDown(); lanesManager.laneActiveID++; break;
         }
     }
     void OnChangeingLane()
     {
-        character.transform.parent = GetActivetLane().gameObject.transform;
-        character.GotoCenterOfLane();
+        if (lanesManager.GetActivetLane())
+        {
+            character.transform.parent = lanesManager.GetActivetLane().gameObject.transform;
+            character.GotoCenterOfLane();
+        }
     }
     void OnChangeLaneComplete()
     {
 
     }
-    private Lane GetActivetLane()
-    {
-        return lanes[laneID-1];
-    }
+    
 }

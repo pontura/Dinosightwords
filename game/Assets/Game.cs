@@ -26,19 +26,19 @@ public class Game : MonoBehaviour {
             return mInstance;
         }
     }
-    void Update()
-    {
-        if (Input.GetKeyDown("space"))
-        {
-        }
-    }
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown("space"))
+    //    {
+    //    }
+    //}
 	void Awake () {
         mInstance = this;
 
     }
     void Start  ()
     {
-       GetComponent<CharacterManager>().Init();
+        GetComponent<GameManager>().Init();
     }
 
     void OnGamePaused(bool paused)

@@ -4,16 +4,22 @@ using Holoville.HOTween;
 
 public class Character : MonoBehaviour {
 
-    int distance = 50;
+    int distance ;
+    float timeToCrossLane;
     public Lane lane;
     public states state;
+
     public enum states
     {
         IDLE,
         CHANGE,
         JUMP
     }
-
+    public void Init()
+    {
+        distance = Data.Instance.gameData.laneSeparation / 2;
+        timeToCrossLane = Data.Instance.gameData.timeToCrossLane / 2;
+    }
 	public void MoveUP()
     {
         Vector3 pos = transform.localPosition;
@@ -42,7 +48,7 @@ public class Character : MonoBehaviour {
             parms.OnComplete(OnChangeLaneComplete);
         else
             parms.OnComplete(OnChangeingLane);
-        HOTween.To(transform, 0.2f,  parms);
+        HOTween.To(transform, timeToCrossLane, parms);
     }
     void OnChangeingLane()
     {
