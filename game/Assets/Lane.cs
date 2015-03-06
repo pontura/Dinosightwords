@@ -10,17 +10,16 @@ public class Lane : MonoBehaviour {
     public GameObject objectsTarget;
     public List<LaneObject> laneObjects;
 
-    void Start()
-    {
-
-    }
-    public void AddObject(LaneObject laneObject, float _x)
+    public void AddObject(LaneObject laneObject, LaneObjectData data)
     {
         LaneObject newLaneObject = Instantiate(laneObject, Vector3.zero, Quaternion.identity) as LaneObject;
+        
         laneObjects.Add(newLaneObject);
         newLaneObject.transform.parent = objectsTarget.transform;
         newLaneObject.transform.localScale = Vector3.one;
         newLaneObject.transform.localPosition = new Vector3( 1200, 0, 0);
+        newLaneObject.SetData(data);
+        
     }
     void DeleteObject(LaneObject laneObject)
     {
