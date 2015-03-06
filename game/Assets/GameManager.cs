@@ -17,8 +17,18 @@ public class GameManager : MonoBehaviour {
 
     private int speed;    
     private LanesManager lanesManager;
-   
+    void Start()
+    {
+        Events.OnPlayerHitObject += OnPlayerHitObject;
+    }
+    void OnDestroy()
+    {
+        Events.OnPlayerHitObject -= OnPlayerHitObject;
+    }
+    void OnPlayerHitObject(LaneObjectData data)
+    {
 
+    }
     public void Init()
     {
         lanesManager = GetComponent<LanesManager>();
@@ -34,7 +44,10 @@ public class GameManager : MonoBehaviour {
     }
     public void AddObject()
     {
-        lanesManager.AddObject(LaneObject_Word);
+        LaneObjectData data = new LaneObjectData();
+        data.word = "CASA";
+        data.score = 1;
+        lanesManager.AddObject(LaneObject_Word, data);
         Loop();
     }
     void Update()

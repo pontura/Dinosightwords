@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class LanesManager : MonoBehaviour {
 
-
     public Lane lane;
     public List<Lane> lanes;
     public Transform canvasContainer;
@@ -24,9 +23,9 @@ public class LanesManager : MonoBehaviour {
             newLane.GetComponent<RectTransform>().localScale = Vector3.one;
         }
     }
-    public void AddObject(LaneObject laneObject)
+    public void AddObject(LaneObject laneObject, LaneObjectData data)
     {
-        GetRandomLane().AddObject(laneObject, -lane.transform.localPosition.x);
+        GetRandomLane().AddObject(laneObject, data);
     }
     public Lane GetActivetLane()
     {
