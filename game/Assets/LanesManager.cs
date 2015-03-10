@@ -24,9 +24,9 @@ public class LanesManager : MonoBehaviour {
             newLane.Init(a);
         }
     }
-    public void AddObject(LaneObject laneObject, LaneObjectData data)
+    public void AddObject(LaneObject laneObject)
     {
-        GetRandomLane().AddObject(laneObject, data);
+        GetRandomLane().AddObject(laneObject);
     }
     public Lane GetActivetLane()
     {

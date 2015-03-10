@@ -33,6 +33,7 @@ public class Data : MonoBehaviour
         DontDestroyOnLoad(this);
 
         gameData = GetComponent<GameData>();
+        GetComponent<WordsData>().Init(1,1,1);
 
 //        Events.OnMusicVolumeChanged += OnMusicVolumeChanged;
 //        Events.OnSoundsVolumeChanged += OnSoundsVolumeChanged;

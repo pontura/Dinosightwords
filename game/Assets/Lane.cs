@@ -22,7 +22,7 @@ public class Lane : MonoBehaviour {
         newLaneObject.repeatIn = (int)newLaneObject.transform.localPosition.x;
         if (id % 2 != 0) newLaneObject.transform.localScale = new Vector3(-1, 1, 1);
     }
-    public void AddObject(LaneObject laneObject, LaneObjectData data)
+    public void AddObject(LaneObject laneObject)
     {
         LaneObject newLaneObject = Instantiate(laneObject, Vector3.zero, Quaternion.identity) as LaneObject;
         
@@ -30,7 +30,7 @@ public class Lane : MonoBehaviour {
         newLaneObject.transform.parent = objectsTarget.transform;
         newLaneObject.transform.localScale = Vector3.one;
         newLaneObject.transform.localPosition = new Vector3( 1200, 0, 0);
-        newLaneObject.SetData(data);
+        newLaneObject.SetData(laneObject.data);
         
     }
     void DeleteObject(LaneObject laneObject)

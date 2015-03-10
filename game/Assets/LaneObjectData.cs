@@ -5,6 +5,5 @@ public class LaneObjectData {
 
     public string word;
     public int score;
-    public bool isObstacle;
 
 }

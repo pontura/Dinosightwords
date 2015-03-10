@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
 
     public Scrolleable[] Scrolleables;
 
-    public LaneObject LaneObject_Word;
+    private bool showObstacles;
 
     public enum states
     {
@@ -17,40 +17,58 @@ public class GameManager : MonoBehaviour {
         INACTIVE
     }
 
+    private WordsData wordsData;
     private int speed;    
     private LanesManager lanesManager;
-    void Start()
-    {
-        Events.OnPlayerHitObject += OnPlayerHitObject;
-    }
-    void OnDestroy()
-    {
-        Events.OnPlayerHitObject -= OnPlayerHitObject;
-    }
-    void OnPlayerHitObject(LaneObjectData data)
-    {
+    private float distanceBetweenWords;
+    private float distanceBetweenObstacles;
+    private float offsetForObstacles;
 
-    }
     public void Init()
     {
+        wordsData = Data.Instance.GetComponent<WordsData>();
         lanesManager = GetComponent<LanesManager>();
         lanesManager.AddLanes(Data.Instance.GetComponent<GameData>().totalLanes);
         GetComponent<CharacterManager>().Init();
+        showObstacles = Data.Instance.gameData.Obstacles;
+        distanceBetweenWords = Data.Instance.gameData.distanceBetweenWords;
+        distanceBetweenObstacles = Data.Instance.gameData.distanceBetweenObstacles;
+        offsetForObstacles = Data.Instance.gameData.offsetForObstacles;
         speed = Data.Instance.gameData.speed;
-        Loop();
+
         state = states.ACTIVE;
+
+        LoopWords();
+        if (showObstacles)
+            Invoke("LoopObstacles", offsetForObstacles + distanceBetweenObstacles);
     }
-    public void Loop()
+    public void LoopWords()
     {
-        Invoke("AddObject", 2);
+        Invoke("AddWord", distanceBetweenWords);
     }
-    public void AddObject()
+    public void LoopObstacles()
     {
-        LaneObjectData data = new LaneObjectData();
-        data.word = "CASA";
-        data.score = 1;
-        lanesManager.AddObject(LaneObject_Word, data);
-        Loop();
+        Invoke("AddObstacle", distanceBetweenObstacles);
+    }
+    public void AddWord()
+    {
+        int num = Random.Range(0, 100);
+        lanesManager.AddObject( PutWordObject() );
+        LoopWords();
+    }
+    public void AddObstacle()
+    {
+        int num = Random.Range(0, 100);
+        lanesManager.AddObject(PutObstacleObject());
+        LoopObstacles();
+    }
+    private LaneObject PutObstacleObject()
+    {
+        return Game.Instance.GetComponent<ObstaclesManager>().GetNewObject();
+    }
+    private LaneObject PutWordObject()
+    {
+        return Game.Instance.GetComponent<WordsManager>().GetNewObject();
     }
     void Update()
     {

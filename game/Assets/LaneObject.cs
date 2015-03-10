@@ -10,7 +10,7 @@ public class LaneObject : MonoBehaviour {
     public void SetData(LaneObjectData data)
     {
         this.data = data;
-        if (data.word != "")
+        if (tag == "Word")
         {
             GetComponentInChildren<Text>().text = data.word;
         }
@@ -23,9 +23,9 @@ public class LaneObject : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            if (data.isObstacle)
+            if (tag == "Obstacle")
             {
-
+                Events.OnPlayerHitObject(data);
             }
             else
             {
@@ -33,5 +33,6 @@ public class LaneObject : MonoBehaviour {
                 gameObject.SetActive(false);
             }
         }
+        GetComponent<Collider2D>().enabled = false;
     }
 }

@@ -7,8 +7,7 @@ public class InputManager : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            print("SPACE#");
-            Events.OnSwipe(SwipeDetector.directions.DOWN);
+            Events.OnHeroJump();
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
             Events.OnSwipe(SwipeDetector.directions.UP);

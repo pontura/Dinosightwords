@@ -8,6 +8,7 @@ public class Character : MonoBehaviour {
     float timeToCrossLane;
     public Lane lane;
     public states state;
+    private int posX;
 
     public enum states
     {
@@ -19,6 +20,13 @@ public class Character : MonoBehaviour {
     {
         distance = Data.Instance.gameData.laneSeparation / 2;
         timeToCrossLane = Data.Instance.gameData.timeToCrossLane / 2;
+    }
+    void Start()
+    {
+        posX = Data.Instance.gameData.CharacterXPosition;
+        Vector3 pos = transform.localPosition;
+        pos.x = posX;
+        transform.localPosition = pos;
     }
 	public void MoveUP()
     {

@@ -21,10 +21,12 @@ public static class Events {
     public static System.Action<bool> OnGamePaused = delegate { };
 
 
+    public static System.Action OnHeroJump = delegate { };
     public static System.Action OnChangeingLane = delegate { };
     public static System.Action OnChangeLaneComplete = delegate { };
 
     public static System.Action<LaneObjectData> OnPlayerHitObject = delegate { };
-    
+
+    public static System.Action SetNextWord = delegate { };
 
 }

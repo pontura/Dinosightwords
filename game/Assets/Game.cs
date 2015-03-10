@@ -27,12 +27,6 @@ public class Game : MonoBehaviour {
             return mInstance;
         }
     }
-    //void Update()
-    //{
-    //    if (Input.GetKeyDown("space"))
-    //    {
-    //    }
-    //}
 	void Awake () {
         mInstance = this;
 
@@ -40,6 +34,7 @@ public class Game : MonoBehaviour {
     void Start  ()
     {
         GetComponent<GameManager>().Init();
+        GetComponent<WordsManager>().Init();
     }
 
     void OnGamePaused(bool paused)
