@@ -12,6 +12,8 @@ public static class Events {
     public static System.Action OnTransition = delegate { };
     public static System.Action OnTransitionReady = delegate { };
 
+
+    public static System.Action OnLevelComplete = delegate { };
     public static System.Action<SwipeDetector.directions> OnSwipe = delegate { };
 
     public static System.Action<float, float> OnSaveVolumes = delegate { };
@@ -25,8 +27,13 @@ public static class Events {
     public static System.Action OnChangeingLane = delegate { };
     public static System.Action OnChangeLaneComplete = delegate { };
 
+    public static System.Action OnHeroCrash = delegate { };
     public static System.Action<LaneObjectData> OnPlayerHitObject = delegate { };
 
     public static System.Action SetNextWord = delegate { };
+    public static System.Action<WordsData.Word> OnNewWord = delegate { };
+
+    public static System.Action<int> OnScoreRefresh = delegate { };
+    
 
 }

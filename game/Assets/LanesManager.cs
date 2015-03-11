@@ -17,7 +17,7 @@ public class LanesManager : MonoBehaviour {
         {
             Lane newLane = Instantiate(lane, Vector3.zero, Quaternion.identity) as Lane;
             lanes.Add(newLane);
-            newLane.transform.parent = canvasContainer.transform;
+            newLane.transform.SetParent(canvasContainer.transform);
             newLane.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, laneYPosition - (laneSeparation * a), 0);
             newLane.GetComponent<RectTransform>().sizeDelta = new Vector3(100,100,100);
             newLane.GetComponent<RectTransform>().localScale = Vector3.one;

@@ -25,7 +25,7 @@ public class LaneObject : MonoBehaviour {
         {
             if (tag == "Obstacle")
             {
-                Events.OnPlayerHitObject(data);
+                Events.OnHeroCrash();
             }
             else
             {

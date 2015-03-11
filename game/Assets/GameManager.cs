@@ -4,6 +4,7 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 
     public float distance;
+    public int score;
     public states state;
 
     public Scrolleable[] Scrolleables;
@@ -20,14 +21,19 @@ public class GameManager : MonoBehaviour {
     private WordsData wordsData;
     private int speed;    
     private LanesManager lanesManager;
+    private WordsManager wordsManager;
     private float distanceBetweenWords;
     private float distanceBetweenObstacles;
     private float offsetForObstacles;
 
     public void Init()
     {
+        Events.OnPlayerHitObject += OnPlayerHitObject;
+        Events.OnLevelComplete += OnLevelComplete;
+
         wordsData = Data.Instance.GetComponent<WordsData>();
         lanesManager = GetComponent<LanesManager>();
+        wordsManager = GetComponent<WordsManager>();
         lanesManager.AddLanes(Data.Instance.GetComponent<GameData>().totalLanes);
         GetComponent<CharacterManager>().Init();
         showObstacles = Data.Instance.gameData.Obstacles;
@@ -41,6 +47,22 @@ public class GameManager : MonoBehaviour {
         LoopWords();
         if (showObstacles)
             Invoke("LoopObstacles", offsetForObstacles + distanceBetweenObstacles);
+    }    
+    void OnDestroy()
+    {
+        Events.OnPlayerHitObject -= OnPlayerHitObject;
+        Events.OnLevelComplete -= OnLevelComplete;
+    }
+    void OnLevelComplete()
+    {
+        Application.LoadLevel("Summary");
+    }
+    void OnPlayerHitObject(LaneObjectData data)
+    {
+        score += data.score;
+        if (score < 0) score = 0;
+        Events.OnScoreRefresh(score);
+        wordsManager.OnPlayerHitWord(score);
     }
     public void LoopWords()
     {

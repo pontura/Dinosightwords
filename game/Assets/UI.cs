@@ -5,19 +5,32 @@ using UnityEngine.UI;
 public class UI : MonoBehaviour {
 
     public Text scoreLabel;
-    private int score = 0;
+    public Text SightWord;
+    private WordsData wordsData;
 
-    void Start()
+   public void Init()
     {
-        Events.OnPlayerHitObject += OnPlayerHitObject;
+        Events.OnScoreRefresh += OnScoreRefresh;
+        Events.OnNewWord += OnNewWord;
+        wordsData = Data.Instance.GetComponent<WordsData>();
+        DisplayWord();
     }
     void OnDestroy()
     {
-        Events.OnPlayerHitObject -= OnPlayerHitObject;
+        Events.OnNewWord -= OnNewWord;
+        Events.OnScoreRefresh -= OnScoreRefresh;
     }
-    void OnPlayerHitObject(LaneObjectData data)
-    {
-        score += data.score;
+    void OnScoreRefresh(int score)
+    {        
         scoreLabel.text = "SCORE = " + score.ToString();
+    }
+    void OnNewWord(WordsData.Word word)
+    {
+        SightWord.text = "";
+        Invoke("DisplayWord", 1);
+    }
+    void DisplayWord()
+    {
+        SightWord.text = wordsData.GetWordData().sightWord;
     }
 }

@@ -16,7 +16,7 @@ public class Lane : MonoBehaviour {
         this.id = id;
         LaneObject newLaneObject = Instantiate(border, Vector3.zero, Quaternion.identity) as LaneObject;
         laneObjects.Add(newLaneObject);
-        newLaneObject.transform.parent = objectsTarget.transform;
+        newLaneObject.transform.SetParent(objectsTarget.transform);
         newLaneObject.transform.localScale = Vector3.one;
         newLaneObject.transform.localPosition = new Vector3((id+1) * 60, 0, 0);
         newLaneObject.repeatIn = (int)newLaneObject.transform.localPosition.x;
@@ -27,7 +27,7 @@ public class Lane : MonoBehaviour {
         LaneObject newLaneObject = Instantiate(laneObject, Vector3.zero, Quaternion.identity) as LaneObject;
         
         laneObjects.Add(newLaneObject);
-        newLaneObject.transform.parent = objectsTarget.transform;
+        newLaneObject.transform.SetParent( objectsTarget.transform );
         newLaneObject.transform.localScale = Vector3.one;
         newLaneObject.transform.localPosition = new Vector3( 1200, 0, 0);
         newLaneObject.SetData(laneObject.data);

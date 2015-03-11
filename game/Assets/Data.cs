@@ -5,9 +5,7 @@ using System.Collections.Generic;
 public class Data : MonoBehaviour
 {
     private string movPath = "bumper04.mp4";
-
-    static Data mInstance = null;
-
+    
     public int totalScore;
 
     public float musicVolume = 1;
@@ -16,21 +14,42 @@ public class Data : MonoBehaviour
     public SceneLoader sceneLoader;
     public GameData gameData;
 
+
+    const string PREFAB_PATH = "Data";
+
+    static Data mInstance = null;
+
     public static Data Instance
     {
         get
         {
             if (mInstance == null)
             {
-                Debug.LogError("Algo llama a DATA antes de inicializarse");
+                mInstance = FindObjectOfType<Data>();
+
+                if (mInstance == null)
+                {
+                    GameObject go = Instantiate(Resources.Load<GameObject>(PREFAB_PATH)) as GameObject;
+                    mInstance = go.GetComponent<Data>();
+                }
             }
             return mInstance;
         }
     }
+
     void Awake()
     {
-        mInstance = this;
-        DontDestroyOnLoad(this);
+        //if we don't have an [_instance] set yet
+        if (!mInstance)
+            mInstance = this;
+        //otherwise, if we do, kill this thing
+        else
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(this.gameObject);
 
         gameData = GetComponent<GameData>();
         GetComponent<WordsData>().Init(1,1,1);

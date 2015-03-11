@@ -8,34 +8,27 @@ public class WordsManager : MonoBehaviour {
 
     public LaneObject LaneObject_Word;
 
-    private int wordScore=0;
-
     public void Init()
     {
-        wordsData = Data.Instance.GetComponent<WordsData>();
-        Events.OnPlayerHitObject += OnPlayerHitObject;
-        wordScore = 0;
+        wordsData = Data.Instance.GetComponent<WordsData>();  
     }
-    void OnDestroy()
+    public void OnPlayerHitWord(int totalScore)
     {
-        Events.OnPlayerHitObject -= OnPlayerHitObject;
-    }
-    void OnPlayerHitObject(LaneObjectData data)
-    {
-        if (data.score <= 0) return;
-        wordScore++;
-        if (wordScore >= CurrentWord().score)
+        if (totalScore >= wordsData.nextScore)
         {
             Events.SetNextWord();
-            wordScore = 0;
         }
     }
     public LaneObject GetNewObject()
     {
+        
         LaneObject laneObject = LaneObject_Word;
         
         LaneObjectData data = new LaneObjectData();
-        if (Random.Range(0, 100) < SightWordProbabilityPercent)
+
+        int rand = Random.Range(0, 100);
+
+        if (rand <= SightWordProbabilityPercent)
         {
             data.word = CurrentWord().sightWord;
             data.score = 1;
@@ -50,6 +43,7 @@ public class WordsManager : MonoBehaviour {
             data.word = word;
             data.score = -1;
         }
+        
         if (!passFilter(data.word))
         {
             return GetNewObject();
@@ -66,6 +60,7 @@ public class WordsManager : MonoBehaviour {
     string lastWord;
     public bool passFilter(string newWord)
     {
+        print("passFilter newWord: " + newWord + "      lastWord: " + lastWord);
         if(newWord == lastWord) return false;
         lastWord = newWord;
         return true;

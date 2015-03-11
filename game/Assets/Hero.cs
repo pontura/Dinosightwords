@@ -11,28 +11,49 @@ public class Hero : MonoBehaviour {
     {
         IDLE,
         RUN,
-        JUMP
+        JUMP,
+        CRASH
     }
     void Start()
     {
-        animator = GetComponent<Animator>();
         Events.OnHeroJump += OnHeroJump;
+        Events.OnHeroCrash += OnHeroCrash;
+
+        animator = GetComponent<Animator>();       
         collider = GetComponent<Collider2D>();
     }
     void OnDestroy()
     {
         Events.OnHeroJump -= OnHeroJump;
+        Events.OnHeroCrash -= OnHeroCrash;
     }
     void OnHeroJump()
     {
         Jump();
         collider.enabled = false;
     }
-    public void Jump()
+    void OnHeroCrash()
+    {
+        Crash();
+        collider.enabled = false;
+    }
+    void Crash()
+    {
+        if (state == states.CRASH) return;
+        state = states.CRASH;
+        animator.SetBool("isCrashing", true);
+    }
+    void Jump()
     {
         if (state == states.JUMP) return;
         state = states.JUMP;
         animator.SetBool("isJumping", true);
+    }
+    public void EndCrash()
+    {
+        collider.enabled = true;
+        state = states.RUN;
+        animator.SetBool("isCrashing", false);
     }
     public void EndJump()
     {

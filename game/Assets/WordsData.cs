@@ -11,6 +11,8 @@ public class WordsData : MonoBehaviour {
 
     private Zone[] actualZone;
 
+    public int nextScore;
+
     public void Init(int ZoneID, int LevelID, int WordID)
     {
         SetZone(ZoneID);
@@ -18,8 +20,13 @@ public class WordsData : MonoBehaviour {
         this.LevelID = LevelID;
         this.WordID = WordID;
         Events.SetNextWord += SetNextWord;
+        RefreshNextScore();
     }
 
+    public void RefreshNextScore()
+    {
+        nextScore += GetWordData().score;
+    }
     [Serializable]
     public class Word
     {
@@ -47,16 +54,14 @@ public class WordsData : MonoBehaviour {
     public void SetNextWord()
     {
         WordID++;
-        if (actualZone[LevelID-1].words.Length < WordID)
+        if (actualZone[LevelID - 1].words.Length < WordID)
         {
-            WordID = 1;
-            LevelID++;
+            Events.OnLevelComplete();
         }
-        if (actualZone.Length < LevelID)
+        else
         {
-            LevelID = 1;
-            ZoneID++;
-            SetZone(ZoneID);
+            RefreshNextScore();
+            Events.OnNewWord(GetWordData());
         }
     }
     public Word GetWordData()

@@ -5,7 +5,7 @@ public class Game : MonoBehaviour {
         
     private states lastState;
     public states state;
-
+    public UI ui;
     
     public enum states
     {
@@ -35,6 +35,7 @@ public class Game : MonoBehaviour {
     {
         GetComponent<GameManager>().Init();
         GetComponent<WordsManager>().Init();
+        ui.Init();
     }
 
     void OnGamePaused(bool paused)

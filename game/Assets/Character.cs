@@ -14,7 +14,8 @@ public class Character : MonoBehaviour {
     {
         IDLE,
         CHANGE,
-        JUMP
+        JUMP,
+        CRASH
     }
     public void Init()
     {
