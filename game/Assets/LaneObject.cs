@@ -29,7 +29,7 @@ public class LaneObject : MonoBehaviour {
             }
             else
             {
-                Events.OnPlayerHitObject(data);
+                Events.OnPlayerHitWord(data);
                 gameObject.SetActive(false);
             }
         }

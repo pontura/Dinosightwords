@@ -1,17 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Summary : MonoBehaviour {
 
+    public Text labelErrors;
+
+    void Start()
+    {
+        int stars;
+        int errors = Data.Instance.errors ;
+
+        if (errors < 2)
+            stars = 3;
+        else if (errors < 4)
+            stars = 2;
+        else
+            stars = 1;
+        
+        labelErrors.text = "STARS: " + stars + "(ERRORS " + errors  + ")";
+    }
+    public void ResetLevel()
+    {
+        Data.Instance.GetComponent<WordsData>().WordID = 1;
+        Data.Instance.errors = 0;
+    }
     public void Next()
     {
-        WordsData data = Data.Instance.GetComponent<WordsData>();
-        data.LevelID++;
-        data.WordID = 1;
+        ResetLevel();
+        Data.Instance.GetComponent<WordsData>().LevelID++;        
         Application.LoadLevel("Game");
     }
     public void RePlay()
     {
+        ResetLevel();
         Application.LoadLevel("Game");
     }
 }

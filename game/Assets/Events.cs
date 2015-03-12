@@ -28,7 +28,7 @@ public static class Events {
     public static System.Action OnChangeLaneComplete = delegate { };
 
     public static System.Action OnHeroCrash = delegate { };
-    public static System.Action<LaneObjectData> OnPlayerHitObject = delegate { };
+    public static System.Action<LaneObjectData> OnPlayerHitWord = delegate { };
 
     public static System.Action SetNextWord = delegate { };
     public static System.Action<WordsData.Word> OnNewWord = delegate { };

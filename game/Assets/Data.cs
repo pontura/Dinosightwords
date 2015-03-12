@@ -7,6 +7,7 @@ public class Data : MonoBehaviour
     private string movPath = "bumper04.mp4";
     
     public int totalScore;
+    public int errors = 0;
 
     public float musicVolume = 1;
     public float soundsVolume = 1;

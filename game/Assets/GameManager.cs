@@ -6,7 +6,6 @@ public class GameManager : MonoBehaviour {
     public float distance;
     public int score;
     public states state;
-
     public Scrolleable[] Scrolleables;
 
     private bool showObstacles;
@@ -28,7 +27,8 @@ public class GameManager : MonoBehaviour {
 
     public void Init()
     {
-        Events.OnPlayerHitObject += OnPlayerHitObject;
+        Data.Instance.errors = 0;
+        Events.OnPlayerHitWord += OnPlayerHitWord;
         Events.OnLevelComplete += OnLevelComplete;
 
         wordsData = Data.Instance.GetComponent<WordsData>();
@@ -50,15 +50,16 @@ public class GameManager : MonoBehaviour {
     }    
     void OnDestroy()
     {
-        Events.OnPlayerHitObject -= OnPlayerHitObject;
+        Events.OnPlayerHitWord -= OnPlayerHitWord;
         Events.OnLevelComplete -= OnLevelComplete;
     }
     void OnLevelComplete()
     {
         Application.LoadLevel("Summary");
     }
-    void OnPlayerHitObject(LaneObjectData data)
+    void OnPlayerHitWord(LaneObjectData data)
     {
+        if (data.score < 0) Data.Instance.errors++;
         score += data.score;
         if (score < 0) score = 0;
         Events.OnScoreRefresh(score);
