@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour {
         Events.OnLevelComplete += OnLevelComplete;
 
         wordsData = Data.Instance.GetComponent<WordsData>();
+        wordsData.RefreshNextScore();
+
         lanesManager = GetComponent<LanesManager>();
         wordsManager = GetComponent<WordsManager>();
         lanesManager.AddLanes(Data.Instance.GetComponent<GameData>().totalLanes);
@@ -55,7 +57,7 @@ public class GameManager : MonoBehaviour {
     }
     void OnLevelComplete()
     {
-        Application.LoadLevel("Summary");
+        Application.LoadLevel("05_Summary");
     }
     void OnPlayerHitWord(LaneObjectData data)
     {
@@ -87,11 +89,26 @@ public class GameManager : MonoBehaviour {
     }
     private LaneObject PutObstacleObject()
     {
-        return Game.Instance.GetComponent<ObstaclesManager>().GetNewObject();
+        try
+        {
+            return Game.Instance.GetComponent<ObstaclesManager>().GetNewObject();
+        } catch
+        {
+            Debug.LogError("No Word");
+        }
+        return null;
     }
     private LaneObject PutWordObject()
     {
-        return Game.Instance.GetComponent<WordsManager>().GetNewObject();
+          try
+        {
+            return Game.Instance.GetComponent<WordsManager>().GetNewObject();
+        }
+          catch
+        {
+            Debug.LogError("No Object");
+        }
+          return null;
     }
     void Update()
     {

@@ -20,7 +20,6 @@ public class WordsData : MonoBehaviour {
         this.LevelID = LevelID;
         this.WordID = WordID;
         Events.SetNextWord += SetNextWord;
-        RefreshNextScore();
     }
 
     public void RefreshNextScore()
@@ -54,6 +53,7 @@ public class WordsData : MonoBehaviour {
     public void SetNextWord()
     {
         WordID++;
+
         if (actualZone[LevelID - 1].words.Length < WordID)
         {
             Events.OnLevelComplete();
@@ -66,7 +66,16 @@ public class WordsData : MonoBehaviour {
     }
     public Word GetWordData()
     {
-        return actualZone[LevelID-1].words[WordID-1];    
+        try
+        {
+            return actualZone[LevelID - 1].words[WordID - 1];  
+        }
+        catch
+        {
+            Debug.LogError("ERROR - no existe el nivel " + LevelID + " o la palabra " + WordID);
+            Time.timeScale = 0;
+        }
+        return null;
     }
     void SetZone(int id)
     {

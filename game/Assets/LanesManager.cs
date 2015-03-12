@@ -26,7 +26,10 @@ public class LanesManager : MonoBehaviour {
     }
     public void AddObject(LaneObject laneObject)
     {
-        GetRandomLane().AddObject(laneObject);
+        if (laneObject == null)
+            Debug.LogError("No Object to add");
+        else
+            GetRandomLane().AddObject(laneObject);
     }
     public Lane GetActivetLane()
     {
