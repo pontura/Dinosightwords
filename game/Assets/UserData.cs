@@ -5,14 +5,13 @@ using System.Collections.Generic;
 public class UserData : MonoBehaviour {
 
     public bool DEBUG_UnlockAllLevels;
-    public List<int> starsZone1;
-    public List<int> starsZone2;
+    public List<int> errorsZone1;
+    public List<int> errorsZone2;
 
     private WordsData wordsData;
     private Data data;
 
 	public void Init () {
-        print("init");
         Events.OnLevelComplete += OnLevelComplete;
         wordsData = GetComponent<WordsData>();
         data = GetComponent<Data>();
