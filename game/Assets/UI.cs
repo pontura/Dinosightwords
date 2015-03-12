@@ -31,6 +31,8 @@ public class UI : MonoBehaviour {
     }
     void DisplayWord()
     {
-        SightWord.text = wordsData.GetWordData().sightWord;
+        WordsData.Word word = wordsData.GetWordData();
+        if(word != null)
+            SightWord.text = word.sightWord;
     }
 }

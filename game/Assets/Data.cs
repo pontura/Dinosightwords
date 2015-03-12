@@ -54,6 +54,7 @@ public class Data : MonoBehaviour
 
         gameData = GetComponent<GameData>();
         GetComponent<WordsData>().Init(1,1,1);
+        GetComponent<UserData>().Init();
 
 //        Events.OnMusicVolumeChanged += OnMusicVolumeChanged;
 //        Events.OnSoundsVolumeChanged += OnSoundsVolumeChanged;

@@ -29,11 +29,11 @@ public class Summary : MonoBehaviour {
     {
         ResetLevel();
         Data.Instance.GetComponent<WordsData>().LevelID++;        
-        Application.LoadLevel("Game");
+        Application.LoadLevel("04_Game");
     }
     public void RePlay()
     {
         ResetLevel();
-        Application.LoadLevel("Game");
+        Application.LoadLevel("04_Game");
     }
 }

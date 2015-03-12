@@ -40,8 +40,18 @@ public class WordsManager : MonoBehaviour {
             else if (Random.Range(0, 100) < 66) word = CurrentWord().wrong2;
             else word = CurrentWord().wrong3;
 
+            
+
             data.word = word;
             data.score = -1;
+
+
+        }
+
+        if (data.word == null || data.word == "")
+        {
+            Debug.LogError("No hay words ");
+            return null;
         }
         
         if (!passFilter(data.word))
@@ -60,7 +70,7 @@ public class WordsManager : MonoBehaviour {
     string lastWord;
     public bool passFilter(string newWord)
     {
-        print("passFilter newWord: " + newWord + "      lastWord: " + lastWord);
+        if (newWord == "" || newWord.ToUpper() == "RANDOM") return true;
         if(newWord == lastWord) return false;
         lastWord = newWord;
         return true;
