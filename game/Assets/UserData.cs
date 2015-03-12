@@ -5,13 +5,14 @@ using System.Collections.Generic;
 public class UserData : MonoBehaviour {
 
     public bool DEBUG_UnlockAllLevels;
-    public List<int> errorsZone1;
-    public List<int> errorsZone2;
+    public List<int> starsZone1;
+    public List<int> starsZone2;
 
     private WordsData wordsData;
     private Data data;
 
 	public void Init () {
+        print("init");
         Events.OnLevelComplete += OnLevelComplete;
         wordsData = GetComponent<WordsData>();
         data = GetComponent<Data>();
@@ -20,15 +21,25 @@ public class UserData : MonoBehaviour {
     void OnLevelComplete()
     {
         int levelID = wordsData.LevelID;
-        int errors = data.errors;
-        if (errorsZone1.Count < levelID)
-            SaveErrors(levelID, errors);
-        else if (errorsZone1[levelID] > errors)
-            SaveErrors(levelID, errors);
+        int stars = ErorsToStars(data.errors);
+        if (starsZone1.Count < levelID)
+            SaveStars(levelID, stars);
+        else if (starsZone1[levelID - 1] > stars)
+            SaveStars(levelID, stars);
     }
-    void SaveErrors(int levelID, int errors)
+    public int ErorsToStars(int errors)
     {
-        PlayerPrefs.SetInt("level_1_" + levelID, errors);   
+        int stars;
+
+        if (errors < 2) stars = 3;
+        else if (errors < 4) stars = 2;
+        else stars = 1;
+
+        return stars;
+    }
+    void SaveStars(int levelID, int errors)
+    {
+        PlayerPrefs.SetInt("level_1_" + levelID, ErorsToStars(errors));   
     }
     void LoadData()
     {
@@ -39,29 +50,23 @@ public class UserData : MonoBehaviour {
             //foreach (WordsData.Word word in zone.words)
             //{
                 print(zone.words);
-                LoadErrors(1, levelID);
+                LoadStars(1, levelID);
            // }
         }
     }
-    void LoadErrors(int ZoneID, int levelID)
+    void LoadStars(int ZoneID, int levelID)
     {
-        print("level_" + ZoneID + "_" + levelID);
-        if ( PlayerPrefs.GetInt("level_" + ZoneID + "_" + levelID) > 0 )
+        if ( PlayerPrefs.GetInt("level_" + ZoneID + "_" + levelID)>0)
         {
-            int levelErrors = PlayerPrefs.GetInt("level_" + ZoneID + "_" + levelID);
-            errorsZone1.Add(levelErrors);
+            int levelStars = PlayerPrefs.GetInt("level_" + ZoneID + "_" + levelID);
+            starsZone1.Add(levelStars);
         }
     }
     public int GetStarsIn(int ZoneID, int LevelID)
     {
-        if (errorsZone1.Count < LevelID ) 
+        if (starsZone1.Count < LevelID) 
             return 0;
-        int errors = errorsZone1[LevelID - 1];
-        int stars;
-
-        if (errors < 2) stars = 3;
-        else if (errors < 4) stars = 2;
-        else stars = 1;
+        int stars = starsZone1[LevelID - 1];
 
         return stars;
     }
