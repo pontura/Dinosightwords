@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour {
         Events.OnLevelComplete += OnLevelComplete;
 
         wordsData = Data.Instance.GetComponent<WordsData>();
-        wordsData.RefreshNextScore();
+        wordsData.Restart();
 
         lanesManager = GetComponent<LanesManager>();
         wordsManager = GetComponent<WordsManager>();

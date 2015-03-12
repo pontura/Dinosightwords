@@ -21,7 +21,11 @@ public class WordsData : MonoBehaviour {
         this.WordID = WordID;
         Events.SetNextWord += SetNextWord;
     }
-
+    public void Restart()
+    {
+        nextScore = 0;
+        RefreshNextScore();
+    }
     public void RefreshNextScore()
     {
         nextScore += GetWordData().score;
@@ -53,7 +57,7 @@ public class WordsData : MonoBehaviour {
     public void SetNextWord()
     {
         WordID++;
-
+        ResetRandomWord();
         if (actualZone[LevelID - 1].words.Length < WordID)
         {
             Events.OnLevelComplete();
@@ -68,7 +72,15 @@ public class WordsData : MonoBehaviour {
     {
         try
         {
-            return actualZone[LevelID - 1].words[WordID - 1];  
+            Word word = actualZone[LevelID - 1].words[WordID - 1];
+            if (word.sightWord.ToUpper() == "RANDOM" )
+            {
+                if( randomWord == null)
+                    SetRandomWord();
+                word = randomWord;
+            }
+            lastRandomWord = word.sightWord;
+            return word;  
         }
         catch
         {
@@ -84,5 +96,22 @@ public class WordsData : MonoBehaviour {
             case 1: actualZone = Zone1; break;
             default: actualZone = Zone2; break;
         }
+    }
+    Word randomWord;
+    string lastRandomWord = "";
+    void ResetRandomWord()
+    {
+        randomWord = null;
+    }
+    void SetRandomWord()
+    {
+        int rand = UnityEngine.Random.Range(0, LevelID);
+        Zone zone = actualZone[rand];
+
+        rand = UnityEngine.Random.Range(0, zone.words.Length);
+        randomWord = zone.words[rand];
+
+        if (randomWord.sightWord.ToUpper() == "RANDOM") SetRandomWord();
+        if (lastRandomWord == randomWord.sightWord) SetRandomWord();
     }
 }

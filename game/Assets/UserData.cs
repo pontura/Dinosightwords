@@ -22,13 +22,17 @@ public class UserData : MonoBehaviour {
         int levelID = wordsData.LevelID;
         int errors = data.errors;
         if (errorsZone1.Count < levelID)
-            SaveErrors(levelID, errors);
-        else if (errorsZone1[levelID] > errors)
-            SaveErrors(levelID, errors);
+            SaveStars(levelID, errors);
+        else if (errorsZone1[levelID-1] > errors)
+            SaveStars(levelID, errors);
     }
-    void SaveErrors(int levelID, int errors)
+    void SaveStars(int levelID, int errors)
     {
-        PlayerPrefs.SetInt("level_1_" + levelID, errors);   
+        int stars;
+        if (errors < 2) stars = 3;
+        else if (errors < 4) stars = 2;
+        else stars = 1;
+        PlayerPrefs.SetInt("level_1_" + levelID, stars);   
     }
     void LoadData()
     {
@@ -39,29 +43,24 @@ public class UserData : MonoBehaviour {
             //foreach (WordsData.Word word in zone.words)
             //{
                 print(zone.words);
-                LoadErrors(1, levelID);
+                LoadStars(1, levelID);
            // }
         }
     }
-    void LoadErrors(int ZoneID, int levelID)
+    void LoadStars(int ZoneID, int levelID)
     {
-        print("level_" + ZoneID + "_" + levelID);
-        if ( PlayerPrefs.GetInt("level_" + ZoneID + "_" + levelID) > 0 )
+        print("level_" + ZoneID + "_" + levelID + " - PlayerPrefs " + PlayerPrefs.GetInt("level_" + ZoneID + "_" + levelID) );
+        if ( PlayerPrefs.GetInt("level_" + ZoneID + "_" + levelID)>0)
         {
-            int levelErrors = PlayerPrefs.GetInt("level_" + ZoneID + "_" + levelID);
-            errorsZone1.Add(levelErrors);
+            int levelStars = PlayerPrefs.GetInt("level_" + ZoneID + "_" + levelID);
+            errorsZone1.Add(levelStars);
         }
     }
     public int GetStarsIn(int ZoneID, int LevelID)
     {
         if (errorsZone1.Count < LevelID ) 
             return 0;
-        int errors = errorsZone1[LevelID - 1];
-        int stars;
-
-        if (errors < 2) stars = 3;
-        else if (errors < 4) stars = 2;
-        else stars = 1;
+        int stars = errorsZone1[LevelID - 1];
 
         return stars;
     }
