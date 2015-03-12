@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< .merge_file_a09076
 guid: 53d691f374628b042817e25bd3c1273c
+=======
+guid: 0c56e10ef82ee2c4c937c9eeecfd84b6
+>>>>>>> .merge_file_a06084
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 2

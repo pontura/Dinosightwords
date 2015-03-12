@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< .merge_file_a08364
 guid: 69a57f812f4c9234688b7ecd1213570a
+=======
+guid: 8e99632cec6191840b7c06ec6442d11c
+>>>>>>> .merge_file_a08860
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 2
@@ -25,6 +29,7 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
+<<<<<<< .merge_file_a08364
     aniso: -1
     mipBias: -1
     wrapMode: -1
@@ -32,14 +37,28 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 0
+=======
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+>>>>>>> .merge_file_a08860
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+<<<<<<< .merge_file_a08364
   alphaIsTransparency: 0
   textureType: -1
+=======
+  alphaIsTransparency: 1
+  textureType: 8
+>>>>>>> .merge_file_a08860
   buildTargetSettings: []
   spriteSheet:
     sprites: []
