@@ -5,8 +5,10 @@ public class LevelSelector : MonoBehaviour {
 
     public GameObject buttonsContainer;
     private UserData userData;
+    public LevelLockedPopup levelLockedPopup;
 
 	void Start () {
+        levelLockedPopup.gameObject.SetActive(false);
         userData = Data.Instance.GetComponent<UserData>();
         int id = 1;
         LevelSelectorButton[] buttons = buttonsContainer.GetComponentsInChildren<LevelSelectorButton>();
@@ -19,6 +21,11 @@ public class LevelSelector : MonoBehaviour {
 	}
     public void Clicked(LevelSelectorButton button)
     {
+        if (!button.isActive)
+        {
+            levelLockedPopup.gameObject.SetActive(true);
+            return;
+        }
         Data.Instance.GetComponent<WordsData>().LevelID = button.id;
         Application.LoadLevel("04_Game");
     }
