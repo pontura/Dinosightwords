@@ -18,6 +18,7 @@ public class LevelSelector : MonoBehaviour {
             button.Init(id, starsQty);
             id++;
         }
+        buttons[0].GetComponent<LevelSelectorButton>().isActive = true;
 	}
     public void Clicked(LevelSelectorButton button)
     {
@@ -28,5 +29,9 @@ public class LevelSelector : MonoBehaviour {
         }
         Data.Instance.GetComponent<WordsData>().LevelID = button.id;
         Application.LoadLevel("04_Game");
+    }
+    public void MainMenu()
+    {
+        Application.LoadLevel("02_MainMenu");
     }
 }

@@ -12,7 +12,6 @@ public class UserData : MonoBehaviour {
     private Data data;
 
 	public void Init () {
-        print("init");
         Events.OnLevelComplete += OnLevelComplete;
         wordsData = GetComponent<WordsData>();
         data = GetComponent<Data>();
@@ -49,7 +48,6 @@ public class UserData : MonoBehaviour {
             levelID++;
             //foreach (WordsData.Word word in zone.words)
             //{
-                print(zone.words);
                 LoadStars(1, levelID);
            // }
         }
