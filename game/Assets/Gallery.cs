@@ -19,24 +19,31 @@ public class Gallery : MonoBehaviour {
         starting_Y = container.transform.localPosition.y;
         wordsData = Data.Instance.GetComponent<WordsData>();
         UserData userData = Data.Instance.GetComponent<UserData>();
+
+        int b = 0;
         int a = 0;
-        
         foreach (WordsData.Zone zone in wordsData.Zone1)
         {
+            int starsInLevel = userData.GetStarsIn(1, b + 1);
+            bool isActive = false;
+            int levelToReachWord;
+            if (starsInLevel > 0)
+            {
+                levelToReachWord = 0;
+                isActive = true;
+            }
+            else
+                levelToReachWord = b;
+            
             foreach (WordsData.Word word in zone.words)
             {
+                if (word.sightWord.ToUpper() == "RANDOM") continue;
+
                 GalleryButton galleryButton = Instantiate(button) as GalleryButton;
                galleryButton.transform.SetParent(container.transform);
 
-               int levelToReachWord;
-               int starsInLevel = userData.GetStarsIn(1, a+1);
-
-               if (starsInLevel > 0)
-                   levelToReachWord = 0;
-               else
-                   levelToReachWord = a;
-
-               galleryButton.Init(this, word.sightWord, levelToReachWord);
+               print("starsInLevel: " + starsInLevel + "  s: " + word.sightWord + " isActive: " + isActive);
+               galleryButton.Init(this, word.sightWord, isActive, levelToReachWord);
                galleryButton.transform.localPosition = new Vector3(0, -buttonSeparation * a, 0);
                galleryButton.transform.localScale = Vector3.one;
 
@@ -44,6 +51,7 @@ public class Gallery : MonoBehaviour {
                a++;
                containerHeight += buttonSeparation;
             }
+            b++;
         }
         containerHeight -= buttonSeparation;
         container.GetComponent<RectTransform>().sizeDelta = new Vector2(600, containerHeight);

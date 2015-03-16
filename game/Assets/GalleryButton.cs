@@ -13,7 +13,7 @@ public class GalleryButton : MonoBehaviour {
     public bool isActive;
     private Gallery gallery;    
 
-    public void Init(Gallery gallery, string sightWord, int levelToReachWord)
+    public void Init(Gallery gallery, string sightWord, bool isActive, int levelToReachWord)
     {
         this.sightWord = sightWord;
         this.gallery = gallery;
@@ -21,7 +21,7 @@ public class GalleryButton : MonoBehaviour {
         isOn.SetActive(false);
         isOff.SetActive(false);
 
-        if (levelToReachWord == 0)
+        if (isActive)
         {
             isActive = true;
             SightWord.text = sightWord;

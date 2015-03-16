@@ -23,6 +23,10 @@ public class LevelSelectorButton : MonoBehaviour {
             isActive = false;
             button.targetGraphic.color = button.colors.disabledColor;
         }
-        
 	}
+    public void NextButton()
+    {
+         isActive = true;
+         button.targetGraphic.color = button.colors.normalColor;        
+    }
 }

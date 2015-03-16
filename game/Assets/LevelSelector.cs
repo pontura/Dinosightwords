@@ -12,10 +12,20 @@ public class LevelSelector : MonoBehaviour {
         userData = Data.Instance.GetComponent<UserData>();
         int id = 1;
         LevelSelectorButton[] buttons = buttonsContainer.GetComponentsInChildren<LevelSelectorButton>();
+        bool nextActiveButton = false;
         foreach (LevelSelectorButton button in buttons)
         {
             int starsQty = userData.GetStarsIn(1, id);
+            
             button.Init(id, starsQty);
+
+            //el proximo activo:
+            if (starsQty == 0 && !nextActiveButton)
+            {
+                nextActiveButton = true;
+                button.NextButton();
+            }
+
             id++;
         }
         buttons[0].GetComponent<LevelSelectorButton>().isActive = true;

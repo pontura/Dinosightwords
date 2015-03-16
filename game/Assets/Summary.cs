@@ -36,4 +36,9 @@ public class Summary : MonoBehaviour {
         ResetLevel();
         Application.LoadLevel("04_Game");
     }
+    public void MainMenu()
+    {
+        ResetLevel();
+        Application.LoadLevel("02_MainMEnu");
+    }
 }
