@@ -4,6 +4,9 @@ using Holoville.HOTween;
 
 public class Character : MonoBehaviour {
 
+    [SerializeField]
+    Hero heroAsset;
+
     int distance ;
     float timeToCrossLane;
     public Lane lane;
@@ -21,6 +24,11 @@ public class Character : MonoBehaviour {
     {
         distance = Data.Instance.gameData.laneSeparation / 2;
         timeToCrossLane = Data.Instance.gameData.timeToCrossLane / 2;
+
+        Hero hero = Instantiate(heroAsset) as Hero;
+        hero.transform.SetParent(transform);
+        hero.GetComponent<RectTransform>().localScale = Vector3.one;
+        hero.GetComponent<RectTransform>().localPosition = Vector3.zero;
     }
     void Start()
     {
