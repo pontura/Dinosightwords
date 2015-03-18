@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour {
         Data.Instance.errors = 0;
         Events.OnPlayerHitWord += OnPlayerHitWord;
         Events.OnLevelComplete += OnLevelComplete;
+        Events.StartGame += StartGame;
 
         wordsData = Data.Instance.GetComponent<WordsData>();
         wordsData.Restart();
@@ -38,6 +39,15 @@ public class GameManager : MonoBehaviour {
         wordsManager = GetComponent<WordsManager>();
         lanesManager.AddLanes(Data.Instance.GetComponent<GameData>().totalLanes);
         GetComponent<CharacterManager>().Init();
+    }
+    void OnDestroy()
+    {
+        Events.OnPlayerHitWord -= OnPlayerHitWord;
+        Events.OnLevelComplete -= OnLevelComplete;
+        Events.StartGame -= StartGame;
+    }
+    void StartGame()
+    {
         showObstacles = Data.Instance.gameData.Obstacles;
         distanceBetweenWords = Data.Instance.gameData.distanceBetweenWords;
         distanceBetweenObstacles = Data.Instance.gameData.distanceBetweenObstacles;
@@ -49,12 +59,9 @@ public class GameManager : MonoBehaviour {
         LoopWords();
         if (showObstacles)
             Invoke("LoopObstacles", offsetForObstacles + distanceBetweenObstacles);
-    }    
-    void OnDestroy()
-    {
-        Events.OnPlayerHitWord -= OnPlayerHitWord;
-        Events.OnLevelComplete -= OnLevelComplete;
+
     }
+   
     void OnLevelComplete()
     {
         Application.LoadLevel("05_Summary");

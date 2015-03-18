@@ -33,15 +33,21 @@ public class Game : MonoBehaviour {
     }
     void Start  ()
     {
+        Events.OnGamePaused += OnGamePaused;
         GetComponent<GameManager>().Init();
         GetComponent<WordsManager>().Init();
         ui.Init();
+    }
+    void Destroy()
+    {
+        Events.OnGamePaused -= OnGamePaused;
     }
 
     void OnGamePaused(bool paused)
     {
         if (paused)
         {
+            print("stop");
             lastState = state;
             Time.timeScale = 0;
             state = states.PAUSED;

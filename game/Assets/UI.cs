@@ -36,4 +36,9 @@ public class UI : MonoBehaviour {
         if(word != null)
             SightWord.text = word.sightWord;
     }
+    public void OnPauseButton()
+    {
+        print("OnPauseButton");
+        Events.OnGamePaused(true);
+    }
 }

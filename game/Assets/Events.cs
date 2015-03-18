@@ -4,6 +4,7 @@ using System.Collections;
 public static class Events {
 
     public static System.Action<GameObject> OnUIClicked = delegate { };
+    
 
     public static System.Action<string> OnPreloadScene = delegate { };
     public static System.Action<string> OnSceneLoad = delegate { };
@@ -13,6 +14,8 @@ public static class Events {
     public static System.Action OnTransitionReady = delegate { };
 
 
+    //The game:
+    public static System.Action StartGame = delegate { };
     public static System.Action OnLevelComplete = delegate { };
     public static System.Action<SwipeDetector.directions> OnSwipe = delegate { };
 

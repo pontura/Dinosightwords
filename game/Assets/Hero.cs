@@ -20,22 +20,29 @@ public class Hero : MonoBehaviour {
     }
     void Start()
     {
+        Events.StartGame += StartGame;
         Events.OnHeroJump += OnHeroJump;
         Events.OnHeroCrash += OnHeroCrash;
         Events.OnHeroSlide += OnHeroSlide;
         Events.OnHeroCelebrate += OnHeroCelebrate;
         Events.OnHeroUnhappy += OnHeroUnhappy;
+        
 
         animator = GetComponent<Animator>();       
         collider = GetComponent<Collider2D>();
     }
     void OnDestroy()
     {
+        Events.StartGame -= StartGame;
         Events.OnHeroJump -= OnHeroJump;
         Events.OnHeroCrash -= OnHeroCrash;
         Events.OnHeroSlide -= OnHeroSlide;
         Events.OnHeroCelebrate -= OnHeroCelebrate;
         Events.OnHeroUnhappy -= OnHeroUnhappy;
+    }
+    void StartGame()
+    {
+        ResetAnimation();
     }
     void OnHeroJump()
     {
@@ -99,5 +106,6 @@ public class Hero : MonoBehaviour {
         animator.SetBool("SLIDE", false);
         animator.SetBool("CELEBRATE", false);
         animator.SetBool("UNHAPPY", false);
+        animator.SetBool("IDLE", false);
     }
 }
