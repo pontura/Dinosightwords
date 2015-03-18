@@ -4,12 +4,17 @@ using UnityEngine.UI;
 
 public class UI : MonoBehaviour {
 
+    [SerializeField]
+    PausedMenu pausedMenu;
+
     public Text scoreLabel;
     public Text SightWord;
     private WordsData wordsData;
 
    public void Init()
     {
+        pausedMenu.gameObject.SetActive(false);
+
         Events.OnScoreRefresh += OnScoreRefresh;
         Events.OnNewWord += OnNewWord;
         wordsData = Data.Instance.GetComponent<WordsData>();
@@ -38,7 +43,7 @@ public class UI : MonoBehaviour {
     }
     public void OnPauseButton()
     {
-        print("OnPauseButton");
+        pausedMenu.gameObject.SetActive(true);
         Events.OnGamePaused(true);
     }
 }

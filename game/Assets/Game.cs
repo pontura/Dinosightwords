@@ -47,7 +47,6 @@ public class Game : MonoBehaviour {
     {
         if (paused)
         {
-            print("stop");
             lastState = state;
             Time.timeScale = 0;
             state = states.PAUSED;
