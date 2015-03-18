@@ -13,12 +13,12 @@ public class UI : MonoBehaviour {
 
    public void Init()
     {
+        SightWord.text = "";
         pausedMenu.gameObject.SetActive(false);
 
         Events.OnScoreRefresh += OnScoreRefresh;
         Events.OnNewWord += OnNewWord;
         wordsData = Data.Instance.GetComponent<WordsData>();
-        DisplayWord();
     }
     void OnDestroy()
     {
@@ -31,13 +31,15 @@ public class UI : MonoBehaviour {
     }
     void OnNewWord(WordsData.Word word)
     {
-        Events.OnVoice(word.sightWord);
+        print("on new word");
         SightWord.text = "";
         Invoke("DisplayWord", 1);
     }
     void DisplayWord()
     {
+        
         WordsData.Word word = wordsData.GetWordData();
+        Events.OnVoice(word.sightWord);
         if(word != null)
             SightWord.text = word.sightWord;
     }

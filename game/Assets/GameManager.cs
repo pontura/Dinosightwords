@@ -60,6 +60,8 @@ public class GameManager : MonoBehaviour {
         if (showObstacles)
             Invoke("LoopObstacles", offsetForObstacles + distanceBetweenObstacles);
 
+        Events.OnNewWord(wordsData.GetWordData());
+
     }
    
     void OnLevelComplete()

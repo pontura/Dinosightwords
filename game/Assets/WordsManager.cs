@@ -11,7 +11,7 @@ public class WordsManager : MonoBehaviour {
     public void Init()
     {
         wordsData = Data.Instance.GetComponent<WordsData>();
-        Events.OnNewWord(wordsData.GetWordData());
+       // Events.OnNewWord(wordsData.GetWordData());
     }
     public void OnPlayerHitWord(int totalScore)
     {
