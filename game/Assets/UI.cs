@@ -26,6 +26,7 @@ public class UI : MonoBehaviour {
     }
     void OnNewWord(WordsData.Word word)
     {
+        Events.OnVoice(word.sightWord);
         SightWord.text = "";
         Invoke("DisplayWord", 1);
     }

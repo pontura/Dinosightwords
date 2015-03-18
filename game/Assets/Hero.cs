@@ -12,12 +12,19 @@ public class Hero : MonoBehaviour {
         IDLE,
         RUN,
         JUMP,
-        CRASH
+        CRASH,
+        SLIDE,
+        CELEBRATE,
+        UNHAPPY,
+        WIN
     }
     void Start()
     {
         Events.OnHeroJump += OnHeroJump;
         Events.OnHeroCrash += OnHeroCrash;
+        Events.OnHeroSlide += OnHeroSlide;
+        Events.OnHeroCelebrate += OnHeroCelebrate;
+        Events.OnHeroUnhappy += OnHeroUnhappy;
 
         animator = GetComponent<Animator>();       
         collider = GetComponent<Collider2D>();
@@ -26,10 +33,18 @@ public class Hero : MonoBehaviour {
     {
         Events.OnHeroJump -= OnHeroJump;
         Events.OnHeroCrash -= OnHeroCrash;
+        Events.OnHeroSlide -= OnHeroSlide;
+        Events.OnHeroCelebrate -= OnHeroCelebrate;
+        Events.OnHeroUnhappy -= OnHeroUnhappy;
     }
     void OnHeroJump()
     {
         Jump();
+        collider.enabled = false;
+    }
+    void OnHeroSlide()
+    {
+        Slide();
         collider.enabled = false;
     }
     void OnHeroCrash()
@@ -37,28 +52,52 @@ public class Hero : MonoBehaviour {
         Crash();
         collider.enabled = false;
     }
+    void OnHeroCelebrate()
+    {
+        Celebrate();
+    }
+    void OnHeroUnhappy()
+    {
+        Unhappy();
+    }
+    void Slide()
+    {
+        if (state == states.SLIDE) return;
+        state = states.SLIDE;
+        animator.SetBool(state.ToString(), true);
+    }
     void Crash()
     {
         if (state == states.CRASH) return;
         state = states.CRASH;
-        animator.SetBool("isCrashing", true);
+        animator.SetBool(state.ToString(), true);
     }
     void Jump()
     {
         if (state == states.JUMP) return;
         state = states.JUMP;
-        animator.SetBool("isJumping", true);
+        animator.SetBool(state.ToString(), true);
     }
-    public void EndCrash()
+    void Celebrate()
+    {
+        if (state == states.JUMP) return;
+        state = states.CELEBRATE;
+        animator.SetBool(state.ToString(), true);
+    }
+    void Unhappy()
+    {
+        if (state == states.JUMP) return;
+        state = states.UNHAPPY;
+        animator.SetBool(state.ToString(), true);
+    }
+    public void ResetAnimation()
     {
         collider.enabled = true;
         state = states.RUN;
-        animator.SetBool("isCrashing", false);
-    }
-    public void EndJump()
-    {
-        collider.enabled = true;
-        state = states.RUN;
-        animator.SetBool("isJumping", false);
+        animator.SetBool("JUMP", false);
+        animator.SetBool("CRASH", false);
+        animator.SetBool("SLIDE", false);
+        animator.SetBool("CELEBRATE", false);
+        animator.SetBool("UNHAPPY", false);
     }
 }

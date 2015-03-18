@@ -7,8 +7,9 @@ public class ObstaclesManager : MonoBehaviour {
 
     public LaneObject GetNewObject()
     {
-        LaneObject laneObject;        
-        laneObject = obstacles[0];
+        LaneObject laneObject;  
+        int random = Random.Range(0, obstacles.Length);
+        laneObject = obstacles[random];
 
         LaneObjectData data = new LaneObjectData();
         data.score = -1;

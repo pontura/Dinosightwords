@@ -42,7 +42,6 @@ public class Gallery : MonoBehaviour {
                 GalleryButton galleryButton = Instantiate(button) as GalleryButton;
                galleryButton.transform.SetParent(container.transform);
 
-               print("starsInLevel: " + starsInLevel + "  s: " + word.sightWord + " isActive: " + isActive);
                galleryButton.Init(this, word.sightWord, isActive, levelToReachWord);
                galleryButton.transform.localPosition = new Vector3(0, -buttonSeparation * a, 0);
                galleryButton.transform.localScale = Vector3.one;
@@ -59,8 +58,8 @@ public class Gallery : MonoBehaviour {
     public void PlayWord(GalleryButton button)
     {
         if(button.isActive)
-            print("play " + button.sightWord);
-    }
+            Events.OnVoice(button.sightWord);
+    }   
     void Update()
     {
         Vector3 pos = container.transform.localPosition;

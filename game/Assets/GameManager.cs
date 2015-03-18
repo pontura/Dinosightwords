@@ -61,7 +61,14 @@ public class GameManager : MonoBehaviour {
     }
     void OnPlayerHitWord(LaneObjectData data)
     {
-        if (data.score < 0) Data.Instance.errors++;
+        if (data.score < 0)
+        {
+            Data.Instance.errors++;
+            Events.OnHeroUnhappy();
+        }
+        else
+            Events.OnHeroCelebrate();
+
         score += data.score;
         if (score < 0) score = 0;
         Events.OnScoreRefresh(score);

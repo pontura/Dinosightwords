@@ -28,10 +28,16 @@ public static class Events {
     public static System.Action OnChangeLaneComplete = delegate { };
 
     public static System.Action OnHeroCrash = delegate { };
+    public static System.Action OnHeroSlide = delegate { };
+    public static System.Action OnHeroCelebrate = delegate { };
+    public static System.Action OnHeroUnhappy = delegate { };
+    public static System.Action OnHeroWin = delegate { };
+
     public static System.Action<LaneObjectData> OnPlayerHitWord = delegate { };
 
     public static System.Action SetNextWord = delegate { };
     public static System.Action<WordsData.Word> OnNewWord = delegate { };
+    public static System.Action<string> OnVoice = delegate { };
 
     public static System.Action<int> OnScoreRefresh = delegate { };
     

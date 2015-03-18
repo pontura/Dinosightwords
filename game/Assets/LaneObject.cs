@@ -6,6 +6,7 @@ public class LaneObject : MonoBehaviour {
 
     public LaneObjectData data;
     public int repeatIn;
+    public bool slide;
 
     public void SetData(LaneObjectData data)
     {
@@ -23,6 +24,10 @@ public class LaneObject : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
+            if (slide)
+            {
+                Events.OnHeroSlide();
+            }else
             if (tag == "Obstacle")
             {
                 Events.OnHeroCrash();

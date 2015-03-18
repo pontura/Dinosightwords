@@ -23,13 +23,13 @@ public class GalleryButton : MonoBehaviour {
 
         if (isActive)
         {
-            isActive = true;
+            this.isActive = true;
             SightWord.text = sightWord;
             isOn.SetActive(true);
         }
         else
         {
-            isActive = false;
+            this.isActive = false;
             isOff.SetActive(true);
             SightWord.text = "???";
             Label.text = "play level " + levelToReachWord + " to learn it!";
