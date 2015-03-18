@@ -24,7 +24,7 @@ public class Gallery : MonoBehaviour {
         int a = 0;
         foreach (WordsData.Zone zone in wordsData.Zone1)
         {
-            int starsInLevel = userData.GetStarsIn(1, b + 1);
+            int starsInLevel = userData.GetStarsIn( b + 1);
             bool isActive = false;
             int levelToReachWord;
             if (starsInLevel > 0)

@@ -6,12 +6,12 @@ public class UserData : MonoBehaviour {
 
     public bool DEBUG_UnlockAllLevels;
     public List<int> starsZone1;
-    public List<int> starsZone2;
 
     private WordsData wordsData;
     private Data data;
 
 	public void Init () {
+
         Events.OnLevelComplete += OnLevelComplete;
         wordsData = GetComponent<WordsData>();
         data = GetComponent<Data>();
@@ -46,10 +46,7 @@ public class UserData : MonoBehaviour {
         foreach (WordsData.Zone zone  in wordsData.Zone1)
         {
             levelID++;
-            //foreach (WordsData.Word word in zone.words)
-            //{
-                LoadStars(1, levelID);
-           // }
+            LoadStars(1, levelID);
         }
     }
     void LoadStars(int ZoneID, int levelID)
@@ -57,14 +54,25 @@ public class UserData : MonoBehaviour {
         if ( PlayerPrefs.GetInt("level_" + ZoneID + "_" + levelID)>0)
         {
             int levelStars = PlayerPrefs.GetInt("level_" + ZoneID + "_" + levelID);
+
+            if (DEBUG_UnlockAllLevels) 
+                levelStars = 3;
             starsZone1.Add(levelStars);
         }
     }
-    public int GetStarsIn(int ZoneID, int LevelID)
+    public int GetStarsIn(int LevelID)
     {
+        if (DEBUG_UnlockAllLevels)
+            return 3;
+
+       // if (starsZone1.Count < LevelID) 
+         //   return 0;
+        int stars;
+
         if (starsZone1.Count < LevelID) 
             return 0;
-        int stars = starsZone1[LevelID - 1];
+
+        stars = starsZone1[LevelID - 1];
 
         return stars;
     }

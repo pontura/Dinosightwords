@@ -8,11 +8,14 @@ public class LevelSelectorButton : MonoBehaviour {
     public Stars stars;
     public Text label;
     public int id;
+    public int zoneID;
     private Button button;
 
-	public void Init(int id, int starsQTY)
+	public void Init(int zoneID, int id, int starsQTY)
     {
+        this.zoneID = zoneID;
         this.id = id;
+
         label.text = id.ToString();
         stars.Init(starsQTY);
         button = GetComponent<Button>();

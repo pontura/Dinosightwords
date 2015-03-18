@@ -5,18 +5,13 @@ using System.Collections.Generic;
 
 public class WordsData : MonoBehaviour {
 
-    public int ZoneID;
     public int LevelID;
     public int WordID;
 
-    private Zone[] actualZone;
-
     public int nextScore;
 
-    public void Init(int ZoneID, int LevelID, int WordID)
+    public void Init( int LevelID, int WordID)
     {
-        SetZone(ZoneID);
-        this.ZoneID = ZoneID;
         this.LevelID = LevelID;
         this.WordID = WordID;
         Events.SetNextWord += SetNextWord;
@@ -52,13 +47,13 @@ public class WordsData : MonoBehaviour {
     }
 
     public Zone[] Zone1;
-    public Zone[] Zone2;
 
     public void SetNextWord()
     {
         WordID++;
         ResetRandomWord();
-        if (actualZone[LevelID - 1].words.Length < WordID)
+        
+        if (Zone1[LevelID - 1].words.Length < WordID)
         {
             Events.OnLevelComplete();
         }
@@ -72,7 +67,7 @@ public class WordsData : MonoBehaviour {
     {
         try
         {
-            Word word = actualZone[LevelID - 1].words[WordID - 1];
+            Word word = Zone1[LevelID - 1].words[WordID - 1];
             if (word.sightWord.ToUpper() == "RANDOM" )
             {
                 if( randomWord == null)
@@ -89,14 +84,7 @@ public class WordsData : MonoBehaviour {
         }
         return null;
     }
-    void SetZone(int id)
-    {
-        switch (id)
-        {
-            case 1: actualZone = Zone1; break;
-            default: actualZone = Zone2; break;
-        }
-    }
+
     Word randomWord;
     string lastRandomWord = "";
     void ResetRandomWord()
@@ -106,7 +94,7 @@ public class WordsData : MonoBehaviour {
     void SetRandomWord()
     {
         int rand = UnityEngine.Random.Range(0, LevelID);
-        Zone zone = actualZone[rand];
+        Zone zone = Zone1[rand];
 
         rand = UnityEngine.Random.Range(0, zone.words.Length);
         randomWord = zone.words[rand];
