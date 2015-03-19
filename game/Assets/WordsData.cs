@@ -102,4 +102,14 @@ public class WordsData : MonoBehaviour {
         if (randomWord.sightWord.ToUpper() == "RANDOM") SetRandomWord();
         if (lastRandomWord == randomWord.sightWord) SetRandomWord();
     }
+    public int GetScoreCurrentLevel()
+    {
+        int total = 0;
+        Word[] words = Zone1[LevelID - 1].words;
+        foreach (Word word in words)
+        {
+            total += word.score;
+        }
+        return total;
+    }
 }

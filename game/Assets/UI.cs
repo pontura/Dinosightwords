@@ -7,7 +7,9 @@ public class UI : MonoBehaviour {
     [SerializeField]
     PausedMenu pausedMenu;
 
-    public Text scoreLabel;
+    [SerializeField]
+    ScoreProgress scoreProgress;
+
     public Text SightWord;
     private WordsData wordsData;
 
@@ -15,19 +17,15 @@ public class UI : MonoBehaviour {
     {
         SightWord.text = "";
         pausedMenu.gameObject.SetActive(false);
-
-        Events.OnScoreRefresh += OnScoreRefresh;
+        
         Events.OnNewWord += OnNewWord;
         wordsData = Data.Instance.GetComponent<WordsData>();
+
+        scoreProgress.Init(wordsData.GetScoreCurrentLevel());
     }
     void OnDestroy()
     {
         Events.OnNewWord -= OnNewWord;
-        Events.OnScoreRefresh -= OnScoreRefresh;
-    }
-    void OnScoreRefresh(int score)
-    {        
-        scoreLabel.text = "SCORE = " + score.ToString();
     }
     void OnNewWord(WordsData.Word word)
     {
