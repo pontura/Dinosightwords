@@ -63,7 +63,7 @@ public class Lane : MonoBehaviour {
             pos.x -= _x;
            // laneObject.transform.localPosition = pos;
 
-            laneObject.transform.localPosition = Vector3.Lerp(laneObject.transform.localPosition, pos, (_x * 100) * Time.deltaTime);
+            laneObject.transform.localPosition = Vector3.Lerp(laneObject.transform.localPosition, pos, _x );
            // forwardMoveSpeed -= 0.05f;
 
             if (laneObject.repeatIn > 0 && pos.x < -882 + laneObject.repeatIn)
