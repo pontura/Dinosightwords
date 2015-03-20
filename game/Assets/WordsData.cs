@@ -95,7 +95,7 @@ public class WordsData : MonoBehaviour {
     }
     void SetRandomWord()
     {
-        int rand = UnityEngine.Random.Range(0, LevelID);
+        int rand = UnityEngine.Random.Range(0, LevelID-1);
         Zone zone = Zone1[rand];
 
         rand = UnityEngine.Random.Range(0, zone.words.Length);

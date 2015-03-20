@@ -58,14 +58,19 @@ public class Lane : MonoBehaviour {
         for (int i = 0; i < laneObjects.Count; i++)
         {
             LaneObject laneObject = laneObjects[i];
+
             Vector3 pos = laneObject.transform.localPosition;
             pos.x -= _x;
-            laneObject.transform.localPosition = pos;
+           // laneObject.transform.localPosition = pos;
+
+            laneObject.transform.localPosition = Vector3.Lerp(laneObject.transform.localPosition, pos, (_x * 100) * Time.deltaTime);
+           // forwardMoveSpeed -= 0.05f;
+
             if (laneObject.repeatIn > 0 && pos.x < -882 + laneObject.repeatIn)
             {
                 pos.x = 882 + laneObject.repeatIn;
                 laneObject.transform.localPosition = pos;
-            }
+            } else
             if (pos.x < -1200) DeleteObject(laneObject);
 
         }
