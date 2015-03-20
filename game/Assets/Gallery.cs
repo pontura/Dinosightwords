@@ -57,6 +57,7 @@ public class Gallery : MonoBehaviour {
 	}
     public void PlayWord(GalleryButton button)
     {
+        print("PlayWord " + button.isActive + " - " + button.sightWord);
         if(button.isActive)
             Events.OnVoice(button.sightWord);
     }   

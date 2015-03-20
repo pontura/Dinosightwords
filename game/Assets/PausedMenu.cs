@@ -11,6 +11,7 @@ public class PausedMenu : MonoBehaviour {
     {
         Time.timeScale = 1;
         Application.LoadLevel("04_Game");
+        Events.OnGameRestart();
     }
     public void LevelSelector()
     {

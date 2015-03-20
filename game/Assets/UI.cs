@@ -29,17 +29,15 @@ public class UI : MonoBehaviour {
     }
     void OnNewWord(WordsData.Word word)
     {
-        print("on new word");
         SightWord.text = "";
         Invoke("DisplayWord", 1);
     }
     void DisplayWord()
-    {
-        
+    {        
         WordsData.Word word = wordsData.GetWordData();
         Events.OnVoice(word.sightWord);
         if(word != null)
-            SightWord.text = word.sightWord;
+            SightWord.text = word.sightWord.ToUpper();
     }
     public void OnPauseButton()
     {

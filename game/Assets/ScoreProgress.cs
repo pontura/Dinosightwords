@@ -28,6 +28,6 @@ public class ScoreProgress : MonoBehaviour {
         label.text = score.ToString();
         float ammount = (float)score / (float)totalLevelScore; 
         bar.fillAmount = ammount;
-        print(ammount + "     score: " + score + "     totalLevelScore " + totalLevelScore );
+       // print(ammount + "     score: " + score + "     totalLevelScore " + totalLevelScore );
     }
 }

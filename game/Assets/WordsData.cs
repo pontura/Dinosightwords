@@ -18,6 +18,8 @@ public class WordsData : MonoBehaviour {
     }
     public void Restart()
     {
+        print("Restart");
+        WordID = 1;
         nextScore = 0;
         RefreshNextScore();
     }
@@ -55,7 +57,7 @@ public class WordsData : MonoBehaviour {
         
         if (Zone1[LevelID - 1].words.Length < WordID)
         {
-            Events.OnLevelComplete();
+            return;
         }
         else
         {

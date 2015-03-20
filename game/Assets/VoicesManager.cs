@@ -4,18 +4,19 @@ using System.Collections;
 public class VoicesManager : MonoBehaviour {
 
 	void Start () {
-        Events.OnNewWord += OnNewWord;
+        Events.OnVoice += OnVoice;
+        print("SATATATS");
 	}
 	
 	void OnDestroy () {
-        Events.OnNewWord -= OnNewWord;
+        Events.OnVoice -= OnVoice;
 	}
-
-    void OnNewWord(WordsData.Word word)
+    void OnVoice(string sightWord)
     {
-        string sightWord = word.sightWord;
         print(sightWord);
         audio.clip = Resources.Load("sightwords/" + sightWord) as AudioClip;
         audio.Play();
+
+        print("OnSay  " + sightWord);
     }
 }

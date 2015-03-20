@@ -24,6 +24,7 @@ public static class Events {
     public static System.Action<float> OnSoundsVolumeChanged = delegate { };   
     public static System.Action OnGameComplete = delegate { };
     public static System.Action<bool> OnGamePaused = delegate { };
+    public static System.Action OnGameRestart = delegate { };
 
 
     public static System.Action OnHeroJump = delegate { };
@@ -41,6 +42,7 @@ public static class Events {
     public static System.Action SetNextWord = delegate { };
     public static System.Action<WordsData.Word> OnNewWord = delegate { };
     public static System.Action<string> OnVoice = delegate { };
+    public static System.Action<string> OnSoundFX = delegate { };
 
     public static System.Action<int> OnScoreRefresh = delegate { };
     

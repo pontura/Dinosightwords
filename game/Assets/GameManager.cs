@@ -74,14 +74,24 @@ public class GameManager : MonoBehaviour {
         {
             Data.Instance.errors++;
             Events.OnHeroUnhappy();
+            Events.OnSoundFX("mistakeWord");
         }
         else
+        {
+            print("got  " + wordsData.GetWordData().sightWord);
             Events.OnHeroCelebrate();
+            Events.OnSoundFX("correctWord");
+            Events.OnVoice(wordsData.GetWordData().sightWord);
+        }
 
         score += data.score;
         if (score < 0) score = 0;
         Events.OnScoreRefresh(score);
-        wordsManager.OnPlayerHitWord(score);
+
+        if (score == wordsData.GetScoreCurrentLevel())
+            Events.OnLevelComplete();
+        else if (score >= wordsData.nextScore)
+            Events.SetNextWord();
     }
     public void LoopWords()
     {
@@ -126,7 +136,7 @@ public class GameManager : MonoBehaviour {
         }
           return null;
     }
-    void Update()
+    void LateUpdate()
     {
         if (state == states.ACTIVE)
         {

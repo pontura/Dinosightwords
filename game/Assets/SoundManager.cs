@@ -1,37 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SoundManager : MonoBehaviour {
+public class SoundManager : MonoBehaviour
+{
 
+    void Start()
+    {
+        Events.OnSoundFX += OnSoundFX;
+    }
 
-    public AudioClip minigameTile;
-
-
-	void Start () {
-        Events.OnSoundsVolumeChanged += OnSoundsVolumeChanged;
-        OnSoundsVolumeChanged(Data.Instance.soundsVolume);
-	}
     void OnDestroy()
     {
-        Events.OnSoundsVolumeChanged -= OnSoundsVolumeChanged;
+        Events.OnSoundFX -= OnSoundFX;
     }
-    void OnAudioButtonClicked()
-    {
-       // playSound(sfx_buttonClick, false);
-    }
-    public void OnPlaySoundFX(string audioName)
-    {
-       // if (audioName == "sfx_photo") playSound(sfx_photo, false);        
-    }
-    void OnSoundsVolumeChanged(float value)
-    {
-        audio.volume = value;
-    }
-    private void playSound(AudioClip _clip, bool looped = true)
-    {
 
-        audio.clip = _clip;
+    void OnSoundFX(string soundName)
+    {
+        audio.clip = Resources.Load("sound/" + soundName) as AudioClip;
         audio.Play();
-        audio.loop = looped;
     }
 }

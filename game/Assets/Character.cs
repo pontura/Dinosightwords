@@ -27,7 +27,7 @@ public class Character : MonoBehaviour {
 
         Hero hero = Instantiate(heroAsset) as Hero;
         hero.transform.SetParent(transform);
-        hero.GetComponent<RectTransform>().localScale = Vector3.one;
+        hero.GetComponent<RectTransform>().localScale = new Vector3(0.85f, 0.85f, 0.85f);
         hero.GetComponent<RectTransform>().localPosition = Vector3.zero;
     }
     void Start()

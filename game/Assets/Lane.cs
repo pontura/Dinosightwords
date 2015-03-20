@@ -22,16 +22,18 @@ public class Lane : MonoBehaviour {
         newLaneObject.transform.localScale = Vector3.one;
         newLaneObject.transform.localPosition = new Vector3((id+1) * 60, 0, 0);
         newLaneObject.repeatIn = (int)newLaneObject.transform.localPosition.x;
+
+
         if (id % 2 != 0)
         {
-            Floor[0].gameObject.SetActive(true);
-            Floor[1].gameObject.SetActive(false);
+           // Floor[0].gameObject.SetActive(true);
+           // Floor[1].gameObject.SetActive(false);
             newLaneObject.transform.localScale = new Vector3(-1, 1, 1);
         }
         else
         {
-            Floor[1].gameObject.SetActive(true);
-            Floor[0].gameObject.SetActive(false);
+           // Floor[1].gameObject.SetActive(true);
+          //  Floor[0].gameObject.SetActive(false);
         }
     }
     public void AddObject(LaneObject laneObject)

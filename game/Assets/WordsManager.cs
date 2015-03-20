@@ -13,13 +13,6 @@ public class WordsManager : MonoBehaviour {
         wordsData = Data.Instance.GetComponent<WordsData>();
        // Events.OnNewWord(wordsData.GetWordData());
     }
-    public void OnPlayerHitWord(int totalScore)
-    {
-        if (totalScore >= wordsData.nextScore)
-        {
-            Events.SetNextWord();
-        }
-    }
     public LaneObject GetNewObject()
     {
         

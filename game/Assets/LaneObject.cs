@@ -13,7 +13,7 @@ public class LaneObject : MonoBehaviour {
         this.data = data;
         if (tag == "Word")
         {
-            GetComponentInChildren<Text>().text = data.word;
+            GetComponentInChildren<Text>().text = data.word.ToUpper();
         }
     }
     public void Destroy()
