@@ -15,6 +15,7 @@ public class LaneObject : MonoBehaviour {
         {
             GetComponentInChildren<Text>().text = data.word.ToUpper();
         }
+       // transform.rigidbody2D.velocity = new Vector2(-200, 0);
     }
     public void Destroy()
     {

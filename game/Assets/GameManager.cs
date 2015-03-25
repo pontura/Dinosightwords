@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     public int score;
     public states state;
     public Scrolleable[] Scrolleables;
+    [SerializeField] Character characterHero;
 
     private bool showObstacles;
 
@@ -18,7 +19,8 @@ public class GameManager : MonoBehaviour {
     }
 
     private WordsData wordsData;
-    private int speed;    
+    private float speed;
+    private float realSpeed = 0;
     private LanesManager lanesManager;
     private WordsManager wordsManager;
     private float distanceBetweenWords;
@@ -28,7 +30,10 @@ public class GameManager : MonoBehaviour {
     public void Init()
     {
         Data.Instance.errors = 0;
+
         Events.OnPlayerHitWord += OnPlayerHitWord;
+        Events.OnHeroCrash += OnHeroCrash;
+        Events.OnHeroSlide += OnHeroSlide;
         Events.OnLevelComplete += OnLevelComplete;
         Events.StartGame += StartGame;
 
@@ -42,6 +47,8 @@ public class GameManager : MonoBehaviour {
     }
     void OnDestroy()
     {
+        Events.OnHeroCrash -= OnHeroCrash;
+        Events.OnHeroSlide -= OnHeroSlide;
         Events.OnPlayerHitWord -= OnPlayerHitWord;
         Events.OnLevelComplete -= OnLevelComplete;
         Events.StartGame -= StartGame;
@@ -136,13 +143,31 @@ public class GameManager : MonoBehaviour {
         }
           return null;
     }
-    void LateUpdate()
+    void OnHeroCrash()
     {
+        realSpeed = 0;
+        Events.OnSoundFX("trip");
+    }
+    void OnHeroSlide()
+    {
+        realSpeed*=2;
+        Events.OnSoundFX("stepPond");
+    }
+    void Update()
+    {
+        if (realSpeed < speed)
+            realSpeed += 0.05f;
+        else if (realSpeed > speed)
+            realSpeed -= 0.05f;
+
         if (state == states.ACTIVE)
         {
-            float _speed = (speed * 100) * Time.deltaTime;
+            float _speed = (realSpeed * 100) * Time.deltaTime;
+           // float _speed = speed*2;
             distance += _speed;
             lanesManager.MoveLanes(_speed);
+
+           // characterHero.Move(_speed);
 
             foreach (Scrolleable scrolleable in Scrolleables)
             {

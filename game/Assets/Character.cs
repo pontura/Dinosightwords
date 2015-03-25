@@ -57,6 +57,7 @@ public class Character : MonoBehaviour {
     }
     public void Move(Vector3 pos)
     {
+        Events.OnSoundFX("changeLane");
         state = states.CHANGE;
         TweenParms parms = new TweenParms();
         parms.Prop("localPosition", pos);

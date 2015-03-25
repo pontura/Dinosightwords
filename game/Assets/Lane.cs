@@ -64,6 +64,7 @@ public class Lane : MonoBehaviour {
            // laneObject.transform.localPosition = pos;
 
             laneObject.transform.localPosition = Vector3.Lerp(laneObject.transform.localPosition, pos, _x );
+           // laneObject.transform.rigidbody2D.velocity = new Vector2(-20*_x, 0);
            // forwardMoveSpeed -= 0.05f;
 
             if (laneObject.repeatIn > 0 && pos.x < -882 + laneObject.repeatIn)
@@ -75,4 +76,5 @@ public class Lane : MonoBehaviour {
 
         }
     }
+
 }
