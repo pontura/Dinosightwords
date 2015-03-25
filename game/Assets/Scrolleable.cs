@@ -15,6 +15,5 @@ public class Scrolleable : MonoBehaviour {
         pos.x -= _x;
         if (pos.x < -distanceToRepeat) pos.x = 0;
         transform.localPosition = pos;
-
     }
 }

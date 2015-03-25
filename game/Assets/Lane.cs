@@ -7,16 +7,22 @@ using System.Collections.Generic;
 public class Lane : MonoBehaviour {
 
     public GameObject[] Floor;
-    public LaneObject border;
+    public LaneObject border1;
+    public LaneObject border2;
     public float distance;
     public int id;
     public GameObject objectsTarget;
     public List<LaneObject> laneObjects;
 
-    public void Init(int id)
+    public void Init(int id, int ZoneID)
     {
         this.id = id;
-        LaneObject newLaneObject = Instantiate(border, Vector3.zero, Quaternion.identity) as LaneObject;
+        LaneObject newLaneObject;
+        if (ZoneID == 1)
+            newLaneObject = Instantiate(border1, Vector3.zero, Quaternion.identity) as LaneObject;
+        else
+            newLaneObject = Instantiate(border2, Vector3.zero, Quaternion.identity) as LaneObject;
+
         laneObjects.Add(newLaneObject);
         newLaneObject.transform.SetParent(objectsTarget.transform);
         newLaneObject.transform.localScale = Vector3.one;

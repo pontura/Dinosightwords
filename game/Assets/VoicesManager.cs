@@ -17,6 +17,5 @@ public class VoicesManager : MonoBehaviour {
         audio.clip = Resources.Load("sightwords/" + sightWord) as AudioClip;
         audio.Play();
 
-        print("OnSay  " + sightWord);
     }
 }

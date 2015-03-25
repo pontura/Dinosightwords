@@ -21,7 +21,7 @@ public class LanesManager : MonoBehaviour {
             newLane.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, laneYPosition - (laneSeparation * a), 0);
             newLane.GetComponent<RectTransform>().sizeDelta = new Vector3(100,100,100);
             newLane.GetComponent<RectTransform>().localScale = Vector3.one;
-            newLane.Init(a);
+            newLane.Init(a,Data.Instance.GetComponent<WordsData>().GetZone());
         }
     }
     public void AddObject(LaneObject laneObject)

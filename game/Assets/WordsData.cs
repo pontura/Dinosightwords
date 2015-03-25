@@ -114,4 +114,10 @@ public class WordsData : MonoBehaviour {
         }
         return total;
     }
+    public int GetZone()
+    {
+        if (LevelID > 15)
+            return 2;
+        else return 1;
+    }
 }

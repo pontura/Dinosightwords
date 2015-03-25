@@ -52,12 +52,12 @@ public class Hero : MonoBehaviour {
     void OnHeroSlide()
     {
         Slide();
-        collider.enabled = false;
+      //  collider.enabled = false;
     }
     void OnHeroCrash()
     {
         Crash();
-        collider.enabled = false;
+       // collider.enabled = false;
     }
     void OnHeroCelebrate()
     {
@@ -82,6 +82,7 @@ public class Hero : MonoBehaviour {
     void Jump()
     {
         if (state == states.JUMP) return;
+        Events.OnSoundFX("jump");
         state = states.JUMP;
         animator.SetBool(state.ToString(), true);
     }

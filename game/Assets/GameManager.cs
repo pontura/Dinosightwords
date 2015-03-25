@@ -7,7 +7,9 @@ public class GameManager : MonoBehaviour {
     public int score;
     public states state;
     public Scrolleable[] Scrolleables;
-    [SerializeField] Character characterHero;
+
+    public GameObject[] Zone1Objects;
+    public GameObject[] Zone2Objects;
 
     private bool showObstacles;
 
@@ -44,6 +46,17 @@ public class GameManager : MonoBehaviour {
         wordsManager = GetComponent<WordsManager>();
         lanesManager.AddLanes(Data.Instance.GetComponent<GameData>().totalLanes);
         GetComponent<CharacterManager>().Init();
+
+        if (wordsData.GetZone() == 2)
+        {
+            foreach (GameObject go in Zone1Objects)
+                go.SetActive(false);
+        }
+        else
+        {
+            foreach (GameObject go in Zone2Objects)
+                go.SetActive(false);
+        }
     }
     void OnDestroy()
     {
@@ -85,7 +98,6 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            print("got  " + wordsData.GetWordData().sightWord);
             Events.OnHeroCelebrate();
             Events.OnSoundFX("correctWord");
             Events.OnVoice(wordsData.GetWordData().sightWord);
