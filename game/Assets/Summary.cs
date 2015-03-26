@@ -5,20 +5,33 @@ using UnityEngine.UI;
 public class Summary : MonoBehaviour {
 
     public Text labelErrors;
+    [SerializeField] Canvas canvas;
+    [SerializeField] Stars stars;
 
     void Start()
     {
-        int stars;
-        int errors = Data.Instance.errors ;
+        Events.OnLevelComplete += OnLevelComplete;
+        canvas.enabled = false;
+    }
+    void OnDestroy()
+    {
+        Events.OnLevelComplete -= OnLevelComplete;
+    }
+    void OnLevelComplete()
+    {
+        canvas.enabled = true;
+        int _stars;
+        int errors = Data.Instance.errors;
 
         if (errors < 2)
-            stars = 3;
+            _stars = 3;
         else if (errors < 4)
-            stars = 2;
+            _stars = 2;
         else
-            stars = 1;
+            _stars = 1;
         
-        labelErrors.text = "STARS: " + stars + "(ERRORS " + errors  + ")";
+        labelErrors.text = "(" + errors  + " errors)";
+        stars.Init(_stars);
     }
     public void ResetLevel()
     {

@@ -5,7 +5,6 @@ public class GameManager : MonoBehaviour {
 
     public float distance;
     public int score;
-    public states state;
     public Scrolleable[] Scrolleables;
 
     public GameObject[] Zone1Objects;
@@ -13,6 +12,7 @@ public class GameManager : MonoBehaviour {
 
     private bool showObstacles;
 
+    public states state;
     public enum states
     {
         IDLE,
@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour {
    
     void OnLevelComplete()
     {
-        Application.LoadLevel("05_Summary");
+        state = states.INACTIVE;
     }
     void OnPlayerHitWord(LaneObjectData data)
     {
@@ -167,6 +167,10 @@ public class GameManager : MonoBehaviour {
     }
     void Update()
     {
+        if (state == states.INACTIVE)
+        {
+            return;
+        }
         if (realSpeed < speed)
             realSpeed += 0.05f;
         else if (realSpeed > speed)
