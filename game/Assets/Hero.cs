@@ -26,6 +26,7 @@ public class Hero : MonoBehaviour {
         Events.OnHeroSlide += OnHeroSlide;
         Events.OnHeroCelebrate += OnHeroCelebrate;
         Events.OnHeroUnhappy += OnHeroUnhappy;
+        Events.OnLevelComplete += OnLevelComplete;
         
 
         animator = GetComponent<Animator>();       
@@ -39,6 +40,7 @@ public class Hero : MonoBehaviour {
         Events.OnHeroSlide -= OnHeroSlide;
         Events.OnHeroCelebrate -= OnHeroCelebrate;
         Events.OnHeroUnhappy -= OnHeroUnhappy;
+        Events.OnLevelComplete -= OnLevelComplete;
     }
     void StartGame()
     {
@@ -96,6 +98,12 @@ public class Hero : MonoBehaviour {
     {
         if (state == states.JUMP) return;
         state = states.UNHAPPY;
+        animator.SetBool(state.ToString(), true);
+    }
+    void OnLevelComplete()
+    {
+        if (state == states.WIN) return;
+        state = states.WIN;
         animator.SetBool(state.ToString(), true);
     }
     public void ResetAnimation()

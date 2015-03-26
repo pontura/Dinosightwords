@@ -10,6 +10,9 @@ public class UI : MonoBehaviour {
     [SerializeField]
     ScoreProgress scoreProgress;
 
+    [SerializeField]
+    GameObject menuButton;
+
     public Text SightWord;
     private WordsData wordsData;
 
@@ -19,6 +22,8 @@ public class UI : MonoBehaviour {
         pausedMenu.gameObject.SetActive(false);
         
         Events.OnNewWord += OnNewWord;
+        Events.OnLevelComplete += OnLevelComplete;
+
         wordsData = Data.Instance.GetComponent<WordsData>();
 
         scoreProgress.Init(wordsData.GetScoreCurrentLevel());
@@ -26,6 +31,7 @@ public class UI : MonoBehaviour {
     void OnDestroy()
     {
         Events.OnNewWord -= OnNewWord;
+        Events.OnLevelComplete -= OnLevelComplete;
     }
     void OnNewWord(WordsData.Word word)
     {
@@ -43,5 +49,11 @@ public class UI : MonoBehaviour {
     {
         pausedMenu.gameObject.SetActive(true);
         Events.OnGamePaused(true);
+    }
+    void OnLevelComplete()
+    {
+        SightWord.gameObject.SetActive(false);
+        scoreProgress.gameObject.SetActive(false);
+        menuButton.gameObject.SetActive(false);
     }
 }
