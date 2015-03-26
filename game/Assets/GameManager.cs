@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour {
     void OnLevelComplete()
     {
         state = states.INACTIVE;
+        Events.OnMusicChange("victoryMusic");
     }
     void OnPlayerHitWord(LaneObjectData data)
     {

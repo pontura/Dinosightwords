@@ -18,7 +18,6 @@ public class WordsData : MonoBehaviour {
     }
     public void Restart()
     {
-        print("Restart");
         WordID = 1;
         nextScore = 0;
         RefreshNextScore();

@@ -16,9 +16,10 @@ public class SoundManager : MonoBehaviour
 
     void OnSoundFX(string soundName)
     {
+        if (Data.Instance.soundsVolume == 0) return;
+
         AudioSource audioSource = audio;
-
-
         audioSource.PlayOneShot(Resources.Load("sound/" + soundName) as AudioClip);
+
     }
 }

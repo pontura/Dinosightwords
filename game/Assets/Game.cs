@@ -33,6 +33,7 @@ public class Game : MonoBehaviour {
     }
     void Start  ()
     {
+        Events.OnMusicChange("inGame");
         Events.OnGamePaused += OnGamePaused;
         GetComponent<GameManager>().Init();
         GetComponent<WordsManager>().Init();

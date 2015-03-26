@@ -5,13 +5,13 @@ using UnityEngine.UI;
 public class Summary : MonoBehaviour {
 
     public Text labelErrors;
-    [SerializeField] Canvas canvas;
+    [SerializeField] GameObject canvas;
     [SerializeField] Stars stars;
 
     void Start()
     {
         Events.OnLevelComplete += OnLevelComplete;
-        canvas.enabled = false;
+        canvas.SetActive( false);
     }
     void OnDestroy()
     {
@@ -19,7 +19,7 @@ public class Summary : MonoBehaviour {
     }
     void OnLevelComplete()
     {
-        canvas.enabled = true;
+        canvas.SetActive(true);
         int _stars;
         int errors = Data.Instance.errors;
 

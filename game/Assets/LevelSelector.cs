@@ -24,6 +24,7 @@ public class LevelSelector : MonoBehaviour {
     private int _xZone2 = -2351;
 
 	void Start () {
+        Events.OnMusicChange("gameMenu");
         activateZone(1);
         levelLockedPopup.gameObject.SetActive(false);
         userData = Data.Instance.GetComponent<UserData>();

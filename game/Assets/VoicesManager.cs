@@ -5,7 +5,6 @@ public class VoicesManager : MonoBehaviour {
 
 	void Start () {
         Events.OnVoice += OnVoice;
-        print("SATATATS");
 	}
 	
 	void OnDestroy () {
@@ -13,6 +12,8 @@ public class VoicesManager : MonoBehaviour {
 	}
     void OnVoice(string sightWord)
     {
+        if (Data.Instance.soundsVolume == 0) return;
+
         print(sightWord);
         audio.clip = Resources.Load("sightwords/" + sightWord) as AudioClip;
         audio.Play();
