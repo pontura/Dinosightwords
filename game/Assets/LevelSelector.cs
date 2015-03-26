@@ -5,11 +5,13 @@ using System.Collections;
 public class LevelSelector : MonoBehaviour {
 
     [SerializeField]
-    Button back;
+    Image back;
     [SerializeField]
-    Button next;
+    Image next;
     [SerializeField]
-    Text title;
+    Image title1;
+    [SerializeField]
+    Image title2;
 
     public GameObject buttonsContainer;
 
@@ -19,7 +21,7 @@ public class LevelSelector : MonoBehaviour {
     
     private int id = 1;
     private bool nextActiveButton = false;
-    private int _xZone2 = -800;
+    private int _xZone2 = -2351;
 
 	void Start () {
         activateZone(1);
@@ -75,20 +77,24 @@ public class LevelSelector : MonoBehaviour {
 
         this.zoneID = zoneID;
         Vector3 pos = buttonsContainer.transform.localPosition;
-        string _title;
+
         if (zoneID == 2)
         {
             pos.x = _xZone2;
-            _title = "Volcano";
+            title1.enabled = false;
+            title2.enabled = true;
+            back.enabled = true;
+            next.enabled = false;
         }
         else
         {
             pos.x = 0;
-            _title = "Forest";
+            title1.enabled = true;
+            title2.enabled = false;
+            back.enabled = false;
+            next.enabled = true;
         }
         buttonsContainer.transform.localPosition = pos;
-
-        title.text = "Zone " + zoneID + ":" + _title;
     }
     
 }

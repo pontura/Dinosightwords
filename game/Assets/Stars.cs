@@ -28,6 +28,6 @@ public class Stars : MonoBehaviour {
     }
     void SetOff(Image star)
     {
-        star.color = Color.black;
+        star.enabled = false;
     }
 }

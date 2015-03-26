@@ -10,6 +10,8 @@ public class LevelSelectorButton : MonoBehaviour {
     public int id;
     public int zoneID;
     private Button button;
+    [SerializeField]
+    Image imageLock;
 
 	public void Init(int zoneID, int id, int starsQTY)
     {
@@ -24,8 +26,9 @@ public class LevelSelectorButton : MonoBehaviour {
         if (starsQTY == 0)
         {
             isActive = false;
-            button.targetGraphic.color = button.colors.disabledColor;
-        }
+            imageLock.enabled = true;
+        } else
+            imageLock.enabled = false;
 	}
     public void NextButton()
     {
