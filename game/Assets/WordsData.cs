@@ -27,6 +27,14 @@ public class WordsData : MonoBehaviour {
         nextScore += GetWordData().score;
     }
     [Serializable]
+    public class Reward
+    {
+        [SerializeField]
+        public string rewardType;
+        public int num;
+    }
+
+    [Serializable]
     public class Word
     {
         [SerializeField]
@@ -45,6 +53,7 @@ public class WordsData : MonoBehaviour {
         [SerializeField]
         public string title;
         public Word[] words;
+        public Reward rewards;
     }
 
     public Zone[] Zone1;
@@ -119,5 +128,9 @@ public class WordsData : MonoBehaviour {
         if (LevelID > 15)
             return 2;
         else return 1;
+    }
+    public Reward GetReward()
+    {
+        return Zone1[LevelID - 1].rewards;
     }
 }

@@ -19,6 +19,15 @@ public class UserData : MonoBehaviour {
 	}
     void OnLevelComplete()
     {
+        WordsData.Reward reward = wordsData.GetReward();
+
+      //  print("rewardType: "  + reward.rewardType + " num:" +  reward.num);
+
+        if (reward != null)
+        {
+            if (PlayerPrefs.GetInt(reward.rewardType) < reward.num)
+                PlayerPrefs.SetInt(reward.rewardType, reward.num);
+        }
         int levelID = wordsData.LevelID;
         int stars = ErorsToStars(data.errors);
         if (starsZone1.Count < levelID)

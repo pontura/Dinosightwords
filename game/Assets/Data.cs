@@ -40,6 +40,9 @@ public class Data : MonoBehaviour
 
     void Awake()
     {
+        //PlayerPrefs.SetInt("hats", 0);
+        //PlayerPrefs.SetInt("legs", 0);
+
         //if we don't have an [_instance] set yet
         if (!mInstance)
             mInstance = this;

@@ -30,7 +30,7 @@ public static class Events {
     public static System.Action<bool> OnGamePaused = delegate { };
     public static System.Action OnGameRestart = delegate { };
 
-
+    public static System.Action<string, int> OnHeroWinClothes = delegate { };
     public static System.Action OnHeroJump = delegate { };
     public static System.Action OnChangeingLane = delegate { };
     public static System.Action OnChangeLaneComplete = delegate { };
