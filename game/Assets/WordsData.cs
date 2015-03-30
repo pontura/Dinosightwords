@@ -73,6 +73,7 @@ public class WordsData : MonoBehaviour {
             {
                 if( randomWord == null)
                     SetRandomWord();
+                randomWord.score = word.score;
                 word = randomWord;
             }
             lastRandomWord = word.sightWord;
