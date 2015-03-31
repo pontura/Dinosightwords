@@ -123,12 +123,14 @@ public class GameManager : MonoBehaviour {
     }
     public void AddWord()
     {
+        if (speed - realSpeed > 0.5f) { LoopWords(); return; }
         int num = Random.Range(0, 100);
         lanesManager.AddObject( PutWordObject() );
         LoopWords();
     }
     public void AddObstacle()
     {
+        if (speed - realSpeed > 0.5f) { LoopObstacles(); return; }
         int num = Random.Range(0, 100);
         lanesManager.AddObject(PutObstacleObject());
         LoopObstacles();
@@ -158,6 +160,7 @@ public class GameManager : MonoBehaviour {
     }
     void OnHeroCrash()
     {
+        Data.Instance.errors++;
         realSpeed = 0;
         Events.OnSoundFX("trip");
     }

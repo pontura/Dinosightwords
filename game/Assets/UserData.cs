@@ -45,28 +45,34 @@ public class UserData : MonoBehaviour {
 
         return stars;
     }
-    void SaveStars(int levelID, int errors)
+    void SaveStars(int levelID, int newStars)
     {
-        PlayerPrefs.SetInt("level_1_" + levelID, ErorsToStars(errors));   
+        print("SAVE STARS: " + levelID + "_ errors: " + newStars);
+        int stars = PlayerPrefs.GetInt("level_1_" + levelID); 
+        if(stars<newStars)
+        {
+            PlayerPrefs.SetInt("level_1_" + levelID, newStars);
+            if (starsZone1.Count < levelID)
+                starsZone1.Add(newStars);
+            else
+                starsZone1[levelID - 1] = newStars;
+        }
     }
     void LoadData()
     {
         int levelID = 0;
-        foreach (WordsData.Zone zone  in wordsData.Zone1)
+        foreach (WordsData.Zone zone in wordsData.Zone1)
         {
             levelID++;
-            LoadStars(1, levelID);
-        }
-    }
-    void LoadStars(int ZoneID, int levelID)
-    {
-        if ( PlayerPrefs.GetInt("level_" + ZoneID + "_" + levelID)>0)
-        {
-            int levelStars = PlayerPrefs.GetInt("level_" + ZoneID + "_" + levelID);
-
-            if (DEBUG_UnlockAllLevels) 
-                levelStars = 3;
-            starsZone1.Add(levelStars);
+            print(levelID);
+            int levelStars = PlayerPrefs.GetInt("level_1_" + levelID);
+            if (levelStars > 0)
+            {
+                // print("level_" + ZoneID + "_" + levelID + " : " + levelStars);
+                if (DEBUG_UnlockAllLevels)
+                    levelStars = 3;
+                starsZone1.Add(levelStars);
+            }
         }
     }
     public int GetStarsIn(int LevelID)

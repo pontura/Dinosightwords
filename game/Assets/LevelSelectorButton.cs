@@ -23,6 +23,12 @@ public class LevelSelectorButton : MonoBehaviour {
         button = GetComponent<Button>();
         isActive = true;
 
+        //// HACK: es el primer nivel
+        //if (starsQTY == 4)
+        //{
+        //    imageLock.enabled = false;
+        //    stars.Init(0);
+        //} else
         if (starsQTY == 0)
         {
             isActive = false;
@@ -33,6 +39,7 @@ public class LevelSelectorButton : MonoBehaviour {
     public void NextButton()
     {
          isActive = true;
-         button.targetGraphic.color = button.colors.normalColor;        
+         button.targetGraphic.color = button.colors.normalColor;
+         imageLock.enabled = false;
     }
 }

@@ -40,6 +40,10 @@ public class Data : MonoBehaviour
 
     void Awake()
     {
+       //PlayerPrefs.SetInt("level_1_1", 0);
+        //PlayerPrefs.SetInt("level_1_2", 0);
+        //PlayerPrefs.SetInt("level_1_3", 0);
+        //PlayerPrefs.SetInt("level_1_4", 0);   
         //PlayerPrefs.SetInt("hats", 0);
         //PlayerPrefs.SetInt("legs", 0);
 
