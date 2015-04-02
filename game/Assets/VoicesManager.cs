@@ -14,7 +14,6 @@ public class VoicesManager : MonoBehaviour {
     {
         if (Data.Instance.soundsVolume == 0) return;
 
-        print(sightWord);
         audio.clip = Resources.Load("sightwords/" + sightWord) as AudioClip;
         audio.Play();
 

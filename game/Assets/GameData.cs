@@ -4,7 +4,12 @@ using System.Collections;
 public class GameData : MonoBehaviour {
 
     public int totalLanes;
-    public int speed;
+
+    [Tooltip("From level 1")]
+    public int speedFrom;
+    [Tooltip("To level 30")]
+    public int speedTo;
+
     public int laneYPosition;
     public int laneSeparation;
     public float timeToCrossLane;
@@ -16,6 +21,8 @@ public class GameData : MonoBehaviour {
     [Tooltip("Obstacles on or off")]
     public bool Obstacles;
     public float distanceBetweenObstacles;
+    public int percentProbabilityObstacleFrom;
+    public int percentProbabilityObstacleTo;
 
     [Tooltip("Offset to separate Obstacles from Words")]
     public float offsetForObstacles;

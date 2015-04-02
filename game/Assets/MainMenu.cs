@@ -3,7 +3,10 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour {
 
-
+    public void UnblockAllLevels()
+    {
+        Data.Instance.GetComponent<UserData>().UnblockAllLevels();
+    }
     void Start()
     {
         Events.OnMusicChange("gameMenu");

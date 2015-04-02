@@ -22,7 +22,8 @@ public class GameManager : MonoBehaviour {
 
     private WordsData wordsData;
     private float speed;
-    private float realSpeed = 0;
+    public float realSpeed = 0;
+    public int percentProbabilityObstacle;
     private LanesManager lanesManager;
     private WordsManager wordsManager;
     private float distanceBetweenWords;
@@ -72,7 +73,18 @@ public class GameManager : MonoBehaviour {
         distanceBetweenWords = Data.Instance.gameData.distanceBetweenWords;
         distanceBetweenObstacles = Data.Instance.gameData.distanceBetweenObstacles;
         offsetForObstacles = Data.Instance.gameData.offsetForObstacles;
-        speed = Data.Instance.gameData.speed;
+
+        float speedFrom = Data.Instance.gameData.speedFrom;
+        float speedTo = Data.Instance.gameData.speedTo;
+        float Diff = speedTo - speedFrom;
+        int total = wordsData.Zone1.Length;
+        int actual = wordsData.LevelID;
+        speed = speedFrom + (actual * Diff / total);
+
+        int percentProbabilityFrom = Data.Instance.gameData.percentProbabilityObstacleFrom;
+        int percentProbabilityTo = Data.Instance.gameData.percentProbabilityObstacleTo;
+        int Diff2 = percentProbabilityTo - percentProbabilityFrom;
+        percentProbabilityObstacle = percentProbabilityFrom + (actual * Diff2 / total);
 
         state = states.ACTIVE;
 
@@ -130,6 +142,7 @@ public class GameManager : MonoBehaviour {
     }
     public void AddObstacle()
     {
+        if (Random.Range(0, 100) > percentProbabilityObstacle) { LoopObstacles(); return; }
         if (speed - realSpeed > 0.5f) { LoopObstacles(); return; }
         int num = Random.Range(0, 100);
         lanesManager.AddObject(PutObstacleObject());

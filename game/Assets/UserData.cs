@@ -17,6 +17,10 @@ public class UserData : MonoBehaviour {
         data = GetComponent<Data>();
         LoadData();
 	}
+    public void UnblockAllLevels()
+    {
+        DEBUG_UnlockAllLevels = true;
+    }
     void OnLevelComplete()
     {
         WordsData.Reward reward = wordsData.GetReward();
@@ -64,7 +68,6 @@ public class UserData : MonoBehaviour {
         foreach (WordsData.Zone zone in wordsData.Zone1)
         {
             levelID++;
-            print(levelID);
             int levelStars = PlayerPrefs.GetInt("level_1_" + levelID);
             if (levelStars > 0)
             {
