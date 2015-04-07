@@ -6,7 +6,6 @@ public class MusicManager : MonoBehaviour {
     public float volume;
        
 	public void Init () {
-        print("Init");
         audio.loop = true;
         OnMusicVolumeChanged(Data.Instance.musicVolume);
 
