@@ -19,7 +19,10 @@ public class MainMenu : MonoBehaviour {
     {
         Application.LoadLevel("06_Gallery");
     }
+    public void Settings()
+    {
 
+    }
     public void SoundsToogle()
     {
         if (Data.Instance.soundsVolume == 1)

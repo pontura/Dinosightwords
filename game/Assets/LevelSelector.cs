@@ -5,13 +5,13 @@ using System.Collections;
 public class LevelSelector : MonoBehaviour {
 
     [SerializeField]
-    Image back;
-    [SerializeField]
-    Image next;
-    [SerializeField]
     Image title1;
     [SerializeField]
     Image title2;
+    [SerializeField]
+    Image title1_off;
+    [SerializeField]
+    Image title2_off;
 
     public GameObject buttonsContainer;
 
@@ -84,16 +84,16 @@ public class LevelSelector : MonoBehaviour {
             pos.x = _xZone2;
             title1.enabled = false;
             title2.enabled = true;
-            back.enabled = true;
-            next.enabled = false;
+            title1_off.enabled = true;
+            title2_off.enabled = false;
         }
         else
         {
             pos.x = 0;
             title1.enabled = true;
             title2.enabled = false;
-            back.enabled = false;
-            next.enabled = true;
+            title2_off.enabled = true;
+            title1_off.enabled = false;
         }
         buttonsContainer.transform.localPosition = pos;
     }
