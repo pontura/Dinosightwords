@@ -4,12 +4,16 @@ using System.Collections;
 
 public class Gallery : MonoBehaviour {
 
+    public GameObject diploma1;
+    public GameObject diploma2;
+
     public GameObject container;
     [SerializeField] GalleryButton button;
     public int buttonSeparation;
     private WordsData wordsData;
     private float starting_Y ;
     private int containerHeight = 0;
+    private float scalable = 0.9f;
 
     public void MainMenu()
     {
@@ -34,17 +38,31 @@ public class Gallery : MonoBehaviour {
             }
             else
                 levelToReachWord = b;
-            
+
+            if (b == 16)
+            {
+                GameObject diploma = Instantiate(diploma1, Vector3.zero, Quaternion.identity) as GameObject;
+                diploma.transform.SetParent(container.transform);
+
+                diploma.transform.localPosition = new Vector3(0, -containerHeight, 0);
+                diploma.transform.localScale = new Vector3(scalable, scalable, scalable);
+
+                diploma.GetComponent<Button>().onClick.AddListener(delegate() { DiplomaClick(diploma); });
+                a++;
+                containerHeight += (buttonSeparation * 3);
+                diploma.GetComponent<GalleryButton>().id = 1;
+                if (Data.Instance.GetComponent<UserData>().diplomaId < 1) diploma.GetComponent<GalleryButton>().isActive = false;
+            }
             foreach (WordsData.Word word in zone.words)
             {
                 if (word.sightWord.ToUpper() == "RANDOM") continue;
 
-                GalleryButton galleryButton = Instantiate(button) as GalleryButton;
+               GalleryButton galleryButton = Instantiate(button) as GalleryButton;
                galleryButton.transform.SetParent(container.transform);
 
                galleryButton.Init(this, word.sightWord, isActive, levelToReachWord);
-               galleryButton.transform.localPosition = new Vector3(0, -buttonSeparation * a, 0);
-               galleryButton.transform.localScale = Vector3.one;
+               galleryButton.transform.localPosition = new Vector3(0, -containerHeight, 0);
+               galleryButton.transform.localScale = new Vector3(scalable, scalable, scalable);
 
                galleryButton.GetComponent<Button>().onClick.AddListener(delegate() { PlayWord(galleryButton); });
                a++;
@@ -52,9 +70,29 @@ public class Gallery : MonoBehaviour {
             }
             b++;
         }
+
+        GameObject lastDiploma = Instantiate(diploma2, Vector3.zero, Quaternion.identity) as GameObject;
+        lastDiploma.transform.SetParent(container.transform);
+
+        lastDiploma.transform.localPosition = new Vector3(0, -containerHeight, 0);
+        lastDiploma.transform.localScale = new Vector3(scalable, scalable, scalable);
+
+        lastDiploma.GetComponent<Button>().onClick.AddListener(delegate() { DiplomaClick(lastDiploma); });
+        containerHeight += (buttonSeparation * 3);
+
+        lastDiploma.GetComponent<GalleryButton>().id = 2;
+        if (Data.Instance.GetComponent<UserData>().diplomaId < 1) lastDiploma.GetComponent<GalleryButton>().isActive = false;
+
+
         containerHeight -= buttonSeparation;
         container.GetComponent<RectTransform>().sizeDelta = new Vector2(600, containerHeight);
 	}
+    public void DiplomaClick(GameObject dipoloma)
+    {
+        int id = dipoloma.GetComponent<GalleryButton>().id ;
+        bool active = dipoloma.GetComponent<GalleryButton>().isActive;
+        print("DiplomaClick " + id + " active: " + active);
+    }
     public void PlayWord(GalleryButton button)
     {
         print("PlayWord " + button.isActive + " - " + button.sightWord);

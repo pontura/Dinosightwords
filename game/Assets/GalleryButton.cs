@@ -9,6 +9,7 @@ public class GalleryButton : MonoBehaviour {
     [SerializeField] GameObject isOn;
     [SerializeField] GameObject isOff;
 
+    public int id;
     public string sightWord;
     public bool isActive;
     private Gallery gallery;    

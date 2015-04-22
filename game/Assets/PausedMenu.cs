@@ -13,12 +13,12 @@ public class PausedMenu : MonoBehaviour {
     public void Restart()
     {
         canvas.SetActive(false);
-        GetComponent<ConfirmExit>().Init();
+        GetComponent<ConfirmExit>().Init("Restart");
     }
     public void LevelSelector()
     {
-        Time.timeScale = 1;
-        Application.LoadLevel("03_LevelSelector");
+        canvas.SetActive(false);
+        GetComponent<ConfirmExit>().Init("03_LevelSelector");
     }
     public void Close()
     {
