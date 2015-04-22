@@ -51,10 +51,14 @@ public class GameManager : MonoBehaviour {
         if (wordsData.GetZone() == 2)
         {
             foreach (GameObject go in Zone1Objects)
+                go.SetActive(true);
+            foreach (GameObject go in Zone1Objects)
                 go.SetActive(false);
         }
         else
         {
+            foreach (GameObject go in Zone2Objects)
+                go.SetActive(true);
             foreach (GameObject go in Zone2Objects)
                 go.SetActive(false);
         }

@@ -3,15 +3,17 @@ using System.Collections;
 
 public class PausedMenu : MonoBehaviour {
 
-	void Start () {
-	
+    public GameObject canvas;
+
+    public void Init()
+    {
+        canvas.SetActive(true);
 	}
 
     public void Restart()
     {
-        Time.timeScale = 1;
-        Application.LoadLevel("04_Game");
-        Events.OnGameRestart();
+        canvas.SetActive(false);
+        GetComponent<ConfirmExit>().Init();
     }
     public void LevelSelector()
     {
@@ -21,7 +23,7 @@ public class PausedMenu : MonoBehaviour {
     public void Close()
     {
         Events.OnGamePaused(false);
-        gameObject.SetActive(false);
+        canvas.SetActive(false);
     }
     public void SoundsToogle()
     {

@@ -9,7 +9,6 @@ public class HeroClothes : MonoBehaviour {
     public GameObject[] legs2;
 
 	void Start () {
-        print("HC: " + PlayerPrefs.GetInt("hats"));
         if (PlayerPrefs.GetInt("hats") > 0)
             OnHeroWinClothes("hats", PlayerPrefs.GetInt("hats"));
         if (PlayerPrefs.GetInt("chairs") > 0)

@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour {
     }
     public void Settings()
     {
-
+        GetComponent<Menu>().Init();
     }
     public void SoundsToogle()
     {

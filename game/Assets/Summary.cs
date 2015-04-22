@@ -5,13 +5,14 @@ using UnityEngine.UI;
 public class Summary : MonoBehaviour {
 
     public Text labelErrors;
-    [SerializeField] GameObject canvas;
+    public GameObject canvas;
     [SerializeField] Stars stars;
+    private string NextAction;
 
     void Start()
     {
         Events.OnLevelComplete += OnLevelComplete;
-        canvas.SetActive( false);
+        canvas.SetActive(false);
     }
     void OnDestroy()
     {
@@ -40,18 +41,68 @@ public class Summary : MonoBehaviour {
     }
     public void Next()
     {
+        if ( !OpenDiploma("Next"))
+        {
+            if (Data.Instance.GetComponent<WordsData>().LevelID < 30)
+            {
+                Data.Instance.GetComponent<WordsData>().LevelID++;
+                Application.LoadLevel("04_Game");
+            }
+            else
+            {
+                Application.LoadLevel("02_MainMEnu");
+            }
+        }
         ResetLevel();
-        Data.Instance.GetComponent<WordsData>().LevelID++;        
-        Application.LoadLevel("04_Game");
     }
     public void RePlay()
     {
+        if (!OpenDiploma("RePlay"))
+        {
+            Application.LoadLevel("04_Game");
+        }
         ResetLevel();
-        Application.LoadLevel("04_Game");
     }
     public void MainMenu()
     {
+        
+        if (!OpenDiploma("MainMenu"))
+        {
+            Application.LoadLevel("02_MainMEnu");
+        }
         ResetLevel();
-        Application.LoadLevel("02_MainMEnu");
+    }
+    public bool OpenDiploma(string NextAction)
+    {
+        bool opened = false;
+        int id = 0;
+        if (Data.Instance.GetComponent<UserData>().diplomaId <1 && Data.Instance.GetComponent<WordsData>().LevelID == 15)
+        {
+            opened = true;
+            id = 1;
+        }
+        else if (Data.Instance.GetComponent<UserData>().diplomaId <2 && Data.Instance.GetComponent<WordsData>().LevelID == 30)
+        {
+            opened = true;
+            id = 2;
+        }
+        if(opened)
+        {
+            Events.WinDiploma(id);
+            this.NextAction = NextAction;
+            GetComponent<Diploma>().Init(id);
+            canvas.SetActive(false);
+        }
+        return opened;
+    }
+    public void diplomaClose()
+    {
+        print("diplomaClose" + NextAction);
+        switch(NextAction)
+        {
+            case "Next": Next(); break;
+            case "MainMenu": MainMenu(); break;
+            case "RePlay": RePlay(); break;
+        }
     }
 }

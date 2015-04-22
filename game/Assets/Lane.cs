@@ -73,12 +73,21 @@ public class Lane : MonoBehaviour {
            // laneObject.transform.rigidbody2D.velocity = new Vector2(-20*_x, 0);
            // forwardMoveSpeed -= 0.05f;
 
-            if (laneObject.repeatIn > 0 && pos.x < -882 + laneObject.repeatIn)
+            int offsetX;
+            if (Data.Instance.GetComponent<WordsData>().GetZone() == 1)
             {
-                pos.x = 882 + laneObject.repeatIn;
+                offsetX = -1438;
+            }
+            else
+            {
+                offsetX = -465;
+            }
+            if (laneObject.repeatIn > 0 && pos.x < offsetX + laneObject.repeatIn)
+            {
+                pos.x = laneObject.repeatIn;
                 laneObject.transform.localPosition = pos;
             } else
-            if (pos.x < -1200) DeleteObject(laneObject);
+                if (pos.x < -1200 && laneObject.repeatIn<1) DeleteObject(laneObject);
 
         }
     }

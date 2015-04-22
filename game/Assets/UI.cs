@@ -19,7 +19,6 @@ public class UI : MonoBehaviour {
    public void Init()
     {
         SightWord.text = "";
-        pausedMenu.gameObject.SetActive(false);
         
         Events.OnNewWord += OnNewWord;
         Events.OnLevelComplete += OnLevelComplete;
@@ -47,7 +46,7 @@ public class UI : MonoBehaviour {
     }
     public void OnPauseButton()
     {
-        pausedMenu.gameObject.SetActive(true);
+        GetComponent<PausedMenu>().Init();
         Events.OnGamePaused(true);
     }
     void OnLevelComplete()

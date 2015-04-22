@@ -45,8 +45,9 @@ public static class Events {
 
     public static System.Action SetNextWord = delegate { };
     public static System.Action<WordsData.Word> OnNewWord = delegate { };
-    
 
+    public static System.Action<int> WinDiploma = delegate { };
+    
     public static System.Action<int> OnScoreRefresh = delegate { };
     
 

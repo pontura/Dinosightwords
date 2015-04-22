@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class UserData : MonoBehaviour {
 
+    public int diplomaId;
     public bool DEBUG_UnlockAllLevels;
     public List<int> starsZone1;
 
@@ -11,12 +12,29 @@ public class UserData : MonoBehaviour {
     private Data data;
 
 	public void Init () {
-
+        Events.WinDiploma += WinDiploma;
         Events.OnLevelComplete += OnLevelComplete;
         wordsData = GetComponent<WordsData>();
         data = GetComponent<Data>();
         LoadData();
+        PlayerPrefs.SetInt("diplomaId", 0);
+        diplomaId = PlayerPrefs.GetInt("diplomaId");
 	}
+    public void Reset()
+    {
+        print("RESET userdata");
+        PlayerPrefs.SetInt("diplomaId", 0);
+        diplomaId = 0;
+
+        for (int a=0; a<31; a++)
+            PlayerPrefs.SetInt("level_1_" + a, 0);
+
+        LoadData();
+
+        PlayerPrefs.SetInt("hats", 0);
+        PlayerPrefs.SetInt("chairs", 0);
+        PlayerPrefs.SetInt("legs", 0);
+    }
     public void UnblockAllLevels()
     {
         DEBUG_UnlockAllLevels = true;
@@ -51,7 +69,7 @@ public class UserData : MonoBehaviour {
     }
     void SaveStars(int levelID, int newStars)
     {
-        print("SAVE STARS: " + levelID + "_ errors: " + newStars);
+     //   print("SAVE STARS: " + levelID + "_ errors: " + newStars);
         int stars = PlayerPrefs.GetInt("level_1_" + levelID); 
         if(stars<newStars)
         {
@@ -93,5 +111,10 @@ public class UserData : MonoBehaviour {
         stars = starsZone1[LevelID - 1];
 
         return stars;
+    }
+    void WinDiploma(int id)
+    {
+        PlayerPrefs.SetInt("diplomaId", id);
+        this.diplomaId = id;
     }
 }

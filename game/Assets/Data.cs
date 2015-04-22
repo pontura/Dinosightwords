@@ -91,6 +91,7 @@ public class Data : MonoBehaviour
     }
     public void Reset()
     {
+
     }
     void OnSaveVolumes(float _musicVolume, float _soundsVolume)
     {
