@@ -33,9 +33,11 @@ public class SwipeDetector : MonoBehaviour
 			    case TouchPhase.Ended:
                     newTime = 0;
                     touched = false;
+                    float swipeDistVertical = (new Vector3(0, touch.position.y, 0) - new Vector3(0, startPos.y, 0)).magnitude;
+                    if (swipeDistVertical < minSwipeDistY)
+                        Events.OnHeroJump();
 				    break;
 			}
-
 
 
             if (touched)
@@ -44,11 +46,8 @@ public class SwipeDetector : MonoBehaviour
             if (newTime > 0.06f && touched)
             {
                 Move(touch.position.y);
-            }
-
-            if (newTime > 1)
-            {
-                touched = true;
+                startPos = touch.position;
+                newTime = -1;
             }
 
 
@@ -57,7 +56,6 @@ public class SwipeDetector : MonoBehaviour
     void Move(float touchFinalPositionY)
     {
         float swipeDistVertical = (new Vector3(0, touchFinalPositionY, 0) - new Vector3(0, startPos.y, 0)).magnitude;
-      //  float swipeDistHorizontal = (new Vector3(touch.position.x, 0, 0) - new Vector3(startPos.x, 0, 0)).magnitude;
         if (swipeDistVertical > minSwipeDistY)
         {
             float swipeValue = Mathf.Sign(touchFinalPositionY - startPos.y);
@@ -66,17 +64,6 @@ public class SwipeDetector : MonoBehaviour
             else if (swipeValue < 0)
                 Swipe(directions.DOWN);
         }
-        else
-            //if (swipeDistHorizontal > minSwipeDistX)
-            //{
-            //    float swipeValue = Mathf.Sign(touch.position.x - startPos.x);
-            //    if (swipeValue > 0)
-            //        Swipe(directions.RIGHT);
-            //    else if (swipeValue < 0)
-            //        Swipe(directions.LEFT);
-            //}
-            //else
-                Events.OnHeroJump();
     }
     void Swipe(directions direction)
     {
