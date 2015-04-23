@@ -28,6 +28,8 @@ public class UserData : MonoBehaviour {
         for (int a=0; a<31; a++)
             PlayerPrefs.SetInt("level_1_" + a, 0);
 
+        starsZone1.Clear();
+
         LoadData();
 
         PlayerPrefs.SetInt("hats", 0);

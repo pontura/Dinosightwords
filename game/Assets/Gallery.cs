@@ -91,7 +91,8 @@ public class Gallery : MonoBehaviour {
     {
         int id = dipoloma.GetComponent<GalleryButton>().id ;
         bool active = dipoloma.GetComponent<GalleryButton>().isActive;
-        print("DiplomaClick " + id + " active: " + active);
+        if (active)
+          GetComponent<Diploma>().Init(id);
     }
     public void PlayWord(GalleryButton button)
     {

@@ -43,6 +43,7 @@ public class Menu : MonoBehaviour {
     public void ConfirmReset()
     {
         Data.Instance.GetComponent<UserData>().Reset();
+        confirmCanvas.SetActive(false);
         Close();
     }
 }

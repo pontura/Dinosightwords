@@ -12,29 +12,40 @@ public class Diploma : MonoBehaviour {
     public Text username;
     public Image diploma1;
     public Image diploma2;
+    private int diplomaID;
 
 	void Start () {
         canvas.SetActive(false);
 	}
     public void Init(int id)
     {
-        diplomaAsset.SetActive(false);
-        diploma1.enabled = false;
-        diploma2.enabled = false; 
+        if (diplomaAsset)
+        {
+            diploma1.enabled = false;
+            diploma2.enabled = false; 
+            diplomaAsset.SetActive(false);
+        }
+        
         canvas.SetActive(true);
+        this.diplomaID  = id;
         switch (id)
         {
-            case 1: title.text = "YOU EARNED THE 'FOREST' DIPLOMA"; diploma1.enabled = true;  break;
-            case 2: title.text = "YOU EARNED THE 'VULCANO' DIPLOMA"; diploma2.enabled = true; break;
+            case 1: title.text = "YOU EARNED THE 'VULCANO' DIPLOMA"; if (diplomaAsset) diploma1.enabled = true; break;
+            case 2: title.text = "YOU EARNED THE 'FOREST' DIPLOMA"; if (diplomaAsset) diploma2.enabled = true; break;
         }
     }
     public void OpenDiploma()
     {
         Close(nameField.text);
     }
+    public void CloseCanvas()
+    {
+        canvas.SetActive(false);
+    }
     public void Close(string _username)
     {
-        diplomaAsset.SetActive(true);
+        if (diplomaAsset)
+            diplomaAsset.SetActive(true);
         username.text = _username;
     }
     public void CloseDiplomaAsset()
@@ -45,8 +56,11 @@ public class Diploma : MonoBehaviour {
     public void Send()
     {
         print("nameField: " + nameField.text + " email: " + emailField.text);
-        sendEmail();
-        Close(nameField.text);
+        StartCoroutine(SendMail());
+        if (diplomaAsset)
+            Close(nameField.text);
+        else
+            CloseCanvas();
     }
     public void SendLater()
     {
@@ -54,20 +68,12 @@ public class Diploma : MonoBehaviour {
         Close(nameField.text);
     }
 
-     void sendEmail() {
-         StartCoroutine(SendMail());
-     }
-
-
      IEnumerator SendMail()
      {
          string message = nameField.text + " won a diploma in DinoSightWords!";
 
-         string id;
-         if (diploma1.enabled)  id = "1";   else id = "2";
-
          string post_url = Data.Instance.URL_php_email + "email.php"
-             + "?image=" + id
+             + "?image=" + diplomaID.ToString()
              + "&to=" + WWW.EscapeURL(emailField.text)
              + "&from=" + WWW.EscapeURL(nameField.text);
 
