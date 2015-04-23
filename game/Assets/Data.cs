@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class Data : MonoBehaviour
 {
+    public string URL_php_email = "http://www.pontura.com/tipitap/";
+
     private string movPath = "bumper04.mp4";
     
     public int totalScore;

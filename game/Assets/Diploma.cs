@@ -28,6 +28,10 @@ public class Diploma : MonoBehaviour {
             case 2: title.text = "YOU EARNED THE 'VULCANO' DIPLOMA"; diploma2.enabled = true; break;
         }
     }
+    public void OpenDiploma()
+    {
+        Close(nameField.text);
+    }
     public void Close(string _username)
     {
         diplomaAsset.SetActive(true);
@@ -41,6 +45,7 @@ public class Diploma : MonoBehaviour {
     public void Send()
     {
         print("nameField: " + nameField.text + " email: " + emailField.text);
+        sendEmail();
         Close(nameField.text);
     }
     public void SendLater()
@@ -48,4 +53,42 @@ public class Diploma : MonoBehaviour {
         print("nameField: " + nameField.text + " email: " + emailField.text);
         Close(nameField.text);
     }
+
+     void sendEmail() {
+         StartCoroutine(SendMail());
+     }
+
+
+     IEnumerator SendMail()
+     {
+         string message = nameField.text + " won a diploma in DinoSightWords!";
+
+         string id;
+         if (diploma1.enabled)  id = "1";   else id = "2";
+
+         string post_url = Data.Instance.URL_php_email + "email.php"
+             + "?image=" + id
+             + "&to=" + WWW.EscapeURL(emailField.text)
+             + "&from=" + WWW.EscapeURL(nameField.text);
+
+         WWW receivedData = new WWW(post_url);
+         yield return receivedData;
+
+         if (receivedData.error != null)
+             print("There was an error: " + receivedData.error);
+         else
+         {
+             try
+             {
+                 print("SENDED" + receivedData.text);
+
+             }
+             catch
+             {
+                 Debug.Log("error sending");
+             }
+         }
+     }
+
+
 }
