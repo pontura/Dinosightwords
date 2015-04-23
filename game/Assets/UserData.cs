@@ -49,7 +49,10 @@ public class UserData : MonoBehaviour {
         if (reward != null)
         {
             if (PlayerPrefs.GetInt(reward.rewardType) < reward.num)
+            {
                 PlayerPrefs.SetInt(reward.rewardType, reward.num);
+                Events.OnReward(reward);
+            }
         }
         int levelID = wordsData.LevelID;
         int stars = ErorsToStars(data.errors);
