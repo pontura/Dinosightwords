@@ -17,7 +17,6 @@ public class UserData : MonoBehaviour {
         wordsData = GetComponent<WordsData>();
         data = GetComponent<Data>();
         LoadData();
-        PlayerPrefs.SetInt("diplomaId", 0);
         diplomaId = PlayerPrefs.GetInt("diplomaId");
 	}
     public void Reset()
