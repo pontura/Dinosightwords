@@ -71,6 +71,7 @@ public class Hero : MonoBehaviour {
     }
     void Slide()
     {
+        if (Game.Instance.state != Game.states.PLAYING) return;
         if (state == states.SLIDE) return;
         state = states.SLIDE;
         animator.SetBool(state.ToString(), true);
@@ -83,6 +84,7 @@ public class Hero : MonoBehaviour {
     }
     void Jump()
     {
+        if (Game.Instance.state != Game.states.PLAYING) return;
         if (state == states.JUMP) return;
         Events.OnSoundFX("jump");
         state = states.JUMP;

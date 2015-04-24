@@ -22,6 +22,7 @@ public static class Events {
     public static System.Action<float, float> OnSaveVolumes = delegate { };
     public static System.Action<float> OnMusicVolumeChanged = delegate { };
     public static System.Action<float> OnSoundsVolumeChanged = delegate { };
+    public static System.Action<bool> OnCapsChanged = delegate { };
     public static System.Action<string> OnVoice = delegate { };
     public static System.Action<string> OnSoundFX = delegate { };
     public static System.Action<string> OnMusicChange = delegate { };

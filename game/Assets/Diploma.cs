@@ -30,7 +30,7 @@ public class Diploma : MonoBehaviour {
         this.diplomaID  = id;
         switch (id)
         {
-            case 1: title.text = "YOU EARNED THE 'VULCANO' DIPLOMA"; if (diplomaAsset) diploma1.enabled = true; break;
+            case 1: title.text = "YOU EARNED THE 'VOLCANO' DIPLOMA"; if (diplomaAsset) diploma1.enabled = true; break;
             case 2: title.text = "YOU EARNED THE 'FOREST' DIPLOMA"; if (diplomaAsset) diploma2.enabled = true; break;
         }
     }
@@ -51,6 +51,10 @@ public class Diploma : MonoBehaviour {
     public void CloseDiplomaAsset()
     {
         GetComponent<Summary>().diplomaClose();
+        canvas.SetActive(false);
+    }
+    public void CloseDiplomaAssetInGallery()
+    {
         canvas.SetActive(false);
     }
     public void Send()

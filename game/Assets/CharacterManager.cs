@@ -24,6 +24,7 @@ public class CharacterManager : MonoBehaviour {
     }
     void OnSwipe(SwipeDetector.directions direction)
     {
+        if ( Game.Instance.state != Game.states.PLAYING ) return;
         if (character.state == Character.states.CHANGE) return;
         if (lanesManager.laneActiveID == 1 && direction == SwipeDetector.directions.UP) return;
         if (lanesManager.laneActiveID == Data.Instance.GetComponent<GameData>().totalLanes && direction == SwipeDetector.directions.DOWN) return;

@@ -8,6 +8,7 @@ public class GalleryButton : MonoBehaviour {
     [SerializeField] Text Label;
     [SerializeField] GameObject isOn;
     [SerializeField] GameObject isOff;
+    public Image diplomaImage;
 
     public int id;
     public string sightWord;
@@ -30,10 +31,17 @@ public class GalleryButton : MonoBehaviour {
         }
         else
         {
+
             this.isActive = false;
             isOff.SetActive(true);
             SightWord.text = "???";
-            Label.text = "play level " + levelToReachWord + " to learn it!";
+            Label.text = "Play level " + (levelToReachWord+1).ToString() + " to learn it!";
         }
+    }
+    public void setDiplomaStatus(bool isActive)
+    {
+        this.isActive = isActive;
+        if (!isActive)
+            GetComponentInChildren<Image>().color = Color.grey;
     }
 }

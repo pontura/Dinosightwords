@@ -10,22 +10,32 @@ public class PausedMenu : MonoBehaviour {
 
     public GameObject soundsOff;
     public GameObject musicOff;
+    public GameObject capsOff;
 
 
     public void Init()
     {
-        print("init");
         canvas.SetActive(true);
         soundsConfirmationCanvas.SetActive(false);
         Events.OnSoundsVolumeChanged += OnSoundsVolumeChanged;
         Events.OnMusicVolumeChanged += OnMusicVolumeChanged;
+        Events.OnCapsChanged += OnCapsChanged;
         OnSoundsVolumeChanged(Data.Instance.soundsVolume);
         OnMusicVolumeChanged(Data.Instance.musicVolume);
+        OnCapsChanged(Data.Instance.caps);
 	}
     void OnDestroy()
     {
         Events.OnSoundsVolumeChanged -= OnSoundsVolumeChanged;
         Events.OnMusicVolumeChanged -= OnMusicVolumeChanged;
+        Events.OnCapsChanged -= OnCapsChanged;
+    }
+    void OnCapsChanged(bool caps)
+    {
+        if (!capsOff) return;
+
+        if (caps) capsOff.SetActive(false);
+        else capsOff.SetActive(true);
     }
     void OnSoundsVolumeChanged(float vol)
     {
@@ -70,6 +80,14 @@ public class PausedMenu : MonoBehaviour {
             Data.Instance.soundsVolume = 1;
             Events.OnSoundsVolumeChanged(Data.Instance.soundsVolume);
         }
+    }
+    public void CapsToogle()
+    {
+        print("CapsToogle" + Data.Instance.caps);
+        if (Data.Instance.caps)
+            Events.OnCapsChanged(false);
+        else
+            Events.OnCapsChanged(true);
     }
     public void CloseSoundsConfirmation()
     {

@@ -13,6 +13,7 @@ public class Data : MonoBehaviour
 
     public float musicVolume = 1;
     public float soundsVolume = 1;
+    public bool caps = true;
 
     public SceneLoader sceneLoader;
     public GameData gameData;
@@ -68,7 +69,7 @@ public class Data : MonoBehaviour
 
         Events.OnMusicVolumeChanged += OnMusicVolumeChanged;
         Events.OnSoundsVolumeChanged += OnSoundsVolumeChanged;
-//        Events.OnSaveVolumes += OnSaveVolumes;
+        Events.OnCapsChanged += OnCapsChanged;
 
 //#if UNITY_ANDROID || UNITY_IPHONE
 //        Handheld.PlayFullScreenMovie(movPath, Color.black, FullScreenMovieControlMode.Hidden, FullScreenMovieScalingMode.AspectFit);
@@ -82,6 +83,10 @@ public class Data : MonoBehaviour
     void OnMusicVolumeChanged(float value)
     {
         musicVolume = value;
+    }
+    void OnCapsChanged(bool _caps)
+    {
+        caps = _caps;
     }
     void OnSoundsVolumeChanged(float value)
     {

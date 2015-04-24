@@ -10,7 +10,7 @@ public class Game : MonoBehaviour {
     public enum states
     {
         PAUSED,
-        IDLE,
+        PLAYING,
         ENDED
     }
     
@@ -33,8 +33,11 @@ public class Game : MonoBehaviour {
     }
     void Start  ()
     {
+        
         Events.OnMusicChange("inGame");
         Events.OnGamePaused += OnGamePaused;
+        Events.OnLevelComplete += OnLevelComplete;
+        Events.StartGame += StartGame;
         GetComponent<GameManager>().Init();
         GetComponent<WordsManager>().Init();
         ui.Init();
@@ -42,8 +45,17 @@ public class Game : MonoBehaviour {
     void Destroy()
     {
         Events.OnGamePaused -= OnGamePaused;
+        Events.StartGame -= StartGame;
+        Events.OnLevelComplete -= OnLevelComplete;
     }
-
+    void StartGame()
+    {
+        state = states.PLAYING;
+    }
+    void OnLevelComplete()
+    {
+        state = states.PAUSED;
+    }
     void OnGamePaused(bool paused)
     {
         if (paused)

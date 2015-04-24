@@ -17,13 +17,10 @@ public class UserData : MonoBehaviour {
         wordsData = GetComponent<WordsData>();
         data = GetComponent<Data>();
         LoadData();
-        diplomaId = PlayerPrefs.GetInt("diplomaId");
+        //diplomaId = PlayerPrefs.GetInt("diplomaId");
 	}
     public void Reset()
     {
-        print("RESET userdata");
-        PlayerPrefs.SetInt("diplomaId", 0);
-        diplomaId = 0;
 
         for (int a=0; a<31; a++)
             PlayerPrefs.SetInt("level_1_" + a, 0);

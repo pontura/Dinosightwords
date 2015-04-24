@@ -41,8 +41,13 @@ public class UI : MonoBehaviour {
     {        
         WordsData.Word word = wordsData.GetWordData();
         Events.OnVoice(word.sightWord);
-        if(word != null)
-            SightWord.text = word.sightWord.ToUpper();
+        if (word != null)
+        {
+            if (Data.Instance.caps)
+                 SightWord.text = word.sightWord.ToUpper();
+            else
+                SightWord.text = word.sightWord.ToLower();
+        }
     }
     public void OnPauseButton()
     {

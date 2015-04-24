@@ -46,12 +46,12 @@ public class Gallery : MonoBehaviour {
 
                 diploma.transform.localPosition = new Vector3(0, -containerHeight, 0);
                 diploma.transform.localScale = new Vector3(scalable, scalable, scalable);
-
                 diploma.GetComponent<Button>().onClick.AddListener(delegate() { DiplomaClick(diploma); });
                 a++;
                 containerHeight += (buttonSeparation * 3);
                 diploma.GetComponent<GalleryButton>().id = 1;
-                if (Data.Instance.GetComponent<UserData>().diplomaId < 1) diploma.GetComponent<GalleryButton>().isActive = false;
+                if (Data.Instance.GetComponent<UserData>().diplomaId < 1) diploma.GetComponent<GalleryButton>().setDiplomaStatus(false);
+                else diploma.GetComponent<GalleryButton>().setDiplomaStatus(true);
             }
             foreach (WordsData.Word word in zone.words)
             {
@@ -81,7 +81,8 @@ public class Gallery : MonoBehaviour {
         containerHeight += (buttonSeparation * 3);
 
         lastDiploma.GetComponent<GalleryButton>().id = 2;
-        if (Data.Instance.GetComponent<UserData>().diplomaId < 1) lastDiploma.GetComponent<GalleryButton>().isActive = false;
+        if (Data.Instance.GetComponent<UserData>().diplomaId < 1) lastDiploma.GetComponent<GalleryButton>().setDiplomaStatus(false);
+        else lastDiploma.GetComponent<GalleryButton>().setDiplomaStatus(true);
 
 
         containerHeight -= buttonSeparation;
@@ -96,7 +97,6 @@ public class Gallery : MonoBehaviour {
     }
     public void PlayWord(GalleryButton button)
     {
-        print("PlayWord " + button.isActive + " - " + button.sightWord);
         if(button.isActive)
             Events.OnVoice(button.sightWord);
     }   

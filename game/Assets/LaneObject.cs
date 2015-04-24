@@ -13,7 +13,10 @@ public class LaneObject : MonoBehaviour {
         this.data = data;
         if (tag == "Word")
         {
-            GetComponentInChildren<Text>().text = data.word.ToUpper();
+            if(Data.Instance.caps)
+                GetComponentInChildren<Text>().text = data.word.ToUpper();
+            else
+                GetComponentInChildren<Text>().text = data.word.ToLower();
         }
        // transform.rigidbody2D.velocity = new Vector2(-200, 0);
     }
