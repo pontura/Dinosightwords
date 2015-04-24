@@ -66,8 +66,8 @@ public class Data : MonoBehaviour
         GetComponent<UserData>().Init();
         GetComponent<MusicManager>().Init();
 
-//        Events.OnMusicVolumeChanged += OnMusicVolumeChanged;
-//        Events.OnSoundsVolumeChanged += OnSoundsVolumeChanged;
+        Events.OnMusicVolumeChanged += OnMusicVolumeChanged;
+        Events.OnSoundsVolumeChanged += OnSoundsVolumeChanged;
 //        Events.OnSaveVolumes += OnSaveVolumes;
 
 //#if UNITY_ANDROID || UNITY_IPHONE
