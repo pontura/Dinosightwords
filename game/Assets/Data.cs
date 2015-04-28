@@ -13,7 +13,7 @@ public class Data : MonoBehaviour
 
     public float musicVolume = 1;
     public float soundsVolume = 1;
-    public bool caps = true;
+    public bool caps = false;
 
     public SceneLoader sceneLoader;
     public GameData gameData;

@@ -27,7 +27,7 @@ public class SwipeDetector : MonoBehaviour
 			switch (touch.phase) 
 			{
 			    case TouchPhase.Began:
-                    timeSinceTouch = 0;
+                    timeSinceTouch = -0.5f;
                     newTime = 0;
                     touched = true;
 				    startPos = touch.position;				

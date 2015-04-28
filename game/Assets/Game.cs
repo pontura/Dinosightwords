@@ -38,6 +38,7 @@ public class Game : MonoBehaviour {
         Events.OnGamePaused += OnGamePaused;
         Events.OnLevelComplete += OnLevelComplete;
         Events.StartGame += StartGame;
+        Events.OnGameOver += OnGameOver;
         GetComponent<GameManager>().Init();
         GetComponent<WordsManager>().Init();
         ui.Init();
@@ -47,6 +48,7 @@ public class Game : MonoBehaviour {
         Events.OnGamePaused -= OnGamePaused;
         Events.StartGame -= StartGame;
         Events.OnLevelComplete -= OnLevelComplete;
+        Events.OnGameOver -= OnGameOver;
     }
     void StartGame()
     {
@@ -55,6 +57,15 @@ public class Game : MonoBehaviour {
     void OnLevelComplete()
     {
         state = states.PAUSED;
+    }
+    void OnGameOver()
+    {
+        OnGamePaused(true);
+        Invoke("Restart", 2);  
+    }
+    void Restart()
+    {
+        Application.LoadLevel("04_Game");
     }
     void OnGamePaused(bool paused)
     {

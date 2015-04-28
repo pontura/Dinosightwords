@@ -16,6 +16,7 @@ public static class Events {
 
     //The game:
     public static System.Action StartGame = delegate { };
+    public static System.Action OnGameOver = delegate { };
     public static System.Action OnLevelComplete = delegate { };
     public static System.Action<SwipeDetector.directions> OnSwipe = delegate { };
 

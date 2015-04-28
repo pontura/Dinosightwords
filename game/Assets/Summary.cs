@@ -96,10 +96,9 @@ public class Summary : MonoBehaviour {
     }
     public void MainMenu()
     {
-        
         if (!OpenDiploma("MainMenu"))
         {
-            Application.LoadLevel("02_MainMEnu");
+            Application.LoadLevel("03_LevelSelector");
         }
         ResetLevel();
     }
