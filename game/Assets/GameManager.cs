@@ -31,6 +31,9 @@ public class GameManager : MonoBehaviour {
 
     public void Init()
     {
+
+        
+
         Data.Instance.errors = 0;
 
         Events.OnPlayerHitWord += OnPlayerHitWord;
@@ -60,6 +63,15 @@ public class GameManager : MonoBehaviour {
             foreach (GameObject go in Zone2Objects)
                 go.SetActive(false);
         }
+
+         WordsData.Reward reward = wordsData.GetReward();
+         if (reward.num > 0)
+             Events.CheckItemsToReward(reward);
+         else
+             Events.OnStartCountDown();
+
+       
+
     }
     void OnDestroy()
     {

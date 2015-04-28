@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class Summary : MonoBehaviour {
 
-    public Text labelErrors;
     public GameObject canvas;
     [SerializeField] Stars stars;
     private string NextAction;
@@ -39,7 +38,6 @@ public class Summary : MonoBehaviour {
         else
             _stars = 1;
         
-        labelErrors.text = "(" + errors  + " errors)";
         stars.Init(_stars);
     }
     void OnReward(WordsData.Reward reward)

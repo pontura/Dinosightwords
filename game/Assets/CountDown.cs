@@ -8,11 +8,21 @@ public class CountDown : MonoBehaviour {
     Text field;
     private int num = 3;
 
-    void Start()
+    void Awake()
+    {
+        field.text = "";
+        Events.OnStartCountDown += OnStartCountDown;
+    }
+    void OnDestroy()
+    {
+        Events.OnStartCountDown -= OnStartCountDown;
+    }
+    void OnStartCountDown()
     {
         field.text = num.ToString();
         Invoke("nextNum", 1);
     }
+
     void nextNum()
     {
         num--;

@@ -50,6 +50,7 @@ public class Menu : MonoBehaviour {
     {
         if (inputText.text == "56")
         {
+            inputText.text = "";
             Data.Instance.GetComponent<UserData>().Reset();
             confirmCanvas.SetActive(false);
             Close();

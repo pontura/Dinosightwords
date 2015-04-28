@@ -52,6 +52,10 @@ public static class Events {
     
     public static System.Action<int> OnScoreRefresh = delegate { };
     public static System.Action<WordsData.Reward> OnReward = delegate { };
+
+    public static System.Action OnStartCountDown = delegate { };
+    public static System.Action<WordsData.Reward> CheckItemsToReward = delegate { };
+    
     
     
 

@@ -65,11 +65,12 @@ public class PausedMenu : MonoBehaviour {
     {
         Events.OnGamePaused(false);
         Game.Instance.state = Game.states.PAUSED;
-        Invoke("Unpause", 0.1f);
+        Invoke("Unpause", 0.3f);
         canvas.SetActive(false);
     }
     void Unpause()
     {
+        Game.Instance.state = Game.states.PLAYING;
         Events.OnGamePaused(false);
     }
     public void SoundsToogle()
