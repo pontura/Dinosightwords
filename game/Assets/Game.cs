@@ -33,22 +33,26 @@ public class Game : MonoBehaviour {
     }
     void Start  ()
     {
-        
         Events.OnMusicChange("inGame");
+
         Events.OnGamePaused += OnGamePaused;
         Events.OnLevelComplete += OnLevelComplete;
         Events.StartGame += StartGame;
         Events.OnGameOver += OnGameOver;
+        Events.OnGameRestart += OnGameRestart;
+
         GetComponent<GameManager>().Init();
         GetComponent<WordsManager>().Init();
         ui.Init();
+        OnGamePaused(false);
     }
-    void Destroy()
+    void OnDestroy()
     {
         Events.OnGamePaused -= OnGamePaused;
         Events.StartGame -= StartGame;
         Events.OnLevelComplete -= OnLevelComplete;
         Events.OnGameOver -= OnGameOver;
+        Events.OnGameRestart -= OnGameRestart;
     }
     void StartGame()
     {
@@ -60,12 +64,14 @@ public class Game : MonoBehaviour {
     }
     void OnGameOver()
     {
+        Events.OnSoundFX("warningPopUp");
+        Events.OnMusicChange("");
         OnGamePaused(true);
-        Invoke("Restart", 2);  
     }
-    void Restart()
+    void OnGameRestart()
     {
         Application.LoadLevel("04_Game");
+        OnGamePaused(false);
     }
     void OnGamePaused(bool paused)
     {

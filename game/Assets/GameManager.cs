@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour {
     public float realSpeed = 0;
     public int percentProbabilityObstacle;
     private LanesManager lanesManager;
-    private WordsManager wordsManager;
     private float distanceBetweenWords;
     private float distanceBetweenObstacles;
     private float offsetForObstacles;
@@ -44,7 +43,6 @@ public class GameManager : MonoBehaviour {
         wordsData.Restart();
 
         lanesManager = GetComponent<LanesManager>();
-        wordsManager = GetComponent<WordsManager>();
         lanesManager.AddLanes(Data.Instance.GetComponent<GameData>().totalLanes);
         GetComponent<CharacterManager>().Init();
 
@@ -140,7 +138,6 @@ public class GameManager : MonoBehaviour {
     public void AddWord()
     {
         if (speed - realSpeed > 0.5f) { LoopWords(); return; }
-        int num = Random.Range(0, 100);
         lanesManager.AddObject( PutWordObject() );
         LoopWords();
     }
@@ -148,7 +145,6 @@ public class GameManager : MonoBehaviour {
     {
         if (Random.Range(0, 100) > percentProbabilityObstacle) { LoopObstacles(); return; }
         if (speed - realSpeed > 0.5f) { LoopObstacles(); return; }
-        int num = Random.Range(0, 100);
         lanesManager.AddObject(PutObstacleObject());
         LoopObstacles();
     }

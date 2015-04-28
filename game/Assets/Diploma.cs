@@ -74,7 +74,6 @@ public class Diploma : MonoBehaviour {
 
      IEnumerator SendMail()
      {
-         string message = nameField.text + " won a diploma in DinoSightWords!";
 
          string post_url = Data.Instance.URL_php_email + "email.php"
              + "?image=" + diplomaID.ToString()

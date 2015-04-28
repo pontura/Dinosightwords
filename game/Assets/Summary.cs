@@ -81,7 +81,7 @@ public class Summary : MonoBehaviour {
             }
             else
             {
-                Application.LoadLevel("02_MainMEnu");
+                Application.LoadLevel("02_MainMenu");
             }
         }
         ResetLevel();

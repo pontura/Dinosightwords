@@ -30,7 +30,6 @@ public class ConfirmExit : MonoBehaviour {
         }
         else
         {
-            Application.LoadLevel("04_Game");
             Events.OnGameRestart();
         }
 

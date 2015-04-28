@@ -22,6 +22,7 @@ public class MusicManager : MonoBehaviour {
 
     void OnMusicChange(string soundName)
     {
+        if (soundName == "") audio.Stop();
         if (audio.clip && audio.clip.name == soundName) return;
         audio.clip = Resources.Load("music/" + soundName) as AudioClip;
         audio.Play();

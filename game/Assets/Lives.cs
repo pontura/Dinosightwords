@@ -37,6 +37,6 @@ public class Lives : MonoBehaviour {
                 GameOver.SetActive(true);
                 break;
         }
-
     }
+    
 }

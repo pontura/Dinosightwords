@@ -13,12 +13,10 @@ public class GalleryButton : MonoBehaviour {
     public int id;
     public string sightWord;
     public bool isActive;
-    private Gallery gallery;    
 
     public void Init(Gallery gallery, string sightWord, bool _isActive, int levelToReachWord)
     {
         this.sightWord = sightWord;
-        this.gallery = gallery;
 
         isOn.SetActive(false);
         isOff.SetActive(false);

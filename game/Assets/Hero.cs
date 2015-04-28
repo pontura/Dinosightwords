@@ -5,7 +5,8 @@ public class Hero : MonoBehaviour {
 
     private Animator animator;
     public states state;
-    private Collider2D collider;
+    private Collider2D collider2d;
+    private Game game;
 
     public enum states
     {
@@ -20,6 +21,7 @@ public class Hero : MonoBehaviour {
     }
     void Start()
     {
+        this.game = Game.Instance;
         Events.StartGame += StartGame;
         Events.OnHeroJump += OnHeroJump;
         Events.OnHeroCrash += OnHeroCrash;
@@ -29,8 +31,8 @@ public class Hero : MonoBehaviour {
         Events.OnLevelComplete += OnLevelComplete;
         
 
-        animator = GetComponent<Animator>();       
-        collider = GetComponent<Collider2D>();
+        animator = GetComponent<Animator>();
+        collider2d = GetComponent<Collider2D>();
     }
     void OnDestroy()
     {
@@ -49,7 +51,7 @@ public class Hero : MonoBehaviour {
     void OnHeroJump()
     {
         Jump();
-        collider.enabled = false;
+        collider2d.enabled = false;
     }
     void OnHeroSlide()
     {
@@ -110,7 +112,8 @@ public class Hero : MonoBehaviour {
     }
     public void ResetAnimation()
     {
-        collider.enabled = true;
+        if (game.state == Game.states.PAUSED) return;
+        collider2d.enabled = true;
         state = states.RUN;
         animator.SetBool("JUMP", false);
         animator.SetBool("CRASH", false);
