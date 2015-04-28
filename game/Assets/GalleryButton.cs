@@ -5,8 +5,6 @@ using System.Collections;
 public class GalleryButton : MonoBehaviour {
 
     [SerializeField] Text SightWord;
-    [SerializeField]
-    Text SightWord2;
     [SerializeField] Text Label;
     [SerializeField] GameObject isOn;
     [SerializeField] GameObject isOff;
@@ -31,7 +29,7 @@ public class GalleryButton : MonoBehaviour {
         }
         else
         {
-            SightWord2.text = sightWord;
+
             this.isActive = false;
             isOff.SetActive(true);
             SightWord.text = "???";
