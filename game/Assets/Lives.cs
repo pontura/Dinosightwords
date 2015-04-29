@@ -32,9 +32,9 @@ public class Lives : MonoBehaviour {
             case 2:
                 live3.SetActive(false);
                 break;
-            default:
-                Events.OnGameOver();
+            default:                
                 GameOver.SetActive(true);
+                Events.OnGameOver();
                 break;
         }
     }

@@ -86,6 +86,7 @@ public class Summary : MonoBehaviour {
     }
     public void RePlay()
     {
+        print("RePlay");
         if (!OpenDiploma("RePlay"))
         {
             Application.LoadLevel("04_Game");
@@ -94,6 +95,7 @@ public class Summary : MonoBehaviour {
     }
     public void MainMenu()
     {
+        print("MainMenu");
         if (!OpenDiploma("MainMenu"))
         {
             Application.LoadLevel("03_LevelSelector");

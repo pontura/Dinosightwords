@@ -29,7 +29,7 @@ public class Character : MonoBehaviour {
         hero.transform.SetParent(transform);
         float sizeCharacter=  0.48f;
         hero.GetComponent<RectTransform>().localScale = new Vector3(sizeCharacter, sizeCharacter, sizeCharacter);
-        hero.GetComponent<RectTransform>().localPosition = new Vector3(0, -35, 0);
+        hero.GetComponent<RectTransform>().localPosition = new Vector3(-50, -35, 0);
     }
     void Start()
     {

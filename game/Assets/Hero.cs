@@ -14,6 +14,7 @@ public class Hero : MonoBehaviour {
         JUMP,
         CRASH,
         SLIDE,
+        LAVA,
         CELEBRATE,
         UNHAPPY,
         WIN
@@ -57,10 +58,12 @@ public class Hero : MonoBehaviour {
         Jump();
         collider2d.enabled = false;
     }
-    void OnHeroSlide()
+    void OnHeroSlide(int id)
     {
-        Slide();
-      //  collider.enabled = false;
+        if (id == 1)
+            Slide();
+        else
+            Lava();
     }
     void OnHeroCrash()
     {
@@ -80,6 +83,13 @@ public class Hero : MonoBehaviour {
         if (Game.Instance.state != Game.states.PLAYING) return;
         if (state == states.SLIDE) return;
         state = states.SLIDE;
+        animator.SetBool(state.ToString(), true);
+    }
+    void Lava()
+    {
+        if (Game.Instance.state != Game.states.PLAYING) return;
+        if (state == states.LAVA) return;
+        state = states.LAVA;
         animator.SetBool(state.ToString(), true);
     }
     void Crash()
@@ -121,6 +131,7 @@ public class Hero : MonoBehaviour {
         animator.SetBool("JUMP", false);
         animator.SetBool("CRASH", false);
         animator.SetBool("SLIDE", false);
+        animator.SetBool("LAVA", false);
         animator.SetBool("CELEBRATE", false);
         animator.SetBool("UNHAPPY", false);
         animator.SetBool("IDLE", false);

@@ -7,6 +7,7 @@ public class LaneObject : MonoBehaviour {
     public LaneObjectData data;
     public int repeatIn;
     public bool slide;
+    public bool lavaSlide;
 
     public void SetData(LaneObjectData data)
     {
@@ -30,8 +31,12 @@ public class LaneObject : MonoBehaviour {
         {
             if (slide)
             {
-                Events.OnHeroSlide();
-            }else
+                Events.OnHeroSlide(1);
+            }
+            else if (lavaSlide)
+            {
+                Events.OnHeroSlide(2);
+            } else
             if (tag == "Obstacle")
             {
                 Events.OnHeroCrash();

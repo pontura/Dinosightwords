@@ -7,6 +7,7 @@ public class WordsManager : MonoBehaviour {
     private int SightWordProbabilityPercent = 50;
 
     public LaneObject LaneObject_Word;
+    private bool lastWordWasSightword;
 
     public void Init()
     {
@@ -22,13 +23,15 @@ public class WordsManager : MonoBehaviour {
 
         int rand = Random.Range(0, 100);
 
-        if (rand <= SightWordProbabilityPercent)
+        if (rand <= SightWordProbabilityPercent && !lastWordWasSightword)
         {
             data.word = CurrentWord().sightWord;
             data.score = 1;
+            lastWordWasSightword = true;
         }
         else
         {
+            lastWordWasSightword = false;
             string word;
             if (Random.Range(0, 100) < 33) word = CurrentWord().wrong1;
             else if (Random.Range(0, 100) < 66) word = CurrentWord().wrong2;

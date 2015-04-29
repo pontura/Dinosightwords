@@ -189,7 +189,7 @@ public class GameManager : MonoBehaviour {
         realSpeed = 0;
         Events.OnSoundFX("trip");
     }
-    void OnHeroSlide()
+    void OnHeroSlide(int id)
     {
         realSpeed*=2;
         Events.OnSoundFX("stepPond");
