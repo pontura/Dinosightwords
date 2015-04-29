@@ -13,6 +13,11 @@ public class LevelSelector : MonoBehaviour {
     [SerializeField]
     Image title2_off;
 
+    [SerializeField]
+    Image bg1;
+    [SerializeField]
+    Image bg2;
+
     public GameObject buttonsContainer;
 
     private UserData userData;
@@ -74,8 +79,8 @@ public class LevelSelector : MonoBehaviour {
         activateZone(1);
     }
     private void activateZone(int zoneID)
-    {       
-
+    {
+        
         this.zoneID = zoneID;
         Vector3 pos = buttonsContainer.transform.localPosition;
 
@@ -86,6 +91,9 @@ public class LevelSelector : MonoBehaviour {
             title2.enabled = true;
             title1_off.enabled = true;
             title2_off.enabled = false;
+
+            bg2.enabled = true;
+            bg1.enabled = false;
         }
         else
         {
@@ -94,6 +102,9 @@ public class LevelSelector : MonoBehaviour {
             title2.enabled = false;
             title2_off.enabled = true;
             title1_off.enabled = false;
+
+            bg1.enabled = true;
+            bg2.enabled = false;
         }
         buttonsContainer.transform.localPosition = pos;
     }
