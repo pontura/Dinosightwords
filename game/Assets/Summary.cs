@@ -31,9 +31,9 @@ public class Summary : MonoBehaviour {
         int _stars;
         int errors = Data.Instance.errors;
 
-        if (errors < 2)
+        if (errors==0)
             _stars = 3;
-        else if (errors < 4)
+        else if (errors==1)
             _stars = 2;
         else
             _stars = 1;
@@ -75,11 +75,11 @@ public class Summary : MonoBehaviour {
             if (Data.Instance.GetComponent<WordsData>().LevelID < 30)
             {
                 Data.Instance.GetComponent<WordsData>().LevelID++;
-                Application.LoadLevel("04_Game");
+                Data.Instance.LoadLevel("04_Game", 1, 1, Color.black);
             }
             else
             {
-                Application.LoadLevel("02_MainMenu");
+                Data.Instance.LoadLevel("02_MainMenu", 1, 1, Color.black);
             }
         }
         ResetLevel();
@@ -89,7 +89,7 @@ public class Summary : MonoBehaviour {
         print("RePlay");
         if (!OpenDiploma("RePlay"))
         {
-            Application.LoadLevel("04_Game");
+            Data.Instance.LoadLevel("04_Game", 1, 1, Color.black);
         }
         ResetLevel();
     }
@@ -98,7 +98,7 @@ public class Summary : MonoBehaviour {
         print("MainMenu");
         if (!OpenDiploma("MainMenu"))
         {
-            Application.LoadLevel("03_LevelSelector");
+            Data.Instance.LoadLevel("03_LevelSelector", 1, 1, Color.black);
         }
         ResetLevel();
     }

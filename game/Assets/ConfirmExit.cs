@@ -26,7 +26,7 @@ public class ConfirmExit : MonoBehaviour {
         if (next == "03_LevelSelector")
         {
             Time.timeScale = 1;
-            Application.LoadLevel("03_LevelSelector");
+            Data.Instance.LoadLevel("03_LevelSelector", 1, 1, Color.black);
         }
         else
         {

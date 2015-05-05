@@ -19,9 +19,9 @@ public class FeedbackManager : MonoBehaviour {
 
     void OnPlayerHitWord(LaneObjectData data)
     {
-        feedbackSignal.transform.SetParent(container.transform);
-        feedbackSignal.transform.localScale = Vector3.one;
-        feedbackSignal.transform.localPosition = Vector3.zero;
+        //feedbackSignal.transform.SetParent(container.transform);
+        //feedbackSignal.transform.localScale = Vector3.one;
+        //feedbackSignal.transform.localPosition = Vector3.zero;
         bool isOk = false;
         if (data.score > 0) isOk = true;
         feedbackSignal.GetComponent<FeedbackSignal>().Init(isOk);

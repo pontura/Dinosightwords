@@ -17,9 +17,11 @@ public class PausedMenu : MonoBehaviour {
     {
         canvas.SetActive(true);
         soundsConfirmationCanvas.SetActive(false);
+
         Events.OnSoundsVolumeChanged += OnSoundsVolumeChanged;
         Events.OnMusicVolumeChanged += OnMusicVolumeChanged;
         Events.OnCapsChanged += OnCapsChanged;
+
         OnSoundsVolumeChanged(Data.Instance.soundsVolume);
         OnMusicVolumeChanged(Data.Instance.musicVolume);
         OnCapsChanged(Data.Instance.caps);
@@ -39,6 +41,7 @@ public class PausedMenu : MonoBehaviour {
     }
     void OnSoundsVolumeChanged(float vol)
     {
+        if (!soundsOff) return;
         if (vol == 1)
             soundsOff.SetActive(false);
         else
@@ -46,6 +49,7 @@ public class PausedMenu : MonoBehaviour {
     }
     void OnMusicVolumeChanged(float vol)
     {
+        if (!musicOff) return;
         if (vol == 1)
             musicOff.SetActive(false);
         else

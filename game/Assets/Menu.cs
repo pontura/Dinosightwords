@@ -13,6 +13,12 @@ public class Menu : MonoBehaviour {
         canvas.SetActive(false);
         confirmCanvas.SetActive(false);
         WrongCanvas.SetActive(false);
+
+        if (Data.Instance.MainMenuPopupOn)
+        {
+            Init();
+            Data.Instance.MainMenuPopupOn = false;
+        }
 	}
     
     public void Init()
@@ -23,13 +29,14 @@ public class Menu : MonoBehaviour {
 
     public void Privacy()
     {
-        Application.LoadLevel("07_PrivacyPolicy");
+        Data.Instance.LoadLevel("07_PrivacyPolicy", 1, 1, Color.black);
+        Data.Instance.MainMenuPopupOn = true;
     }
 
     public void Reset()
     {
         confirmCanvas.SetActive(true);
-        Close();
+       // Close();
     }
 
     public void Close()

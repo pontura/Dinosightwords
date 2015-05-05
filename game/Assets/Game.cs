@@ -70,7 +70,7 @@ public class Game : MonoBehaviour {
     }
     void OnGameRestart()
     {
-        Application.LoadLevel("04_Game");
+        Data.Instance.LoadLevel("04_Game", 1, 1, Color.black); 
         OnGamePaused(false);
     }
     void OnGamePaused(bool paused)

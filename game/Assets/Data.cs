@@ -13,11 +13,14 @@ public class Data : MonoBehaviour
     public float soundsVolume = 1;
     public bool caps = false;
 
-    public SceneLoader sceneLoader;
     public GameData gameData;
 
+    //malisimo
+    public bool MainMenuPopupOn;
 
     const string PREFAB_PATH = "Data";
+
+    private Fade fade;
 
     static Data mInstance = null;
 
@@ -38,9 +41,14 @@ public class Data : MonoBehaviour
             return mInstance;
         }
     }
-
+    public void LoadLevel(string aLevelName, float aFadeOutTime, float aFadeInTime, Color aColor)
+    {
+        fade.LoadLevel(aLevelName, aFadeOutTime, aFadeInTime, aColor);
+    }
     void Awake()
     {
+        fade = GetComponentInChildren<Fade>();
+        fade.gameObject.SetActive(true);
        //PlayerPrefs.SetInt("level_1_1", 0);
         //PlayerPrefs.SetInt("level_1_2", 0);
         //PlayerPrefs.SetInt("level_1_3", 0);

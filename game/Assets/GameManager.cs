@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour {
     public GameObject[] Zone1Objects;
     public GameObject[] Zone2Objects;
 
+    public GameObject tutorialArrows;
+
     private bool showObstacles;
 
     public states state;
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour {
         Events.OnHeroSlide += OnHeroSlide;
         Events.OnLevelComplete += OnLevelComplete;
         Events.StartGame += StartGame;
+        Events.OnSwipe += OnSwipe;
 
         wordsData = Data.Instance.GetComponent<WordsData>();
         wordsData.Restart();
@@ -80,9 +83,21 @@ public class GameManager : MonoBehaviour {
         Events.OnPlayerHitWord -= OnPlayerHitWord;
         Events.OnLevelComplete -= OnLevelComplete;
         Events.StartGame -= StartGame;
+        Events.OnSwipe -= OnSwipe;
+    }
+    void OnSwipe(SwipeDetector.directions dir)
+    {
+        tutorialArrows.SetActive(false);
+        Events.OnSwipe -= OnSwipe;
+    }
+    void SwipOff()
+    {
+        tutorialArrows.SetActive(false);
     }
     void StartGame()
     {
+        Invoke("SwipOff", 3);
+        tutorialArrows.SetActive(true);
         showObstacles = Data.Instance.gameData.Obstacles;
         distanceBetweenWords = Data.Instance.gameData.distanceBetweenWords;
         distanceBetweenObstacles = Data.Instance.gameData.distanceBetweenObstacles;
@@ -188,6 +203,12 @@ public class GameManager : MonoBehaviour {
         Data.Instance.errors++;
         realSpeed = 0;
         Events.OnSoundFX("trip");
+        state = states.INACTIVE;
+        Invoke("goOn", 1.2f);
+    }
+    void goOn()
+    {
+        state = states.ACTIVE;
     }
     void OnHeroSlide(int id)
     {

@@ -9,6 +9,6 @@ public class PrivacyPolicy : MonoBehaviour {
 	}
 	
 	public void Close () {
-        Application.LoadLevel("02_MainMenu");
+        Data.Instance.LoadLevel("02_MainMenu", 1, 1, Color.black);
 	}
 }

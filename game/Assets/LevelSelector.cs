@@ -63,12 +63,11 @@ public class LevelSelector : MonoBehaviour {
             return;
         }
         Data.Instance.GetComponent<WordsData>().LevelID = button.id;
-
-        Application.LoadLevel("04_Game");
+        Data.Instance.LoadLevel("04_Game", 1, 1, Color.black);   
     }
     public void MainMenu()
     {
-        Application.LoadLevel("02_MainMenu");
+        Data.Instance.LoadLevel("02_MainMenu", 1, 1, Color.black);     
     }
     public void nextClicked()
     {

@@ -14,12 +14,15 @@ public class Gallery : MonoBehaviour {
     private float starting_Y ;
     private int containerHeight = 0;
     private float scalable = 0.9f;
+    private float lastMusicVolume;
 
     public void MainMenu()
     {
-        Application.LoadLevel("02_MainMenu");
+        Data.Instance.LoadLevel("02_MainMenu", 1, 1, Color.black);
+        Events.OnMusicVolumeChanged(lastMusicVolume);
     }
 	void Start () {
+        lastMusicVolume = Data.Instance.musicVolume;
         starting_Y = container.transform.localPosition.y;
         wordsData = Data.Instance.GetComponent<WordsData>();
         UserData userData = Data.Instance.GetComponent<UserData>();
@@ -97,6 +100,7 @@ public class Gallery : MonoBehaviour {
     }
     public void PlayWord(GalleryButton button)
     {
+        Events.OnMusicVolumeChanged(0.2f);
         if(button.isActive)
             Events.OnVoice(button.sightWord);
     }   

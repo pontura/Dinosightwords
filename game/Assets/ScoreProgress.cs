@@ -25,9 +25,14 @@ public class ScoreProgress : MonoBehaviour {
     }
     public void OnScoreRefresh(int score)
     {
+        if (score > 0) GetComponent<Animator>().SetBool("on", true);
         label.text = score.ToString();
         float ammount = (float)score / (float)totalLevelScore; 
         bar.fillAmount = ammount;
        // print(ammount + "     score: " + score + "     totalLevelScore " + totalLevelScore );
+    }
+    public void AnimReady()
+    {
+        GetComponent<Animator>().SetBool("on", false);
     }
 }
