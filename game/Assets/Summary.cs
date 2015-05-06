@@ -98,6 +98,7 @@ public class Summary : MonoBehaviour {
         print("MainMenu");
         if (!OpenDiploma("MainMenu"))
         {
+            
             Data.Instance.LoadLevel("03_LevelSelector", 1, 1, Color.black);
         }
         ResetLevel();

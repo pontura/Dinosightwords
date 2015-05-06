@@ -204,7 +204,7 @@ public class GameManager : MonoBehaviour {
         realSpeed = 0;
         Events.OnSoundFX("trip");
         state = states.INACTIVE;
-        Invoke("goOn", 1.2f);
+        Invoke("goOn", 1.7f);
     }
     void goOn()
     {
