@@ -18,6 +18,11 @@ public class LevelSelector : MonoBehaviour {
     [SerializeField]
     Image bg2;
 
+    [SerializeField]
+    GameObject items1;
+    [SerializeField]
+    GameObject items2;
+
     public GameObject buttonsContainer;
 
     private UserData userData;
@@ -86,6 +91,9 @@ public class LevelSelector : MonoBehaviour {
         if (zoneID == 2)
         {
             pos.x = _xZone2;
+            items1.SetActive(false);
+            items2.SetActive(true);
+
             title1.enabled = false;
             title2.enabled = true;
             title1_off.enabled = true;
@@ -97,6 +105,10 @@ public class LevelSelector : MonoBehaviour {
         else
         {
             pos.x = 0;
+
+            items2.SetActive(false);
+            items1.SetActive(true);
+
             title1.enabled = true;
             title2.enabled = false;
             title2_off.enabled = true;
