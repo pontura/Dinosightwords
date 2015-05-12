@@ -41,6 +41,7 @@ public class Diploma : MonoBehaviour {
     public void CloseCanvas()
     {
         canvas.SetActive(false);
+        Events.OnSoundFX("backPress");
     }
     public void Close(string _username)
     {
@@ -50,6 +51,7 @@ public class Diploma : MonoBehaviour {
     }
     public void CloseDiplomaAsset()
     {
+        Events.OnSoundFX("backPress");
         GetComponent<Summary>().diplomaClose();
         canvas.SetActive(false);
     }
@@ -59,6 +61,7 @@ public class Diploma : MonoBehaviour {
     }
     public void Send()
     {
+        Events.OnSoundFX("buttonPress");
         print("nameField: " + nameField.text + " email: " + emailField.text);
         StartCoroutine(SendMail());
         if (diplomaAsset)
@@ -68,6 +71,7 @@ public class Diploma : MonoBehaviour {
     }
     public void SendLater()
     {
+        Events.OnSoundFX("buttonPress");
         print("nameField: " + nameField.text + " email: " + emailField.text);
         Close(nameField.text);
     }

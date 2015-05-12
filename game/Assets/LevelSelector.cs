@@ -79,14 +79,16 @@ public class LevelSelector : MonoBehaviour {
     public void nextClicked()
     {
         activateZone(2);
+        Events.OnSoundFX("buttonPress");
     }
     public void prevClicked()
     {
         activateZone(1);
+        Events.OnSoundFX("buttonPress");
     }
     private void activateZone(int zoneID)
     {
-        Events.OnSoundFX("buttonPress");
+        
         this.zoneID = zoneID;
         Vector3 pos = buttonsContainer.transform.localPosition;
 

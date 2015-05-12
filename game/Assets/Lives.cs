@@ -21,7 +21,6 @@ public class Lives : MonoBehaviour {
     }
     void OnHeroCrash()
     {
-        print("LoseLive");
         lives--;
         switch (lives)
         {

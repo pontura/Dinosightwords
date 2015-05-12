@@ -69,7 +69,7 @@ public class PausedMenu : MonoBehaviour {
     }
     public void Close()
     {
-        Events.OnSoundFX("buttonPress");
+        Events.OnSoundFX("backPress");
         Events.OnGamePaused(false);
         Game.Instance.state = Game.states.PAUSED;
         Invoke("Unpause", 0.3f);
@@ -77,7 +77,6 @@ public class PausedMenu : MonoBehaviour {
     }
     void Unpause()
     {
-        Events.OnSoundFX("buttonPress");
         Game.Instance.state = Game.states.PLAYING;
         Events.OnGamePaused(false);
     }

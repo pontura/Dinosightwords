@@ -12,10 +12,12 @@ public class MainMenu : MonoBehaviour {
         Events.OnMusicChange("gameMenu");
     }
 	public void Play () {
+        Events.OnSoundFX("buttonPress");
         Data.Instance.LoadLevel("03_LevelSelector", 1, 1, Color.black);        
 	}
     public void Gallery()
     {
+        Events.OnSoundFX("buttonPress");
         Data.Instance.LoadLevel("06_Gallery", 1, 1, Color.black);
     }
     public void Settings()

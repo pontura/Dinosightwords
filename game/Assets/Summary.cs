@@ -70,6 +70,7 @@ public class Summary : MonoBehaviour {
     }
     public void Next()
     {
+        Events.OnSoundFX("buttonPress");
         if ( !OpenDiploma("Next"))
         {
             if (Data.Instance.GetComponent<WordsData>().LevelID < 30)
@@ -86,7 +87,7 @@ public class Summary : MonoBehaviour {
     }
     public void RePlay()
     {
-        print("RePlay");
+        Events.OnSoundFX("buttonPress");
         if (!OpenDiploma("RePlay"))
         {
             Data.Instance.LoadLevel("04_Game", 1, 1, Color.black);
@@ -95,7 +96,7 @@ public class Summary : MonoBehaviour {
     }
     public void MainMenu()
     {
-        print("MainMenu");
+        Events.OnSoundFX("buttonPress");
         if (!OpenDiploma("MainMenu"))
         {
             
@@ -105,6 +106,7 @@ public class Summary : MonoBehaviour {
     }
     public bool OpenDiploma(string NextAction)
     {
+        Events.OnSoundFX("buttonPress");
         bool opened = false;
         int id = 0;
         if (Data.Instance.GetComponent<UserData>().diplomaId <1 && Data.Instance.GetComponent<WordsData>().LevelID == 15)
@@ -128,7 +130,7 @@ public class Summary : MonoBehaviour {
     }
     public void diplomaClose()
     {
-        print("diplomaClose" + NextAction);
+        Events.OnSoundFX("backPress");
         switch(NextAction)
         {
             case "Next": Next(); break;

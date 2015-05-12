@@ -44,6 +44,7 @@ public class ItemsRewardSignal : MonoBehaviour {
     }
 	public void Close()
     {
+        Events.OnSoundFX("backPress");
         Canvas.SetActive(false);
         Events.OnStartCountDown();
 	}

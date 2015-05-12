@@ -16,6 +16,7 @@ public class ConfirmExit : MonoBehaviour {
     }
     public void Close()
     {
+        Events.OnSoundFX("backPress");
         canvas.SetActive(false);
         Events.OnGamePaused(false);
     }

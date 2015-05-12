@@ -20,6 +20,7 @@ public class Gallery : MonoBehaviour {
     {
         Data.Instance.LoadLevel("02_MainMenu", 1, 1, Color.black);
         Events.OnMusicVolumeChanged(lastMusicVolume);
+        Events.OnSoundFX("backPress");
     }
 	void Start () {
         lastMusicVolume = Data.Instance.musicVolume;
@@ -93,6 +94,7 @@ public class Gallery : MonoBehaviour {
 	}
     public void DiplomaClick(GameObject dipoloma)
     {
+        Events.OnSoundFX("buttonPress");
         int id = dipoloma.GetComponent<GalleryButton>().id ;
         bool active = dipoloma.GetComponent<GalleryButton>().isActive;
         if (active)
@@ -100,7 +102,8 @@ public class Gallery : MonoBehaviour {
     }
     public void PlayWord(GalleryButton button)
     {
-        Events.OnMusicVolumeChanged(0.2f);
+        if(Data.Instance.musicVolume>0)
+            Events.OnMusicVolumeChanged(0.2f);
         if(button.isActive)
             Events.OnVoice(button.sightWord);
     }   
