@@ -21,10 +21,15 @@ public class CountDown : MonoBehaviour {
     {
         field.text = num.ToString();
         Invoke("nextNum", 1);
+        animation["CountDown"].normalizedTime = 0;
+        animation.Play("CountDown");
+        
     }
 
     void nextNum()
     {
+        animation["CountDown"].normalizedTime = 0;
+        animation.Play("CountDown");
         num--;
         field.text = num.ToString();
         if (num <= 0)

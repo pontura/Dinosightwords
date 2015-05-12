@@ -10,8 +10,6 @@ public class GameManager : MonoBehaviour {
     public GameObject[] Zone1Objects;
     public GameObject[] Zone2Objects;
 
-    public GameObject tutorialArrows;
-
     private bool showObstacles;
 
     public states state;
@@ -33,9 +31,6 @@ public class GameManager : MonoBehaviour {
 
     public void Init()
     {
-
-        
-
         Data.Instance.errors = 0;
 
         Events.OnPlayerHitWord += OnPlayerHitWord;
@@ -43,7 +38,6 @@ public class GameManager : MonoBehaviour {
         Events.OnHeroSlide += OnHeroSlide;
         Events.OnLevelComplete += OnLevelComplete;
         Events.StartGame += StartGame;
-        Events.OnSwipe += OnSwipe;
 
         wordsData = Data.Instance.GetComponent<WordsData>();
         wordsData.Restart();
@@ -83,21 +77,10 @@ public class GameManager : MonoBehaviour {
         Events.OnPlayerHitWord -= OnPlayerHitWord;
         Events.OnLevelComplete -= OnLevelComplete;
         Events.StartGame -= StartGame;
-        Events.OnSwipe -= OnSwipe;
-    }
-    void OnSwipe(SwipeDetector.directions dir)
-    {
-        tutorialArrows.SetActive(false);
-        Events.OnSwipe -= OnSwipe;
-    }
-    void SwipOff()
-    {
-        tutorialArrows.SetActive(false);
+        Events.OnMusicVolumeChanged(1);
     }
     void StartGame()
     {
-        Invoke("SwipOff", 3);
-        tutorialArrows.SetActive(true);
         showObstacles = Data.Instance.gameData.Obstacles;
         distanceBetweenWords = Data.Instance.gameData.distanceBetweenWords;
         distanceBetweenObstacles = Data.Instance.gameData.distanceBetweenObstacles;
@@ -122,13 +105,14 @@ public class GameManager : MonoBehaviour {
             Invoke("LoopObstacles", offsetForObstacles + distanceBetweenObstacles);
 
         Events.OnNewWord(wordsData.GetWordData());
-
+        
     }
    
     void OnLevelComplete()
     {
         state = states.INACTIVE;
-        Events.OnMusicChange("victoryMusic");
+        Events.OnMusicVolumeChanged(0.2f);
+        Events.OnSoundFX("victoryMusic");
     }
     void OnPlayerHitWord(LaneObjectData data)
     {

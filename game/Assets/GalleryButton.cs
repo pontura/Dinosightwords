@@ -5,11 +5,7 @@ using System.Collections;
 public class GalleryButton : MonoBehaviour {
 
     [SerializeField] Text SightWord;
-    [SerializeField]
-    Text SightWord2;
     [SerializeField] Text Label;
-    [SerializeField] GameObject isOn;
-    [SerializeField] GameObject isOff;
     public Image diplomaImage;
 
     public int id;
@@ -20,22 +16,18 @@ public class GalleryButton : MonoBehaviour {
     {
         this.sightWord = sightWord;
 
-        isOn.SetActive(false);
-        isOff.SetActive(false);
+        this.isActive = true;
+        SightWord.text = sightWord;
 
         if (_isActive)
         {
-            this.isActive = true;
-            SightWord.text = sightWord;
-            isOn.SetActive(true);
+           
         }
         else
         {
-            SightWord2.text = sightWord;
             this.isActive = false;
-            isOff.SetActive(true);
-            SightWord.text = "???";
-            Label.text = "Play level " + (levelToReachWord+1).ToString() + " to learn it!";
+            GetComponent<Button>().interactable = false;
+           // Label.text = "Play level " + (levelToReachWord+1).ToString() + " to learn it!";
         }
     }
     public void setDiplomaStatus(bool isActive)

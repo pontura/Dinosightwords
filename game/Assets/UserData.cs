@@ -45,14 +45,14 @@ public class UserData : MonoBehaviour {
 
         if (reward != null)
         {
-            if (PlayerPrefs.GetInt(reward.rewardType) < reward.num)
-            {
+            //if (PlayerPrefs.GetInt(reward.rewardType) < reward.num)
+            //{
                 if (Data.Instance.errors == 0)
                 {
                     PlayerPrefs.SetInt(reward.rewardType, reward.num);
                     Events.OnReward(reward);
                 }
-            }
+           // }
         }
         int levelID = wordsData.LevelID;
         int stars = ErorsToStars(data.errors);
