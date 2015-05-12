@@ -11,6 +11,7 @@ public class ConfirmExit : MonoBehaviour {
     }
     public void Init(string next)
     {
+        Events.OnSoundFX("warningPopUp");
         this.next = next;
         canvas.SetActive(true);
     }

@@ -41,14 +41,17 @@ public class Stars : MonoBehaviour {
     {
         if (stars <1)
         animator.speed = 0;
+        Events.OnSoundFX("star001");
     }
     public void Star2Arrived()
     {
         if (stars < 2)
         animator.speed = 0;
+        Events.OnSoundFX("star002");
     }
     public void Star3Arrived()
     {
         animator.speed = 0;
+        Events.OnSoundFX("star003");
     }
 }

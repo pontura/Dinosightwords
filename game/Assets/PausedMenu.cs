@@ -86,6 +86,7 @@ public class PausedMenu : MonoBehaviour {
         print("SoundsToogle" + Data.Instance.soundsVolume);
         if (Data.Instance.soundsVolume == 1)
         {
+            Events.OnSoundFX("warningPopUp");
             soundsConfirmationCanvas.SetActive(true);
             soundsConfirmationText.text = Data.Instance.GetComponent<TextsData>().SoundsOffConfirmation;
            

@@ -43,7 +43,7 @@ public class UserData : MonoBehaviour {
 
       //  print("rewardType: "  + reward.rewardType + " num:" +  reward.num);
 
-        if (reward != null)
+        if (reward != null && reward.num>0)
         {
             //if (PlayerPrefs.GetInt(reward.rewardType) < reward.num)
             //{

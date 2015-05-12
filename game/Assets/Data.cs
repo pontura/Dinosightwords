@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class Data : MonoBehaviour
 {
+    private string movPath = "bumper04.mp4";
+
     public string URL_php_email = "http://www.pontura.com/tipitap/";
         
     public int totalScore;
@@ -79,7 +81,7 @@ public class Data : MonoBehaviour
         Events.OnCapsChanged += OnCapsChanged;
 
 //#if UNITY_ANDROID || UNITY_IPHONE
-//        Handheld.PlayFullScreenMovie(movPath, Color.black, FullScreenMovieControlMode.Hidden, FullScreenMovieScalingMode.AspectFit);
+        Handheld.PlayFullScreenMovie(movPath, Color.black, FullScreenMovieControlMode.Hidden, FullScreenMovieScalingMode.AspectFit);
 //#endif
 
     }

@@ -19,6 +19,8 @@ public class GalleryButton : MonoBehaviour {
         this.isActive = true;
         SightWord.text = sightWord;
 
+        GetComponent<Button>().onClick.AddListener(() => OnClick());
+
         if (_isActive)
         {
            
@@ -26,8 +28,17 @@ public class GalleryButton : MonoBehaviour {
         else
         {
             this.isActive = false;
-            GetComponent<Button>().interactable = false;
+            SightWord.color = Color.gray;
            // Label.text = "Play level " + (levelToReachWord+1).ToString() + " to learn it!";
+        }
+        
+    }
+    void OnClick()
+    {
+        print("OnClick" + isActive);
+        if (!isActive)
+        {
+            Events.OnSoundFX("denied");
         }
     }
     public void setDiplomaStatus(bool isActive)

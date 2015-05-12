@@ -65,7 +65,7 @@ public class Game : MonoBehaviour {
     void OnGameOver()
     {
         Events.OnSoundFX("warningPopUp");
-        Events.OnMusicChange("");
+        Events.OnMusicChange("gameOverTemp");
         OnGamePaused(true);
     }
     void OnGameRestart()

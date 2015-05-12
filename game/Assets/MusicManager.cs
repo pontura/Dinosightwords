@@ -27,7 +27,7 @@ public class MusicManager : MonoBehaviour {
         audio.clip = Resources.Load("music/" + soundName) as AudioClip;
         audio.Play();
 
-        if (soundName == "victoryMusic") 
+        if (soundName == "victoryMusic" || soundName == "gameOverTemp") 
             audio.loop = false;
         else
             audio.loop = true;

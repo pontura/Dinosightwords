@@ -136,4 +136,13 @@ public class Hero : MonoBehaviour {
         animator.SetBool("UNHAPPY", false);
         animator.SetBool("IDLE", false);
     }
+    private bool step1;
+    public void OnDinoStep()
+    {
+        step1 = !step1;
+        if(step1)
+            Events.OnSoundFX("dinoStep001");
+        else
+            Events.OnSoundFX("dinoStep002");
+    }
 }
