@@ -16,6 +16,7 @@ public class SoundManager : MonoBehaviour
 
     void OnSoundFX(string soundName)
     {
+        print("OnSoundFX + " + soundName + " vol: " + Data.Instance.soundsVolume );
         if (Data.Instance.soundsVolume == 0) return;
 
         AudioSource audioSource = audio;

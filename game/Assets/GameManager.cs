@@ -28,9 +28,11 @@ public class GameManager : MonoBehaviour {
     private float distanceBetweenWords;
     private float distanceBetweenObstacles;
     private float offsetForObstacles;
+    private float lastVolume;
 
     public void Init()
     {
+        lastVolume = Data.Instance.musicVolume;
         Data.Instance.errors = 0;
 
         Events.OnPlayerHitWord += OnPlayerHitWord;
@@ -77,7 +79,8 @@ public class GameManager : MonoBehaviour {
         Events.OnPlayerHitWord -= OnPlayerHitWord;
         Events.OnLevelComplete -= OnLevelComplete;
         Events.StartGame -= StartGame;
-        Events.OnMusicVolumeChanged(1);
+
+        Events.OnMusicVolumeChanged(lastVolume);
     }
     void StartGame()
     {
@@ -111,6 +114,7 @@ public class GameManager : MonoBehaviour {
     void OnLevelComplete()
     {
         state = states.INACTIVE;
+        lastVolume = Data.Instance.musicVolume;
         Events.OnMusicVolumeChanged(0.2f);
         Events.OnSoundFX("victoryMusic");
     }

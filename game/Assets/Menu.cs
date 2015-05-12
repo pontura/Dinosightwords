@@ -29,12 +29,14 @@ public class Menu : MonoBehaviour {
 
     public void Privacy()
     {
+        Events.OnSoundFX("buttonPress");
         Data.Instance.LoadLevel("07_PrivacyPolicy", 1, 1, Color.black);
         Data.Instance.MainMenuPopupOn = true;
     }
 
     public void Reset()
     {
+        Events.OnSoundFX("buttonPress");
         confirmCanvas.SetActive(true);
        // Close();
     }
@@ -42,19 +44,22 @@ public class Menu : MonoBehaviour {
     public void Close()
     {
         canvas.SetActive(false);
-        
+        Events.OnSoundFX("backPress");
     }
     public void Confirm()
     {
+        Events.OnSoundFX("buttonPress");
         confirmCanvas.SetActive(true);
         Close();
     }
     public void CloseConfirm()
     {
+        Events.OnSoundFX("buttonPress");
         confirmCanvas.SetActive(false);
     }
     public void ConfirmReset()
     {
+        Events.OnSoundFX("buttonPress");
         if (inputText.text == "56")
         {
             inputText.text = "";
@@ -69,6 +74,7 @@ public class Menu : MonoBehaviour {
     }
     public void CloseWrong()
     {
+        Events.OnSoundFX("buttonPress");
         WrongCanvas.SetActive(false);
     }
 }

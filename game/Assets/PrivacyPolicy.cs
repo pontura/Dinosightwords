@@ -10,5 +10,6 @@ public class PrivacyPolicy : MonoBehaviour {
 	
 	public void Close () {
         Data.Instance.LoadLevel("02_MainMenu", 1, 1, Color.black);
+        Events.OnSoundFX("backPress");
 	}
 }

@@ -67,11 +67,13 @@ public class LevelSelector : MonoBehaviour {
             levelLockedPopup.gameObject.SetActive(true);
             return;
         }
+        Events.OnSoundFX("buttonPress");
         Data.Instance.GetComponent<WordsData>().LevelID = button.id;
         Data.Instance.LoadLevel("04_Game", 1, 1, Color.black);   
     }
     public void MainMenu()
     {
+        Events.OnSoundFX("backPress");
         Data.Instance.LoadLevel("02_MainMenu", 1, 1, Color.black);     
     }
     public void nextClicked()
@@ -84,7 +86,7 @@ public class LevelSelector : MonoBehaviour {
     }
     private void activateZone(int zoneID)
     {
-        
+        Events.OnSoundFX("buttonPress");
         this.zoneID = zoneID;
         Vector3 pos = buttonsContainer.transform.localPosition;
 

@@ -20,6 +20,7 @@ public class MainMenu : MonoBehaviour {
     }
     public void Settings()
     {
+        Events.OnSoundFX("buttonPress");
         GetComponent<Menu>().Init();
     }
     public void SoundsToogle()

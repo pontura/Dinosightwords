@@ -57,16 +57,19 @@ public class PausedMenu : MonoBehaviour {
     }
     public void Restart()
     {
+        Events.OnSoundFX("buttonPress");
         canvas.SetActive(false);
         GetComponent<ConfirmExit>().Init("Restart");
     }
     public void LevelSelector()
     {
+        Events.OnSoundFX("buttonPress");
         canvas.SetActive(false);
         GetComponent<ConfirmExit>().Init("03_LevelSelector");
     }
     public void Close()
     {
+        Events.OnSoundFX("buttonPress");
         Events.OnGamePaused(false);
         Game.Instance.state = Game.states.PAUSED;
         Invoke("Unpause", 0.3f);
@@ -74,11 +77,13 @@ public class PausedMenu : MonoBehaviour {
     }
     void Unpause()
     {
+        Events.OnSoundFX("buttonPress");
         Game.Instance.state = Game.states.PLAYING;
         Events.OnGamePaused(false);
     }
     public void SoundsToogle()
     {
+        Events.OnSoundFX("buttonPress");
         print("SoundsToogle" + Data.Instance.soundsVolume);
         if (Data.Instance.soundsVolume == 1)
         {
@@ -94,6 +99,7 @@ public class PausedMenu : MonoBehaviour {
     }
     public void CapsToogle()
     {
+        Events.OnSoundFX("buttonPress");
         print("CapsToogle" + Data.Instance.caps);
         if (Data.Instance.caps)
             Events.OnCapsChanged(false);
@@ -102,16 +108,19 @@ public class PausedMenu : MonoBehaviour {
     }
     public void CloseSoundsConfirmation()
     {
+        Events.OnSoundFX("buttonPress");
         soundsConfirmationCanvas.SetActive(false);
     }
     public void SoundsOff()
     {
+        Events.OnSoundFX("buttonPress");
         print("SoundsOff" + Data.Instance.soundsVolume);
         Events.OnSoundsVolumeChanged(0);
         CloseSoundsConfirmation();
     }
     public void MusicToogle()
     {
+        Events.OnSoundFX("buttonPress");
         if (Data.Instance.musicVolume == 1)
             Data.Instance.musicVolume = 0;
         else
