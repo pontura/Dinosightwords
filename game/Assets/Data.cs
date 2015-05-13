@@ -88,7 +88,7 @@ public class Data : MonoBehaviour
     }
     void Start()
     {
-        Events.OnSceneLoad("Main");
+        Data.Instance.LoadLevel("02_MainMenu", 1, 1, Color.black);
     }
     void OnMusicVolumeChanged(float value)
     {
