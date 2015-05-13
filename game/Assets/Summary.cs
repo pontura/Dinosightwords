@@ -9,9 +9,14 @@ public class Summary : MonoBehaviour {
     private string NextAction;
 
     public GameObject RewardsCanvas;
+
     public GameObject[] rewardHats;
     public GameObject[] rewardChairs;
     public GameObject[] rewardHShoes;
+
+    public AudioClip[] clipHats;
+    public AudioClip[] clipChairs;
+    public AudioClip[] clipShoes;
 
     void Start()
     {
@@ -39,9 +44,25 @@ public class Summary : MonoBehaviour {
             _stars = 1;
         
         stars.Init(_stars);
+
+        Invoke("sayCongrats", 1);
     }
+    void sayCongrats()
+    {
+        int rand = Random.Range(0, 100);
+
+        if (rand < 33)
+            Events.OnSoundFX("2_Well Done");
+        else if (rand < 66)
+            Events.OnSoundFX("3_Great Job");
+        else
+            Events.OnSoundFX("4_Awesome Job");
+    }
+    private WordsData.Reward reward;
+    private AudioClip clip;
     void OnReward(WordsData.Reward reward)
     {
+        this.reward = reward;
         canvas.SetActive(true);
         RewardsCanvas.SetActive(true);
         foreach (GameObject item in rewardHats)
@@ -55,13 +76,25 @@ public class Summary : MonoBehaviour {
         canvas.transform.localPosition = pos;
 
         GameObject _item;
+        
         switch (reward.rewardType)
         {
-            case "hats": _item = rewardHats[reward.num - 1]; break;
-            case "chairs": _item = rewardChairs[reward.num - 1]; break;
-            default: _item = rewardHShoes[reward.num - 1]; break;
+            case "hats": _item = rewardHats[reward.num - 1]; clip = clipHats[reward.num - 1]; break;
+            case "chairs": _item = rewardChairs[reward.num - 1]; clip = clipChairs[reward.num - 1]; break;
+            default: _item = rewardHShoes[reward.num - 1]; clip = clipShoes[reward.num - 1];  break;
         }
+        
         _item.SetActive(true);
+        Invoke("particlesOn", 2f);
+    }
+    void particlesOn()
+    {
+        Events.OnHeroWinClothes(reward.rewardType, reward.num);
+        Invoke("sayIt", 1);
+    }
+    void sayIt()
+    {
+        Events.OnSoundFX(clip.name);
     }
     public void ResetLevel()
     {
@@ -130,6 +163,7 @@ public class Summary : MonoBehaviour {
     }
     public void diplomaClose()
     {
+        print("diplomaClose" + NextAction);
         Events.OnSoundFX("backPress");
         switch(NextAction)
         {

@@ -17,10 +17,15 @@ public class SoundManager : MonoBehaviour
     void OnSoundFX(string soundName)
     {
         print("OnSoundFX + " + soundName + " vol: " + Data.Instance.soundsVolume );
+        if (soundName == "")
+        {
+            audio.Stop();
+            return;
+        }
+
         if (Data.Instance.soundsVolume == 0) return;
 
-        AudioSource audioSource = audio;
-        audioSource.PlayOneShot(Resources.Load("sound/" + soundName) as AudioClip);
+        audio.PlayOneShot(Resources.Load("sound/" + soundName) as AudioClip);
 
     }
 }

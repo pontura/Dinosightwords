@@ -64,10 +64,9 @@ public class Game : MonoBehaviour {
     }
     void OnGameOver()
     {
-        Events.OnSoundFX("warningPopUp");
-        Events.OnMusicChange("gameOverTemp");
-        OnGamePaused(true);
+        state = states.PAUSED;       
     }
+    
     void OnGameRestart()
     {
         Data.Instance.LoadLevel("04_Game", 1, 1, Color.black); 

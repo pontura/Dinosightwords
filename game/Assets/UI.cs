@@ -35,7 +35,12 @@ public class UI : MonoBehaviour {
     void OnNewWord(WordsData.Word word)
     {
         SightWord.text = "";
-        Invoke("DisplayWord", 1);
+        Invoke("SayIntro", 1);
+    }
+    void SayIntro()
+    {
+        Events.OnSoundFX("1_YouHaveToCatchTheWord");
+        Invoke("DisplayWord", 2f);
     }
     void DisplayWord()
     {        

@@ -14,6 +14,8 @@ public class Diploma : MonoBehaviour {
     public Image diploma2;
     private int diplomaID;
 
+    private float lastVol;
+
 	void Start () {
         canvas.SetActive(false);
 	}
@@ -33,6 +35,9 @@ public class Diploma : MonoBehaviour {
             case 1: title.text = "YOU EARNED THE 'VOLCANO' DIPLOMA"; if (diplomaAsset) diploma1.enabled = true; break;
             case 2: title.text = "YOU EARNED THE 'FOREST' DIPLOMA"; if (diplomaAsset) diploma2.enabled = true; break;
         }
+        lastVol = Data.Instance.musicVolume;
+        Events.OnSoundFX("19_Ask Your Mom");
+        Events.OnMusicVolumeChanged(0.3f);
     }
     public void OpenDiploma()
     {
@@ -42,15 +47,22 @@ public class Diploma : MonoBehaviour {
     {
         canvas.SetActive(false);
         Events.OnSoundFX("backPress");
+        Events.OnMusicVolumeChanged(lastVol);
     }
     public void Close(string _username)
     {
         if (diplomaAsset)
+        {
             diplomaAsset.SetActive(true);
+            if( GetComponent<Summary>() )
+                Events.OnSoundFX("18_Congratulations");
+        }
         username.text = _username;
+        Events.OnMusicVolumeChanged(lastVol);
     }
     public void CloseDiplomaAsset()
     {
+        print("CloseDiplomaAsset");
         Events.OnSoundFX("backPress");
         GetComponent<Summary>().diplomaClose();
         canvas.SetActive(false);

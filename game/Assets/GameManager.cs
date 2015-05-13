@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviour {
     {
         IDLE,
         ACTIVE,
-        INACTIVE
+        INACTIVE,
+        GAMEOVER
     }
 
     private WordsData wordsData;
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour {
         Events.OnHeroSlide += OnHeroSlide;
         Events.OnLevelComplete += OnLevelComplete;
         Events.StartGame += StartGame;
+        Events.OnGameOver += OnGameOver;
 
         wordsData = Data.Instance.GetComponent<WordsData>();
         wordsData.Restart();
@@ -63,14 +65,29 @@ public class GameManager : MonoBehaviour {
                 go.SetActive(false);
         }
 
-         WordsData.Reward reward = wordsData.GetReward();
-         if (reward.num > 0)
-             Events.CheckItemsToReward(reward);
-         else
-             Events.OnStartCountDown();
+        if (Data.Instance.TutorialReady)
+            TutorialReady();
+        else
+            Invoke("SayTutorial", 0.1f);
 
-       
+    }
+    void SayTutorial()
+    {
+        if (Random.Range(0, 100) < 50)
+            Events.OnSoundFX("26_SwipeUpAndDown");
+        else
+            Events.OnSoundFX("27_YouLoseALife");
 
+        Data.Instance.TutorialReady = true;
+        Invoke("TutorialReady", 6);
+    }
+    void TutorialReady()
+    {
+        WordsData.Reward reward = wordsData.GetReward();
+        if (reward.num > 0)
+            Events.CheckItemsToReward(reward);
+        else
+            Events.OnStartCountDown();
     }
     void OnDestroy()
     {
@@ -79,6 +96,7 @@ public class GameManager : MonoBehaviour {
         Events.OnPlayerHitWord -= OnPlayerHitWord;
         Events.OnLevelComplete -= OnLevelComplete;
         Events.StartGame -= StartGame;
+        Events.OnGameOver -= OnGameOver;
 
         Events.OnMusicVolumeChanged(lastVolume);
     }
@@ -110,7 +128,17 @@ public class GameManager : MonoBehaviour {
         Events.OnNewWord(wordsData.GetWordData());
         
     }
-   
+    void OnGameOver()
+    {
+        state = states.GAMEOVER;
+        Events.OnSoundFX("warningPopUp");
+        Events.OnMusicChange("gameOverTemp");
+        Invoke("voice", 2);
+    }
+    void voice()
+    {
+        Events.OnSoundFX("23_Try Again");
+    }
     void OnLevelComplete()
     {
         state = states.INACTIVE;
@@ -191,11 +219,15 @@ public class GameManager : MonoBehaviour {
         Data.Instance.errors++;
         realSpeed = 0;
         Events.OnSoundFX("trip");
-        state = states.INACTIVE;
-        Invoke("goOn", 1.7f);
+        if (state != states.GAMEOVER)
+        {
+            state = states.INACTIVE;
+            Invoke("goOn", 1.7f);
+        }
     }
     void goOn()
     {
+        if (state == states.GAMEOVER) return;
         state = states.ACTIVE;
     }
     void OnHeroSlide(int id)
@@ -205,14 +237,14 @@ public class GameManager : MonoBehaviour {
     }
     void Update()
     {
-        if (state == states.INACTIVE)
+        if (state == states.INACTIVE || state == states.GAMEOVER)
         {
             return;
         }
         if (realSpeed < speed)
-            realSpeed += 0.05f;
+            realSpeed += 0.04f;
         else if (realSpeed > speed)
-            realSpeed -= 0.05f;
+            realSpeed -= 0.04f;
 
         if (state == states.ACTIVE)
         {

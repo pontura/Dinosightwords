@@ -91,6 +91,7 @@ public class Hero : MonoBehaviour {
         if (state == states.LAVA) return;
         state = states.LAVA;
         animator.SetBool(state.ToString(), true);
+        Events.OnSoundFX("threadLava");
     }
     void Crash()
     {
@@ -126,6 +127,7 @@ public class Hero : MonoBehaviour {
     }
     public void ResetAnimation()
     {
+        if (Game.Instance.GetComponent<GameManager>().state == GameManager.states.GAMEOVER) return;
         collider2d.enabled = true;
         state = states.RUN;
         animator.SetBool("JUMP", false);

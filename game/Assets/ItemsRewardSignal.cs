@@ -23,8 +23,8 @@ public class ItemsRewardSignal : MonoBehaviour {
 
     void CheckItemsToReward(WordsData.Reward reward)
     {
-       print("CheckItemsToReward " + reward.rewardType);
-       Canvas.SetActive(true);
+        Invoke("waited", 0.5f);
+        Canvas.SetActive(true);
 
         foreach (GameObject item in rewardHats)
             item.SetActive(false);
@@ -42,10 +42,20 @@ public class ItemsRewardSignal : MonoBehaviour {
         }
         _item.SetActive(true);
     }
+    void waited()
+    {
+        if(Random.Range(0,100)>50)
+            Events.OnSoundFX("21_GetThreeStarsToWinThisItem");
+        else
+            Events.OnSoundFX("22_ToEarnThreeStars");
+        
+    }
 	public void Close()
     {
+        print("Close");
         Events.OnSoundFX("backPress");
         Canvas.SetActive(false);
         Events.OnStartCountDown();
+        Events.OnSoundFX("");
 	}
 }

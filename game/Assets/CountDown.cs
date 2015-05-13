@@ -19,11 +19,16 @@ public class CountDown : MonoBehaviour {
     }
     void OnStartCountDown()
     {
+        Invoke("waitToSay", 0.5f);
+    }
+
+    void waitToSay()
+    {
+        Events.OnSoundFX("20_Three Two One Go");
         field.text = num.ToString();
-        Invoke("nextNum", 1);
+        Invoke("nextNum", 0.5f);
         animation["CountDown"].normalizedTime = 0;
-        animation.Play("CountDown");
-        
+        animation.Play("CountDown"); 
     }
 
     void nextNum()
@@ -40,7 +45,7 @@ public class CountDown : MonoBehaviour {
         }
         else
         {
-            Invoke("nextNum", 1);
+            Invoke("nextNum", 0.5f);
         }
     }
 }

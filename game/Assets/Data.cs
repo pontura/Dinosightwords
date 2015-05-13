@@ -19,6 +19,7 @@ public class Data : MonoBehaviour
 
     //malisimo
     public bool MainMenuPopupOn;
+    public bool TutorialReady;
 
     const string PREFAB_PATH = "Data";
 

@@ -25,6 +25,7 @@ public class PausedMenu : MonoBehaviour {
         OnSoundsVolumeChanged(Data.Instance.soundsVolume);
         OnMusicVolumeChanged(Data.Instance.musicVolume);
         OnCapsChanged(Data.Instance.caps);
+        Events.OnSoundFX("");
 	}
     void OnDestroy()
     {
@@ -89,6 +90,7 @@ public class PausedMenu : MonoBehaviour {
             Events.OnSoundFX("warningPopUp");
             soundsConfirmationCanvas.SetActive(true);
             soundsConfirmationText.text = Data.Instance.GetComponent<TextsData>().SoundsOffConfirmation;
+            Events.OnSoundFX("24_ThisGameIsBasedOnListening");
            
         }
         else
@@ -110,6 +112,7 @@ public class PausedMenu : MonoBehaviour {
     {
         Events.OnSoundFX("buttonPress");
         soundsConfirmationCanvas.SetActive(false);
+        Events.OnSoundFX("");
     }
     public void SoundsOff()
     {
