@@ -23,6 +23,10 @@ public class LevelSelector : MonoBehaviour {
     [SerializeField]
     GameObject items2;
 
+    public GameObject[] hats;
+    public GameObject[] legs;
+    public GameObject[] chairs;
+
     public GameObject buttonsContainer;
 
     private UserData userData;
@@ -58,6 +62,8 @@ public class LevelSelector : MonoBehaviour {
             id++;
         }
         buttons[0].GetComponent<LevelSelectorButton>().isActive = true;
+
+        
 
     }
     public void Clicked(LevelSelectorButton button)
@@ -122,6 +128,18 @@ public class LevelSelector : MonoBehaviour {
             bg2.enabled = false;
         }
         buttonsContainer.transform.localPosition = pos;
+
+
+        foreach (Image image in items1.GetComponentsInChildren<Image>())
+            image.color = new Color(1, 1, 1, 0.5f);
+
+        foreach (Image image in items2.GetComponentsInChildren<Image>())
+            image.color = new Color(1, 1, 1, 0.5f);
+
+        if (PlayerPrefs.GetInt("hats") > 0) hats[PlayerPrefs.GetInt("hats") - 1].GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        if (PlayerPrefs.GetInt("chairs") > 0) chairs[PlayerPrefs.GetInt("chairs") - 1].GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        if (PlayerPrefs.GetInt("legs") > 0) legs[PlayerPrefs.GetInt("legs") - 1].GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        
     }
     
 }

@@ -80,7 +80,7 @@ public class Lane : MonoBehaviour {
             }
             else
             {
-                offsetX = -465;
+                offsetX = -458;
             }
             if (laneObject.repeatIn > 0 && pos.x < offsetX + laneObject.repeatIn)
             {
