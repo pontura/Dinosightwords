@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour {
                 go.SetActive(false);
         }
 
+        if (Data.Instance.GetComponent<WordsData>().LevelID > 1) Data.Instance.TutorialReady = true;
         if (Data.Instance.TutorialReady)
             TutorialReady();
         else

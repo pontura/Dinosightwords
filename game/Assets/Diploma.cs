@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
+using Parse;
 
 public class Diploma : MonoBehaviour {
 
@@ -73,9 +75,27 @@ public class Diploma : MonoBehaviour {
     }
     public void Send()
     {
+        string url;
+        switch (diplomaID)
+        {
+            case 1: url = "ttp://www.pontura.com/tipitap/diplomaVulcano.jpg"; break;
+            default: url = "ttp://www.pontura.com/tipitap/diplomaForest.jpg"; break;
+        }
+
+        Dictionary<string, object> parameters = new Dictionary<string, object>();
+        parameters.Add("username", nameField.text);
+        parameters.Add("to", emailField.text);
+        parameters.Add("url", url);
+
+        ParseCloud.CallFunctionAsync<string>("sendDiploma", parameters)
+            .ContinueWith(t =>
+                Debug.Log("received: " + t.Result)
+            );
+
+        //StartCoroutine(SendMail());
+
         Events.OnSoundFX("buttonPress");
-        print("nameField: " + nameField.text + " email: " + emailField.text);
-        StartCoroutine(SendMail());
+        
         if (diplomaAsset)
             Close(nameField.text);
         else
@@ -84,7 +104,6 @@ public class Diploma : MonoBehaviour {
     public void SendLater()
     {
         Events.OnSoundFX("buttonPress");
-        print("nameField: " + nameField.text + " email: " + emailField.text);
         Close(nameField.text);
     }
 

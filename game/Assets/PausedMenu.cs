@@ -12,9 +12,13 @@ public class PausedMenu : MonoBehaviour {
     public GameObject musicOff;
     public GameObject capsOff;
 
+    private float lastMusicVolume;
+
 
     public void Init()
     {
+        
+
         canvas.SetActive(true);
         soundsConfirmationCanvas.SetActive(false);
 
@@ -89,6 +93,10 @@ public class PausedMenu : MonoBehaviour {
         {
             Events.OnSoundFX("warningPopUp");
             soundsConfirmationCanvas.SetActive(true);
+            lastMusicVolume = Data.Instance.musicVolume;
+            if(lastMusicVolume>0)
+                Events.OnMusicVolumeChanged(0.3f);
+
             soundsConfirmationText.text = Data.Instance.GetComponent<TextsData>().SoundsOffConfirmation;
             Events.OnSoundFX("24_ThisGameIsBasedOnListening");
            
@@ -110,6 +118,7 @@ public class PausedMenu : MonoBehaviour {
     }
     public void CloseSoundsConfirmation()
     {
+        Events.OnMusicVolumeChanged(lastMusicVolume);
         Events.OnSoundFX("buttonPress");
         soundsConfirmationCanvas.SetActive(false);
         Events.OnSoundFX("");
