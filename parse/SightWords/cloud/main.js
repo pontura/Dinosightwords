@@ -13,9 +13,9 @@ Parse.Cloud.define('sendDiploma', function(request, response) {
 	Mandrill.sendEmail({
 	  message: {
 		html: "<img src='" + request.params.url + "' />",
-		subject: request.params.username + " Won a new Diploma in Sight Words",
-		from_email: "bot@tipitap.com",
-		from_name: "Tipitap",
+		subject: request.params.username + " Won a new Diploma! in Sight Words",
+		from_email: "no-reply@tipitap.com",
+		from_name: "Sight Words!",
 		to: [
 		  {
 			email: request.params.to,

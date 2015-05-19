@@ -78,8 +78,8 @@ public class Diploma : MonoBehaviour {
         string url;
         switch (diplomaID)
         {
-            case 1: url = "ttp://www.pontura.com/tipitap/diplomaVulcano.jpg"; break;
-            default: url = "ttp://www.pontura.com/tipitap/diplomaForest.jpg"; break;
+            case 1: url = "http://www.pontura.com/tipitap/diplomaVulcano.jpg"; break;
+            default: url = "http://www.pontura.com/tipitap/diplomaForest.jpg"; break;
         }
 
         Dictionary<string, object> parameters = new Dictionary<string, object>();
