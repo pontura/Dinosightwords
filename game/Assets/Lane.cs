@@ -13,9 +13,11 @@ public class Lane : MonoBehaviour {
     public int id;
     public GameObject objectsTarget;
     public List<LaneObject> laneObjects;
+    private WordsData wordsData;
 
     public void Init(int id, int ZoneID)
     {
+        wordsData = Data.Instance.GetComponent<WordsData>();
         this.id = id;
         LaneObject newLaneObject;
         if (ZoneID == 1)
@@ -74,7 +76,7 @@ public class Lane : MonoBehaviour {
            // forwardMoveSpeed -= 0.05f;
 
             int offsetX;
-            if (Data.Instance.GetComponent<WordsData>().GetZone() == 1)
+            if (wordsData.GetZone() == 1)
             {
                 offsetX = -1438;
             }
