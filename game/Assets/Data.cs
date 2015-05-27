@@ -51,6 +51,8 @@ public class Data : MonoBehaviour
     }
     void Awake()
     {
+		//Application.targetFrameRate = 30;
+		QualitySettings.vSyncCount = 1;
         fade = GetComponentInChildren<Fade>();
         fade.gameObject.SetActive(true);
        //PlayerPrefs.SetInt("level_1_1", 0);
@@ -82,7 +84,7 @@ public class Data : MonoBehaviour
         Events.OnCapsChanged += OnCapsChanged;
 
 //#if UNITY_ANDROID || UNITY_IPHONE
-        Handheld.PlayFullScreenMovie(movPath, Color.black, FullScreenMovieControlMode.Hidden, FullScreenMovieScalingMode.AspectFit);
+        Handheld.PlayFullScreenMovie(movPath, Color.black, FullScreenMovieControlMode.Hidden, FullScreenMovieScalingMode.AspectFill);
 //#endif
 
     }

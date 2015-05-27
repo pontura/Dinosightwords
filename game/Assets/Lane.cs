@@ -13,9 +13,11 @@ public class Lane : MonoBehaviour {
     public int id;
     public GameObject objectsTarget;
     public List<LaneObject> laneObjects;
+	private WordsData wordsData;
 
     public void Init(int id, int ZoneID)
     {
+		wordsData = Data.Instance.GetComponent<WordsData> ();
         this.id = id;
         LaneObject newLaneObject;
         if (ZoneID == 1)
@@ -66,15 +68,15 @@ public class Lane : MonoBehaviour {
             LaneObject laneObject = laneObjects[i];
 
             Vector3 pos = laneObject.transform.localPosition;
-            pos.x -= _x;
-           // laneObject.transform.localPosition = pos;
+			pos.x -= _x;
+            laneObject.transform.localPosition = pos;
 
-            laneObject.transform.localPosition = Vector3.Lerp(laneObject.transform.localPosition, pos, _x );
+           // laneObject.transform.localPosition = Vector3.Lerp(laneObject.transform.localPosition, pos, (int)_x );
            // laneObject.transform.rigidbody2D.velocity = new Vector2(-20*_x, 0);
            // forwardMoveSpeed -= 0.05f;
 
             int offsetX;
-            if (Data.Instance.GetComponent<WordsData>().GetZone() == 1)
+			if (wordsData.GetZone() == 1)
             {
                 offsetX = -1438;
             }

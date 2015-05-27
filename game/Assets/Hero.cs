@@ -141,6 +141,7 @@ public class Hero : MonoBehaviour {
     private bool step1;
     public void OnDinoStep()
     {
+		return;
         step1 = !step1;
         if(step1)
             Events.OnSoundFX("dinoStep001");

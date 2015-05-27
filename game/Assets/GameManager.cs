@@ -5,8 +5,7 @@ public class GameManager : MonoBehaviour {
 
     public float distance;
     public int score;
-    public Scrolleable[] Scrolleables;
-
+	
     public GameObject[] Zone1Objects;
     public GameObject[] Zone2Objects;
 
@@ -53,16 +52,12 @@ public class GameManager : MonoBehaviour {
         if (wordsData.GetZone() == 2)
         {
             foreach (GameObject go in Zone1Objects)
-                go.SetActive(true);
-            foreach (GameObject go in Zone1Objects)
-                go.SetActive(false);
-        }
-        else
-        {
+				GameObject.Destroy(go);
+		}
+		else
+		{
             foreach (GameObject go in Zone2Objects)
-                go.SetActive(true);
-            foreach (GameObject go in Zone2Objects)
-                go.SetActive(false);
+				GameObject.Destroy(go);
         }
 
         if (Data.Instance.GetComponent<WordsData>().LevelID > 1) Data.Instance.TutorialReady = true;
@@ -247,19 +242,26 @@ public class GameManager : MonoBehaviour {
         else if (realSpeed > speed)
             realSpeed -= 0.04f;
 
+
         if (state == states.ACTIVE)
         {
-            float _speed = (realSpeed * 100) * Time.deltaTime;
+			float _speed = (realSpeed*100)*Time.smoothDeltaTime  ;
+		//	float _speed = (realSpeed);
            // float _speed = speed*2;
             distance += _speed;
+			//print (_speed + "      " + Time.deltaTime );
             lanesManager.MoveLanes(_speed);
 
            // characterHero.Move(_speed);
-
-            foreach (Scrolleable scrolleable in Scrolleables)
-            {
-                scrolleable.Move(_speed);
-            }
-        }
-    }
+			if (wordsData.GetZone() == 1)
+			{
+				foreach (GameObject scrolleable in Zone1Objects)
+	                scrolleable.GetComponent<Scrolleable>().Move(_speed);
+			} else
+			{
+				foreach (GameObject scrolleable in Zone2Objects)
+					scrolleable.GetComponent<Scrolleable>().Move(_speed);
+			}
+		}
+	}
 }

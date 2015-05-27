@@ -16,7 +16,6 @@ public class SoundManager : MonoBehaviour
 
     void OnSoundFX(string soundName)
     {
-        print("OnSoundFX + " + soundName + " vol: " + Data.Instance.soundsVolume );
         if (soundName == "")
         {
             audio.Stop();

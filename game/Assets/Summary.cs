@@ -104,6 +104,7 @@ public class Summary : MonoBehaviour {
     public void Next()
     {
         Events.OnSoundFX("buttonPress");
+		print ("ASDASSAD");
         if ( !OpenDiploma("Next"))
         {
             if (Data.Instance.GetComponent<WordsData>().LevelID < 30)

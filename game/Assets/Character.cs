@@ -42,22 +42,35 @@ public class Character : MonoBehaviour {
     {
         Vector3 pos = transform.localPosition;
         pos.y += distance;
-        Move(pos);
+        Move(pos, true);
     }
     public void MoveDown()
     {
         Vector3 pos = transform.localPosition;
         pos.y -= distance;
-        Move(pos);
+        Move(pos, true);
     }
     public void GotoCenterOfLane()
     {
         Vector3 pos = transform.localPosition;
         pos.y = 0;
-        Move(pos);
+        Move(pos, false);
     }
-    public void Move(Vector3 pos)
+    public void Move(Vector3 pos, bool firstStep)
     {
+		if (pos.y < transform.localPosition.y) {
+			print ("baja");
+			if(firstStep)
+				timeToCrossLane = Data.Instance.gameData.timeToCrossLane / 3;
+			else
+				timeToCrossLane = Data.Instance.gameData.timeToCrossLane / 1.1f;
+		}else {
+			print ("sube");
+			if(firstStep)
+				timeToCrossLane = Data.Instance.gameData.timeToCrossLane / 1.1f;
+			else
+				timeToCrossLane = Data.Instance.gameData.timeToCrossLane / 3f;
+		}
         Events.OnSoundFX("changeLane");
         state = states.CHANGE;
         TweenParms parms = new TweenParms();
