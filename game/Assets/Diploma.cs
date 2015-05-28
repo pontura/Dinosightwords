@@ -61,7 +61,7 @@ public class Diploma : MonoBehaviour {
             if( GetComponent<Summary>() )
                 Events.OnSoundFX("18_Congratulations");
         }
-        username.text = _username;
+        //username.text = _username;
         Events.OnMusicVolumeChanged(lastVol);
     }
     public void CloseDiplomaAsset()

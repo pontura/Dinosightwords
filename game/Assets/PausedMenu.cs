@@ -74,10 +74,10 @@ public class PausedMenu : MonoBehaviour {
     }
     public void Close()
     {
+        Time.timeScale = 1;
         Events.OnSoundFX("backPress");
         Game.Instance.state = Game.states.PAUSED;
-        Invoke("Unpause", 0.05f);
-        Time.timeScale = 1;        
+        Invoke("Unpause", 0.05f);                
     }
     void Unpause()
     {
