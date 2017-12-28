@@ -13,8 +13,8 @@ public class FeedbackSignal : MonoBehaviour {
     }
     public void Init(bool isOk)
     {
-        animation.Rewind();
-        animation.Play();
+        GetComponent<Animation>().Rewind();
+        GetComponent<Animation>().Play();
         if (isOk)
         {
             field.text = "+1";

@@ -27,14 +27,14 @@ public class CountDown : MonoBehaviour {
         Events.OnSoundFX("20_Three Two One Go");
         field.text = num.ToString();
         Invoke("nextNum", 0.5f);
-        animation["CountDown"].normalizedTime = 0;
-        animation.Play("CountDown"); 
+        GetComponent<Animation>()["CountDown"].normalizedTime = 0;
+        GetComponent<Animation>().Play("CountDown"); 
     }
 
     void nextNum()
     {
-        animation["CountDown"].normalizedTime = 0;
-        animation.Play("CountDown");
+        GetComponent<Animation>()["CountDown"].normalizedTime = 0;
+        GetComponent<Animation>().Play("CountDown");
         num--;
         field.text = num.ToString();
         if (num <= 0)

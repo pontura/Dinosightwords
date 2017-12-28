@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Fade : MonoBehaviour
 {
     private Image masker;
     private string m_LevelName = "";
     private int m_LevelIndex = 0;
-    private bool m_Fading = false;
     private GraphicRaycaster graphicRaycaster;
 
     private void Awake()
@@ -32,9 +32,9 @@ public class Fade : MonoBehaviour
 		}
 
         if (m_LevelName != "")
-            Application.LoadLevel(m_LevelName);
+			SceneManager.LoadScene(m_LevelName);
         else
-            Application.LoadLevel(m_LevelIndex);     
+			SceneManager.LoadScene(m_LevelIndex);     
 		while (t > 0f)
 		{
 			yield return new WaitForEndOfFrame();
@@ -42,11 +42,9 @@ public class Fade : MonoBehaviour
 			masker.color = new Color(0,0,0,t);
 		}
         graphicRaycaster.enabled = false;
-        m_Fading = false;
     }
     private void StartFade(float aFadeOutTime, float aFadeInTime, Color aColor)
     {
-        m_Fading = true;
         StartCoroutine(FadeStart(aFadeOutTime, aFadeInTime, aColor));
     }
 

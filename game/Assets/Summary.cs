@@ -104,8 +104,10 @@ public class Summary : MonoBehaviour {
     public void Next()
     {
         Events.OnSoundFX("buttonPress");
-		print ("ASDASSAD");
-        if ( !OpenDiploma("Next"))
+
+		if (Data.Instance.GetComponent<WordsData> ().LevelID == 9 && !IAPManager.Instance.isUnlocked) {
+			Data.Instance.LoadLevel("02_MainMenu", 1, 1, Color.black);
+		} else  if ( !OpenDiploma("Next"))
         {
             if (Data.Instance.GetComponent<WordsData>().LevelID < 30)
             {

@@ -68,6 +68,10 @@ public class LevelSelector : MonoBehaviour {
     }
     public void Clicked(LevelSelectorButton button)
     {
+		if (!IAPManager.Instance.isUnlocked && button.id > 9) {
+			Events.SetPurchasesPanel (true);
+			return;
+		}
         if (!button.isActive)
         {
             levelLockedPopup.gameObject.SetActive(true);

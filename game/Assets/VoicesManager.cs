@@ -12,10 +12,11 @@ public class VoicesManager : MonoBehaviour {
 	}
     void OnVoice(string sightWord)
     {
+		print ("voice onVoice: " + sightWord);
         if (Data.Instance.soundsVolume == 0) return;
 
-        audio.clip = Resources.Load("sightwords/" + sightWord) as AudioClip;
-        audio.Play();
+        GetComponent<AudioSource>().clip = Resources.Load("sightwords/" + sightWord) as AudioClip;
+        GetComponent<AudioSource>().Play();
 
     }
 }

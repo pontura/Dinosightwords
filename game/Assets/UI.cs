@@ -40,9 +40,9 @@ public class UI : MonoBehaviour {
     void SayIntro()
     {
         DisplayWord();
-        return;
-        Events.OnSoundFX("1_YouHaveToCatchTheWord");
-        Invoke("DisplayWord", 2f);
+    //    return;
+      //  Events.OnSoundFX("1_YouHaveToCatchTheWord");
+       // Invoke("DisplayWord", 2f);
     }
     void DisplayWord()
     {        

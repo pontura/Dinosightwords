@@ -55,6 +55,7 @@ public static class Events {
 
     public static System.Action OnStartCountDown = delegate { };
     public static System.Action<WordsData.Reward> CheckItemsToReward = delegate { };
+	public static System.Action<bool> SetPurchasesPanel = delegate { };
     
     
     

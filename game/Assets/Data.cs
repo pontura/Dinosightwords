@@ -84,7 +84,7 @@ public class Data : MonoBehaviour
         Events.OnCapsChanged += OnCapsChanged;
 
 //#if UNITY_ANDROID || UNITY_IPHONE
-        Handheld.PlayFullScreenMovie(movPath, Color.black, FullScreenMovieControlMode.Hidden, FullScreenMovieScalingMode.AspectFill);
+//        Handheld.PlayFullScreenMovie(movPath, Color.black, FullScreenMovieControlMode.Hidden, FullScreenMovieScalingMode.AspectFill);
 //#endif
 
     }

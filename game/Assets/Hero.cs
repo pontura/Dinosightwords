@@ -142,10 +142,10 @@ public class Hero : MonoBehaviour {
     public void OnDinoStep()
     {
 		return;
-        step1 = !step1;
-        if(step1)
-            Events.OnSoundFX("dinoStep001");
-        else
-            Events.OnSoundFX("dinoStep002");
+     //   step1 = !step1;
+       // if(step1)
+        //    Events.OnSoundFX("dinoStep001");
+       // else
+         //   Events.OnSoundFX("dinoStep002");
     }
 }

@@ -3,9 +3,10 @@ using System.Collections;
 
 public class SoundManager : MonoBehaviour
 {
-
+	private AudioSource audioSource;
     void Start()
     {
+		audioSource = GetComponent<AudioSource> ();
         Events.OnSoundFX += OnSoundFX;
     }
 
@@ -16,15 +17,19 @@ public class SoundManager : MonoBehaviour
 
     void OnSoundFX(string soundName)
     {
+		print ("OnSoundFX: " + soundName);
+
         if (soundName == "")
         {
-            audio.Stop();
+            GetComponent<AudioSource>().Stop();
             return;
         }
 
         if (Data.Instance.soundsVolume == 0) return;
+		AudioClip ac = Resources.Load("sound/" + soundName) as AudioClip;
+		audioSource.PlayOneShot(ac,  1f);
 
-        audio.PlayOneShot(Resources.Load("sound/" + soundName) as AudioClip);
+		print ("AudioClip: " + ac);
 
     }
 }

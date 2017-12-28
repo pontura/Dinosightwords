@@ -5,8 +5,8 @@ public class Force2dAudio : AssetPostprocessor
 {
     void OnPreprocessAudio()
     {
-        AudioImporter importer = (AudioImporter)assetImporter;
-        importer.threeD = false;
-        importer.loadType = AudioImporterLoadType.StreamFromDisc;
+      //  AudioImporter importer = (AudioImporter)assetImporter;
+       // importer.threeD = false;
+       // importer.loadInBackground = true;
     }
 }
