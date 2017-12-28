@@ -14,7 +14,7 @@ public class Loading : MonoBehaviour {
 	void LoadNext()
 	{
 		SceneManager.LoadScene ("01_Splash");
-		Invoke ("Clear", 3);
+		Invoke ("Clear", 1);
 	}
 	void Clear()
 	{
